@@ -56,7 +56,7 @@ using System.Runtime.CompilerServices;
 // NOTE:  the version here will be used to track which version of the
 // Java library implements compatible functionality.
 
-[assembly: AssemblyVersion("2.1.*")]
+[assembly: AssemblyVersion("@build.version.major@.@build.version.minor@.@build.version.release-prefix@.@build.version.count@")]
 
 // Currently not doing signed assemblies
 [assembly: AssemblyDelaySign(false)]
