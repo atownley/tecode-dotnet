@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+//////////////////////////////////////////////////////////////////////
+//
+// Copyright (c) 2002-2004, Andrew S. Townley
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 
+//     * Redistributions of source code must retain the above
+//     copyright notice, this list of conditions and the following
+//     disclaimer.
+// 
+//     * Redistributions in binary form must reproduce the above
+//     copyright notice, this list of conditions and the following
+//     disclaimer in the documentation and/or other materials provided
+//     with the distribution.
+// 
+//     * Neither the names Andrew Townley and Townley Enterprises,
+//     Inc. nor the names of its contributors may be used to endorse
+//     or promote products derived from this software without specific
+//     prior written permission.  
+// 
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+// FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+// COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+// INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+// (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+// HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+// STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+// OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// File:	te-common.build
+// Created:	Tue Jun  8 18:50:10 IST 2004
+// Description:
+//	NAnt (http://nant.sourceforge.net) build file.
+//
+//////////////////////////////////////////////////////////////////////
+-->
+
+<project name="te-common" default="all" basedir=".">
+	<property name="basedir"	value="${nant.project.basedir}"/>
+	<property name="app.name"	value="te-common"/>
+	<property name="build.dir"	value="build/classes"/>
+	<property name="build.tests"	value="build/tests"/>
+	<property name="reports.tests"	value="build/reports"/>
+	<property name="lib.dir"	value="lib"/>
+	<property name="src.dir"	value="src"/>
+	<property name="tests.dir"	value="tests/nunit"/>
+	<property name="tests.lib.dir"	value="tests/lib"/>
+
+	<target name="all" depends="compile-lib"/>
+
+	<target name="compile-lib">
+		<csc target="library" output="${app.name}.dll">
+			<sources>
+				<includes name="src/**/*.cs"/>
+			</sources>
+		</csc>
+	</target>
+
+	<target name="clean">
+		<delete file="${app.name}.dll"/>
+	</target>
+
+	<!-- unit tests -->
+	<target name="compile-tests" depends="compile-lib">
+		<mkdir dir="${build.tests}"/>
+		<csc target="library" output="${build.tests}/${app.name}-tests.dll">
+			<sources>
+				<includes name="tests/nunit/**/*.cs"/>
+			</sources>
+			<references>
+				<includes name="${app.name}.dll"/>
+				<includes name="${tests.lib.dir}/*.dll"/>
+			</references>
+		</csc>
+	</target>
+
+	<target name="nunit" depends="compile-tests">
+		<nunit>
+		</nunit>
+	</target>
+</project>
