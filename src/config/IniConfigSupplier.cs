@@ -68,7 +68,7 @@ namespace TownleyEnterprises.Config {
 ///   </ol>
 ///   </para>
 /// </summary>
-/// <version>$Id: IniConfigSupplier.cs,v 1.1 2004/06/24 19:20:39 atownley Exp $</version>
+/// <version>$Id: IniConfigSupplier.cs,v 1.2 2004/06/24 20:03:43 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -153,11 +153,21 @@ public class IniConfigSupplier: IConfigSupplier
 
 		get
 		{
+//Console.WriteLine("key:  " + key);
 			string[] path = GetPathComponents(key.ToLower());
-			return _input[path[0]][path[1]];
+			ConfigSection section = _input[path[0]];
+			if(section == null)
+			{
+//Console.WriteLine("section " + path[0] + " was not found.");
+				return null;
+			}
+
+			return section[path[1]];
 		}
 		set
 		{
+			// FIXME:  this looks a bit dodgy, but I'm in a hurry...
+			// need to add some unit tests
 			string[] path = GetPathComponents(key.ToLower());
 			string mkey = _prefix + path[0];
 			if(!_keys.Contains(mkey))
@@ -232,9 +242,12 @@ public class IniConfigSupplier: IConfigSupplier
 		// load the sections
 		foreach(ConfigSection section in _input.Sections)
 		{
-			string s = _prefix + section.Name;
-//Console.WriteLine("added alias '{0}' for '{1}'", s.ToLower(), section.Name);
-			_keys[s.ToLower()] = section.Name;
+			string s = (_prefix + section.Name).ToLower();
+//Console.WriteLine("added alias '{0}' for '{1}'", s, section.Name);
+			foreach(string s2 in section.Keys)
+			{
+				_keys[s + "." + s2] = s2;
+			}
 		}
 	}
 
@@ -269,12 +282,28 @@ public class IniConfigSupplier: IConfigSupplier
 		return buf.ToString();
 	}
 
+	// FIXME:  currently has a bug in support for section value names
+	// including a '.'
+	
 	private string[] GetPathComponents(string name)
 	{
 		string key = Paths.Basename(name, ".");
 		string section = Paths.Suffix(name, _prefix);
-		section = section.Substring(0,
-				section.Length - key.Length - 1);
+
+//Console.WriteLine("section:  '{0}'; key:  '{1}'", section, key);
+
+		string[] pe = section.Split('.');
+		if((_prefix != null && pe.Length >= 2)
+				|| (_prefix == null && pe.Length >= 1))
+		{
+			section = section.Substring(0,
+					section.Length - key.Length - 1);
+		}
+		else
+		{
+			section = key;
+			key = "";
+		}
 
 //Console.WriteLine("section:  '{0}'; key:  '{1}'", section, key);
 		return (new string[] { section, key });
