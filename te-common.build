@@ -47,18 +47,19 @@
 <project name="te-common" default="all" basedir=".">
 	<property name="basedir"	value="${nant.project.basedir}"/>
 	<property name="app.name"	value="te-common"/>
-	<property name="build.dir"	value="build/classes"/>
 	<property name="build.tests"	value="build/tests"/>
 	<property name="reports.tests"	value="build/reports"/>
 	<property name="lib.dir"	value="lib"/>
+	<property name="lib.name"	value="${app.name}.dll"/>
 	<property name="src.dir"	value="src"/>
 	<property name="tests.dir"	value="tests/nunit"/>
 	<property name="tests.lib.dir"	value="tests/lib"/>
+	<property name="tests.lib.name"	value="${build.tests}/${app.name}-tests.dll"/>
 
 	<target name="all" depends="compile-lib"/>
 
 	<target name="compile-lib">
-		<csc target="library" output="${app.name}.dll">
+		<csc target="library" output="${lib.name}">
 			<sources>
 				<include name="src/**/*.cs"/>
 			</sources>
@@ -66,31 +67,35 @@
 	</target>
 
 	<target name="clean">
-		<delete file="${app.name}.dll"/>
+		<delete file="${lib.name}"/>
 		<delete dir="build"/>
 	</target>
 
 	<!-- unit tests -->
 	<target name="compile-tests" depends="compile-lib">
 		<mkdir dir="${build.tests}"/>
-		<csc target="library" output="${build.tests}/${app.name}-tests.dll">
+		<csc target="library" output="${tests.lib.name}">
 			<sources>
 				<include name="tests/nunit/**/*.cs"/>
 			</sources>
 			<references>
-				<include name="${app.name}.dll"/>
+				<include name="${lib.name}"/>
 				<include name="${tests.lib.dir}/*.dll"/>
 			</references>
 		</csc>
 	</target>
 
 	<target name="nunit" depends="compile-tests">
+		<copy todir="${build.tests}" flatten="true">
+			<fileset dir="${basedir}">
+				<include name="${lib.name}"/>
+			</fileset>
+		</copy>
 		<nunit2>
 			<formatter type="Plain"/>
 			<test>
 				<assemblies>
-					<include name="${app.name}.dll"/>
-					<include name="${build.tests}/${app.name}-tests.dll"/>
+					<include name="${tests.lib.name}"/>
 				</assemblies>
 			</test>
 		</nunit2>
