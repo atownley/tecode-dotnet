@@ -39,6 +39,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
@@ -52,6 +53,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyCopyright("Copyright 2004, Andrew S. Townley")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+[assembly: CLSCompliant(true)]
 
 // NOTE:  the version here will be used to track which version of the
 // Java library implements compatible functionality.

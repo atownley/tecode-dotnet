@@ -79,7 +79,7 @@
 
 	<target name="stamp" depends="bootstrap">
 		<buildstamp versioninfo="${build.version}"
-				devname="999999"
+				devname="9999"
 				verbose="true">
 			<fileset dir="${basedir}">
 				<include name="**/*.in"/>
@@ -117,6 +117,8 @@
 
 	<target name="all" depends="stamp, compile-lib"/>
 
+	<target name="cmbuild" depends="stamp-count, bin-dist"/>
+
 	<target name="compile-lib">
 		<csc target="library" output="${lib.name}"
 				nowarn="1591" debug="true"
@@ -150,8 +152,7 @@
 		-->
 	</target>
 
-	<!--target name="bin-dist" depends="compile-lib,docs,distdirs"-->
-	<target name="bin-dist" depends="version,compile-lib,distdirs">
+	<target name="bin-dist" depends="version,compile-lib,docs,distdirs">
 		<copy file="${lib.name}" todir="${dist.dir}/bin" />
 		<copy file="${custom.tasks}" todir="${dist.dir}/bin" />
 		<mkdir dir="${dist.dir}/docs" />
@@ -168,6 +169,7 @@
 	<target name="clean">
 		<delete file="${lib.name}" failonerror="false"/>
 		<delete dir="build" failonerror="false"/>
+		<delete dir="${msdn.docs}" failonerror="false"/>
 	</target>
 
 	<target name="distclean" depends="clean,stamp-clean">
@@ -209,6 +211,7 @@
 	
 	<!-- documentation -->
 	<target name="docs" depends="compile-lib">
+		<if test="${not nant.platform.unix}">
 		<mkdir dir="${msdn.docs}"/>
 		<ndoc>
 			<assemblies>
@@ -245,5 +248,6 @@
 				</documenter>
 			</documenters>
 		</ndoc>
+		</if>
 	</target>
 </project>
