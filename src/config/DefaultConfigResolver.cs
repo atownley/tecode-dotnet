@@ -54,7 +54,7 @@ namespace TownleyEnterprises.Config {
 ///   decorator for a single reference to an IConfigSupplier instance
 ///   delegate.
 /// </summary>
-/// <version>$Id: DefaultConfigResolver.cs,v 1.1 2004/06/22 12:01:11 atownley Exp $</version>
+/// <version>$Id: DefaultConfigResolver.cs,v 1.2 2004/06/23 14:46:32 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -84,6 +84,7 @@ public class DefaultConfigResolver: IConfigResolver
 
 	protected DefaultConfigResolver(string key, IConfigSupplier config)
 	{
+		_key = key;
 		_config = config;
 		_debug = new DebugWriter(this);
 		_debug.WriteLine(
@@ -300,18 +301,22 @@ public class DefaultConfigResolver: IConfigResolver
 
 	public override string ToString()
 	{
-		StringBuilder buf = new StringBuilder();
-		buf.Append(base.ToString());
-		buf.Append("[");
-		buf.Append(GetHashCode());
-		buf.Append("]");
+		// this is debugging stuff
+		//StringBuilder buf = new StringBuilder();
+		//buf.Append(base.ToString());
+		//buf.Append("[");
+		//buf.Append(GetHashCode());
+		//buf.Append("]");
 
-		return buf.ToString();
+		//return buf.ToString();
+		
+		return this[_key];
 	}
 
 	private readonly IConfigSupplier	_config;
 	private IConfigResolver			_parent = null;
 	private DebugWriter			_debug;
+	private string				_key = null;
 }
 
 }
