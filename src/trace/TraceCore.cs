@@ -62,7 +62,7 @@ namespace TownleyEnterprises.Trace {
 ///   multiplier of the trace level for individual trace methods.
 ///   <para>
 /// </summary>
-/// <version>$Id: TraceCore.cs,v 1.2 2004/06/28 07:41:16 atownley Exp $</version>
+/// <version>$Id: TraceCore.cs,v 1.3 2004/06/28 09:20:37 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -357,11 +357,14 @@ public class TraceCore
 
 			try
 			{
+				// make sure we expand any environment variables
+				filename = Environment.ExpandEnvironmentVariables(filename);
 				_ts = new FileTraceWriter(filename, append);
 				_traceFileName = filename;
 			}
 			catch(Exception e)
 			{
+				_traceFileName = "";
 				Console.Error.WriteLine(e);
 				_ts = SystemTraceWriter.GetInstance();
 			}
