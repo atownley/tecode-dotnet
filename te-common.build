@@ -67,8 +67,13 @@
 	</target>
 
 	<target name="clean">
-		<delete file="${lib.name}"/>
-		<delete dir="build"/>
+		<delete file="${lib.name}" failonerror="false"/>
+		<delete dir="build" failonerror="false"/>
+		<delete failonerror="false">
+			<fileset dir=".">
+				<include name="**/*.pdb"/>
+			</fileset>
+		</delete>
 	</target>
 
 	<!-- unit tests -->
