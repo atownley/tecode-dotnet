@@ -61,7 +61,7 @@
 	<property name="tests.lib.name"	value="${build.tests}/${app.name}-tests.dll"/>
 	<property name="custom.tasks"	value="nant-tasks/TownleyEnterprises.NAnt.Tasks.dll"/>
 
-	<loadtasks assembly="${lib.dir}/CloverNAnt-0.85.dll"/>
+	<!-- loadtasks assembly="${lib.dir}/CloverNAnt-0.85.dll"/-->
 
 	<target name="bootstrap">
 		<csc target="library" output="${custom.tasks}">
@@ -121,6 +121,7 @@
 		<property name="dist.dir" value="${app.name}-${version}"/>
 	</target>
 
+	<!--
 	<target name="with-clover">
 		<clover-setup initstring="${clover.build}/te-common.cdb"
 			builddir="${clover.build}" flatten="true"/>
@@ -133,6 +134,7 @@
 			</current>
 		</clover-report>
 	</target>
+	-->
 
 	<target name="all" depends="stamp, compile-lib"/>
 
