@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Trace {
 ///   on Console.Error and is the default trace stream used unless
 ///   otherwise configured.
 /// </summary>
-/// <version>$Id: SystemTraceWriter.cs,v 1.2 2004/07/20 10:22:09 atownley Exp $</version>
+/// <version>$Id: SystemTraceWriter.cs,v 1.3 2004/11/23 22:50:06 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -78,11 +78,6 @@ public class SystemTraceWriter: TraceWriter
 	
 	public static TraceWriter GetInstance()
 	{
-		if(_instance == null)
-		{
-			_instance = new SystemTraceWriter();
-		}
-
 		return _instance;
 	}
 
@@ -120,7 +115,7 @@ public class SystemTraceWriter: TraceWriter
 	}
 
 	/** our singleton instance */
-	private static TraceWriter _instance = null;
+	private static TraceWriter _instance = new SystemTraceWriter();
 }
 
 }
