@@ -61,7 +61,8 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyVersion("@build.version.major@.@build.version.minor@.0.0")]
 
 // this is the display version, so we can do what we want here
-[assembly: AssemblyFileVersion("@build.version.major@.@build.version.minor@.@build.version.release@ (Build @build.version.count@")]
+//[assembly: AssemblyFileVersion("@build.version.major@.@build.version.minor@.@build.version.release@ (Build @build.version.count@)")]
+[assembly: AssemblyFileVersion("@build.version.major@.@build.version.minor@.@build.version.release@.@build.version.count@")]
 
 // Currently not doing signed assemblies
 [assembly: AssemblyDelaySign(false)]
