@@ -40,6 +40,7 @@
 //////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Text;
 
 namespace TownleyEnterprises.Command {
 
@@ -47,7 +48,7 @@ namespace TownleyEnterprises.Command {
 /// <summary>
 ///   This class provides information to event subscribers.
 /// </summary>
-/// <version>$Id: ExecuteEventArgs.cs,v 1.1 2004/07/20 11:50:00 atownley Exp $</version>
+/// <version>$Id: ExecuteEventArgs.cs,v 1.2 2004/07/23 05:53:44 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -60,9 +61,15 @@ public sealed class ExecuteEventArgs: EventArgs
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 	
-	public ExecuteEventArgs(CommandParser parser)
+	public ExecuteEventArgs(CommandParser parser, CommandOption opt)
 	{
 		_parser = parser;
+		_option = opt;
+	}
+
+	public CommandOption Option
+	{
+		get { return _option; }
 	}
 
 	public CommandParser Parser
@@ -70,6 +77,18 @@ public sealed class ExecuteEventArgs: EventArgs
 		get { return _parser; }
 	}
 
+	public override string ToString()
+	{
+		StringBuilder buf = new StringBuilder("[TownleyEnterprises.Command.ExecuteEventArgs: parser = ");
+		buf.Append(_parser);
+		buf.Append("; option = ");
+		buf.Append(_option);
+		buf.Append(" ]");
+
+		return buf.ToString();
+	}
+
+	private readonly CommandOption _option;
 	private readonly CommandParser _parser;
 }
 
