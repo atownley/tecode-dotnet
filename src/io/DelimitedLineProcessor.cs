@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Common.IO {
 ///   This class provides a mechanism for easily parsing delimited
 ///   text files.
 /// </summary>
-/// <version>$Id: DelimitedLineProcessor.cs,v 1.1 2004/06/10 07:58:28 atownley Exp $</version>
+/// <version>$Id: DelimitedLineProcessor.cs,v 1.2 2004/06/10 08:43:54 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -104,9 +104,11 @@ public abstract class DelimitedLineProcessor: AbstractLineProcessor
 			}
 			else
 			{
+				int sidx = lidx+1;
+
 				if(idx != -1)
 				{
-					tok = line.Substring(lidx+1, idx);
+					tok = line.Substring(sidx, idx - sidx);
 				}
 				else
 				{
