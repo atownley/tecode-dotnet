@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Config {
 ///   This class provides an implementation of the Registry pattern
 ///   for system-wide configuration.
 /// </summary>
-/// <version>$Id: ConfigRegistry.cs,v 1.1 2004/06/21 15:55:07 atownley Exp $</version>
+/// <version>$Id: ConfigRegistry.cs,v 1.2 2004/06/23 14:45:44 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -58,13 +58,40 @@ public sealed class ConfigRegistry
 {
 	//////////////////////////////////////////////////////////////
 	/// <summary>
-	///   This method is used to register a config supplier.
+	///   This method is used to register a config supplier. 
 	/// </summary>
+	/// <param name="supplier">the supplier to register</param>
 	//////////////////////////////////////////////////////////////
 	
 	public static void RegisterSupplier(IConfigSupplier supplier)
 	{
+		AppConfig ac = GetConfig(supplier.AppName);
+		ac.RegisterConfigSupplier(supplier);
 	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method is used to retrieve a reference to the
+	///   specified AppConfig instance.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+	
+	public static AppConfig GetConfig(string name)
+	{
+		AppConfig ac = (AppConfig)_hash[name];
+		if(ac == null)
+		{
+			ac = new AppConfig(name);
+			_hash[name] = ac;
+		}
+	
+		return ac;
+	}
+
+	// create a shared environment resolver
+	internal static IConfigSupplier Environment = new EnvConfigSupplier();
+
+	private static Hashtable	_hash = new Hashtable();
 
 	// prevent instances
 	private ConfigRegistry() {}
