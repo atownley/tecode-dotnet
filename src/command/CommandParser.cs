@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.5 2004/06/18 15:30:45 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.6 2004/07/20 10:08:07 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -544,7 +544,7 @@ public sealed class CommandParser: ICommandListener
 		// sanity check for existing options
 		OptionHolder lobj = (OptionHolder)_longOpts[lname];
 		OptionHolder sobj = (OptionHolder)_shortOpts[c];
-		if(lobj != null || sobj != null)
+		if(lname != "" && (lobj != null || sobj != null))
 		{
 			string desc = null;
 			Console.Error.Write("warning:  overriding option");
@@ -949,6 +949,16 @@ public sealed class CommandParser: ICommandListener
 					HandleMissingArg(val);
 					return ++argc;
 				}
+
+				// sanity check the argument value to
+				// make sure it isn't another
+				// switch...
+				if(arg.StartsWith(_lswitch)
+						|| c0 == _sswitch)
+				{
+					HandleMissingArg(val);
+					return ++argc;
+				}
 			}
 		}
 
@@ -1003,6 +1013,15 @@ public sealed class CommandParser: ICommandListener
 						arg = args[argc];
 					}
 					else
+					{
+						HandleMissingArg(oh);
+					}
+				
+					// FIXME:  this check should
+					// be generalized for both
+					// cases...
+					if(arg.StartsWith(_lswitch)
+							|| arg[0] == _sswitch)
 					{
 						HandleMissingArg(oh);
 					}
