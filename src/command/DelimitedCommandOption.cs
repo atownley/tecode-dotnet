@@ -42,7 +42,7 @@
 using System;
 using System.Collections;
 
-namespace TownleyEnterprises.Common.Command {
+namespace TownleyEnterprises.Command {
 
 /// <summary>
 ///   This class provides support for multi-valued options which are
@@ -60,7 +60,7 @@ namespace TownleyEnterprises.Common.Command {
 ///   </p>
 /// </summary>
 ///
-/// <version>$Id: DelimitedCommandOption.cs,v 1.1 2004/06/08 19:48:35 atownley Exp $</version>
+/// <version>$Id: DelimitedCommandOption.cs,v 1.2 2004/06/15 16:57:44 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 
 public class DelimitedCommandOption: RepeatableCommandOption

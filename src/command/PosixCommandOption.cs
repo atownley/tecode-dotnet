@@ -41,13 +41,13 @@
 
 using System;
 
-namespace TownleyEnterprises.Common.Command {
+namespace TownleyEnterprises.Command {
 
 /// <summary>
 ///   This class provides support for POSIX-compliant command options.
 /// </summary>
 ///
-/// <version>$Id: PosixCommandOption.cs,v 1.1 2004/06/08 19:48:35 atownley Exp $</version>
+/// <version>$Id: PosixCommandOption.cs,v 1.2 2004/06/15 16:57:44 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 
 public class PosixCommandOption: CommandOption

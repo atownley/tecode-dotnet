@@ -43,14 +43,14 @@ using System;
 using System.Collections;
 using System.Text;
 
-namespace TownleyEnterprises.Common.Command {
+namespace TownleyEnterprises.Command {
 
 //////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.3 2004/06/09 07:31:59 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.4 2004/06/15 16:57:44 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 

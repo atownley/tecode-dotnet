@@ -39,14 +39,14 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-namespace TownleyEnterprises.Common.Command {
+namespace TownleyEnterprises.Command {
 
 /// <summary>
 ///   This abstract class is intended to easily support the
 ///   implementation of command-line argument handler classes
 ///   by providing an empty optionMatched method.
 /// </summary>
-/// <version>$Id: AbstractCommandListener.cs,v 1.1 2004/06/08 19:48:35 atownley Exp $</version>
+/// <version>$Id: AbstractCommandListener.cs,v 1.2 2004/06/15 16:57:34 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 
 public abstract class AbstractCommandListener: ICommandListener
