@@ -1,3 +1,36 @@
+2004-11-23 Andrew S. Townley <atownley>
+	* Added docs/namespaces.xml to repository
+
+	* examples/command/feather2.cs
+	  examples/command/feather3.cs
+
+	  Changed delegate initialization so it compiles for MS.NET
+
+	* te-common.build
+
+	  Changed docs target so now builds on Unix.  Added link on
+	  copyright text to SourceForge.
+
+	* src/command/CommandParser.cs
+
+	  Fix to problem executing unmatched CommandOptions.
+
+2004-07-26 Andrew S. Townley <atownley>
+	* src/command/CommandOption.cs
+
+	  Changed declaration of EventHandler delegate based on
+	  actually understanding how they work.
+
+2004-07-23 Andrew S. Townley <atownley>
+	* te-common.build
+	  
+	  Removed reference to clover because not yet working with
+	  Mono.
+
+	* src/command/CommandOption.cs
+
+	  Fix for handling no short arguments.
+
 2004-07-20 Andrew S. Townley <atownley>
 	* Added example for CLI classes
 
@@ -7,6 +40,16 @@
 	  in the case where another switch followed and was erronously
 	  picked up as the argument to the first switch.  Must fix
 	  this in the Java Edition as well.
+	
+	* src/command/CommandOption.cs
+	  src/command/CommandParser.cs
+
+	  Added delegate to implement GoF Command pattern and made
+	  appropriate changes to necessary classes.
+
+	  Added experimental automatic constraint checking.
+	  
+	  Fixed bug in handling - as valid argument.
 
 2004-07-19 Andrew S. Townley <atownley>
 	* Added command options and command listener for
