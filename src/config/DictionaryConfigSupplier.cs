@@ -43,8 +43,6 @@ using System;
 using System.Collections;
 using System.Text;
 
-using TownleyEnterprises.IO;
-
 namespace TownleyEnterprises.Config {
 
 //////////////////////////////////////////////////////////////////////
@@ -52,11 +50,11 @@ namespace TownleyEnterprises.Config {
 ///   This class is a Dictionary decorator which implements the
 ///   IConfigSupplier interface.
 /// </summary>
-/// <version>$Id: DictionaryConfigSupplier.cs,v 1.2 2004/06/22 12:04:13 atownley Exp $</version>
+/// <version>$Id: DictionaryConfigSupplier.cs,v 1.3 2004/06/23 14:47:01 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
-public sealed class DictionaryConfigSupplier: IConfigSupplier
+public class DictionaryConfigSupplier: IConfigSupplier
 {
 	//////////////////////////////////////////////////////////////
 	/// <summary>
@@ -82,7 +80,7 @@ public sealed class DictionaryConfigSupplier: IConfigSupplier
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 
-	public string AppName
+	public virtual string AppName
 	{
 		get { return _name; }
 	}
@@ -94,7 +92,7 @@ public sealed class DictionaryConfigSupplier: IConfigSupplier
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 
-	public ICollection Keys
+	public virtual ICollection Keys
 	{
 		get { return _dict.Keys; }
 	}
@@ -107,7 +105,7 @@ public sealed class DictionaryConfigSupplier: IConfigSupplier
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 
-	public string this[string key]
+	public virtual string this[string key]
 	{
 		get { return (string)_dict[key]; }
 		set { _dict[key] = value; }
@@ -120,7 +118,7 @@ public sealed class DictionaryConfigSupplier: IConfigSupplier
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 	
-	public bool IsCaseSensitive
+	public virtual bool IsCaseSensitive
 	{
 		get { return true; }
 	}
@@ -135,7 +133,7 @@ public sealed class DictionaryConfigSupplier: IConfigSupplier
 	/// supplier</returns>
 	//////////////////////////////////////////////////////////////
 	
-	public bool CanRead(string key)
+	public virtual bool CanRead(string key)
 	{
 		return _dict.Contains(key);
 	}
@@ -150,7 +148,7 @@ public sealed class DictionaryConfigSupplier: IConfigSupplier
 	/// supplier</returns>
 	//////////////////////////////////////////////////////////////
 	
-	public bool CanWrite(string key)
+	public virtual bool CanWrite(string key)
 	{
 		return true;
 	}
@@ -162,7 +160,7 @@ public sealed class DictionaryConfigSupplier: IConfigSupplier
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 	
-	public void Load()
+	public virtual void Load()
 	{
 	}
 	
@@ -173,8 +171,21 @@ public sealed class DictionaryConfigSupplier: IConfigSupplier
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 	
-	public void Save()
+	public virtual void Save()
 	{
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property provides a way for derived classes to
+	///   refresh the underlying dictionary.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+	
+	public virtual IDictionary Dictionary
+	{
+		get { return _dict; }
+		set { _dict = value; }
 	}
 
 	public override string ToString()
@@ -189,7 +200,9 @@ public sealed class DictionaryConfigSupplier: IConfigSupplier
 	}
 
 	private readonly string		_name;
-	private readonly IDictionary	_dict;
+
+	// derived classes need to refresh the dictionary
+	private IDictionary		_dict;
 }
 
 }
