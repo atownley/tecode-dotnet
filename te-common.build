@@ -86,10 +86,6 @@
 	</target>
 
 	<target name="nunit" depends="compile-tests">
-		<!-- configure the system's environment -->
-		<sysinfo verbose="true" prefix=""
-			sys.env.TEST_DATA_DIR="${tests.dir}/data"/>
-
 		<copy todir="${build.tests}" flatten="true">
 			<fileset dir="${basedir}">
 				<include name="${lib.name}"/>
