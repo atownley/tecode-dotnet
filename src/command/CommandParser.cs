@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.7 2004/07/20 10:22:08 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.8 2004/07/20 11:50:00 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -343,6 +343,19 @@ public sealed class CommandParser: ICommandListener
 		}
 	}
 
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property determines if the other commands will be
+	///   executed if one command throws an exception.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+
+	public bool AbortExecutionOnException
+	{
+		get { return _abortExecOnError; }
+		set { _abortExecOnError = value; }
+	}
+
 	/// OptionListener interface
 	
 	public void OptionMatched(CommandOption opt, string arg)
@@ -524,6 +537,36 @@ public sealed class CommandParser: ICommandListener
 
 	//////////////////////////////////////////////////////////////
 	/// <summary>
+	///   This method is used to execute the registered commands.
+	/// </summary>
+	/// <param name="sender">the object triggering the
+	/// commands</param>
+	//////////////////////////////////////////////////////////////
+
+	public void ExecuteCommands(Object sender)
+	{
+		foreach(CommandOption option in _commands)
+		{
+			try
+			{
+				option.Execute(sender, new ExecuteEventArgs(this));
+			}
+			catch(Exception e)
+			{
+				if(!_abortExecOnError)
+				{
+					Console.Error.WriteLine(e);
+				}
+				else
+				{
+					throw e;
+				}
+			}
+		}
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
 	///   This method is an easy way to add a new command option to
 	///   the appropriate places.
 	/// </summary>
@@ -572,6 +615,11 @@ public sealed class CommandParser: ICommandListener
 		if(c != (char)0)
 		{
 			_shortOpts[c] = holder;
+		}
+
+		if(!_commands.Contains(opt))
+		{
+			_commands.Add(opt);
 		}
 	}
 
@@ -847,14 +895,9 @@ public sealed class CommandParser: ICommandListener
 
 	private void ResetOptions()
 	{
-		foreach(OptionHolder holder in _longOpts.Values)
+		foreach(CommandOption option in _commands)
 		{
-			holder.option.Reset();
-		}
-
-		foreach(OptionHolder holder in _shortOpts.Values)
-		{
-			holder.option.Reset();
+			option.Reset();
 		}
 	}
 
@@ -954,7 +997,7 @@ public sealed class CommandParser: ICommandListener
 				// make sure it isn't another
 				// switch...
 				if(arg.StartsWith(_lswitch)
-						|| c0 == _sswitch)
+						|| arg[0] == _sswitch)
 				{
 					HandleMissingArg(val);
 					return ++argc;
@@ -1085,6 +1128,13 @@ public sealed class CommandParser: ICommandListener
 
 	/** the postamble to print */
 	private string		_postamble = null;
+
+	/** controls if we exit when an execute action throws an
+	 * exception */
+	private bool		_abortExecOnError = true;
+
+	/** tracks the unique list of commands */
+	private ArrayList	_commands = new ArrayList();
 
 	/** the maximum width of the switch part */
 	private const int	SWITCH_LENGTH = 35;

@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for defining command-line
 ///   arguments.
 /// </summary>
-/// <version>$Id: CommandOption.cs,v 1.5 2004/07/20 10:22:08 atownley Exp $</version>
+/// <version>$Id: CommandOption.cs,v 1.6 2004/07/20 11:50:00 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -191,6 +191,20 @@ public class CommandOption
 
 	//////////////////////////////////////////////////////////////
 	/// <summary>
+	///   This delegate may be used to initialize a command option
+	///   with the value to be used for the Execute method.
+	/// </summary>
+	/// <param name="sender">the object triggering the
+	/// execution</param>
+	/// <param name="e">the event arguments</param>
+	//////////////////////////////////////////////////////////////
+	
+	public delegate void ExecuteHandler(Object sender, ExecuteEventArgs e);
+
+	public event ExecuteHandler OnExecute;
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
 	///   This method is used to retrieve the argument (if any)
 	///   which was given to the option.  If no argument was
 	///   specified and the option has a default value, the
@@ -228,8 +242,8 @@ public class CommandOption
 
 	//////////////////////////////////////////////////////////////
 	/// <summary>
-	/// <para>This method is called by the command parser to indicate
-	/// that the option has been matched.</para>
+	/// <para>This method is called by the command parser to
+	/// indicate that the option has been matched.</para>
 	/// <para>This method may be overridden by derived classes to
 	/// provide object-oriented command-line argument handling.
 	/// The default implementation simply sets the value returned
@@ -244,6 +258,31 @@ public class CommandOption
 	{
 		_matched = true;
 		_arg = arg;
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method is designed to be overridden by derived
+	///   CommandOption classes which wish to implement the GoF
+	///   Command pattern.
+	/// </summary>
+	/// <remarks>
+	///   When implementing this method, error states should be
+	///   reported by throwing exceptions.  The command parser
+	///   will determine if a single exception will stop the
+	///   execution of any other commands.
+	/// </remarks>
+	/// <param name="sender">the application which triggered the
+	/// execution</param>
+	/// <param name="e">the event arguments</param>
+	//////////////////////////////////////////////////////////////
+
+	public virtual void Execute(Object sender, ExecuteEventArgs e)
+	{
+		if(OnExecute != null && Matched)
+		{
+			OnExecute(sender, e);
+		}
 	}
 
 	//////////////////////////////////////////////////////////////
