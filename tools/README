@@ -1,0 +1,24 @@
+README for Tools
+================
+
+This directory contains snapshots of the tools required to
+successfully build te-common.NET.  At the moment, it depends on the
+nightly build of NAnt from the 28th of Sept, but I'm not sure for how
+much longer.  I didn't have access to the previous version that I was
+using (will be posted here soon), so I had to update.
+
+This version of NAnt doesn't come with either NDoc or NUnit (which is
+slightly annoying), but using NUnit 2.1 seems to work if you put the
+appropriate assemblies in the right places in NAnt's bin directory.
+
+NDoc is a non-runner at the moment, so I'm not really sure what to do
+about that.  I gather from trying to make everything work that NAnt is
+using a nightly build or other snapshot of NDoc, because none of the
+versions I tried seems to work.
+
+I'll post any extra tools you need to build this thing here as they
+come available and try to keep everything up to date.
+
+ast
+
+$Id: README,v 1.1 2004/10/09 12:21:05 atownley Exp $
