@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   the file has been parsed, the sections can be retrieved for
 ///   further manipulation.
 /// </summary>
-/// <version>$Id: IniFileProcessor.cs,v 1.8 2004/06/17 07:48:11 atownley Exp $</version>
+/// <version>$Id: IniFileProcessor.cs,v 1.9 2004/06/23 14:48:22 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -124,9 +124,9 @@ public class IniFileProcessor: TextFileProcessor
 			get { return _dupSections; }
 		}
 
-		public IniSection this[string key]
+		public ConfigSection this[string key]
 		{
-			get { return (IniSection)_sections[key.ToLower()]; }
+			get { return (ConfigSection)_sections[key.ToLower()]; }
 		}
 
 		public bool Warnings
@@ -135,15 +135,17 @@ public class IniFileProcessor: TextFileProcessor
 			set { _warnings = value; }
 		}
 
-		private IniSection ParseSection(string line)
+		private ConfigSection ParseSection(string line)
 		{
-			IniSection section = null;
+			ConfigSection section = null;
 			int idx = line.IndexOf("[");
 			int idx2 = line.LastIndexOf("]");
 
 			if(idx != -1 && idx2 != -1 && idx2 > idx)
 			{
-				section = new IniSection(line.Substring(idx + 1, idx2 - idx - 1));
+				section = new ConfigSection(
+					line.Substring(idx + 1, 
+						idx2 - idx - 1), true);
 			}
 
 			return section;
@@ -184,7 +186,7 @@ public class IniFileProcessor: TextFileProcessor
 		}
 
 		private Hashtable	_sections = new Hashtable();
-		private IniSection	_cs = null;
+		private ConfigSection	_cs = null;
 		private ArrayList	_dupSections = new ArrayList();
 		private bool		_warnings = true;
 	}
@@ -273,7 +275,7 @@ public class IniFileProcessor: TextFileProcessor
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 
-	public IniSection this[string key]
+	public ConfigSection this[string key]
 	{
 		get { return (_ir == null) ? null: _ir[key]; }
 	}
