@@ -41,6 +41,8 @@
 
 using System;
 using System.Collections;
+using System.IO;
+
 using TownleyEnterprises.Config;
 
 namespace TownleyEnterprises.IO {
@@ -52,7 +54,7 @@ namespace TownleyEnterprises.IO {
 ///   the file has been parsed, the sections can be retrieved for
 ///   further manipulation.
 /// </summary>
-/// <version>$Id: IniFileProcessor.cs,v 1.9 2004/06/23 14:48:22 atownley Exp $</version>
+/// <version>$Id: IniFileProcessor.cs,v 1.10 2004/06/24 10:28:29 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -201,6 +203,14 @@ public class IniFileProcessor: TextFileProcessor
 
 	public IniFileProcessor(string name) : base(name)
 	{
+		// compatibility with the Win32 API profile functions
+		string windir = Environment.GetEnvironmentVariable("WINDIR");
+		if(windir != null && "" != windir && !File.Exists(name))
+		{
+			string s = Path.Combine(windir, name);
+			if(File.Exists(s))
+				FileName = s;
+		}
 	}
 
 	//////////////////////////////////////////////////////////////

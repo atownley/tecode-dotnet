@@ -53,7 +53,7 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the IniFileProcessor class from
 ///   the IO package.
 /// </summary>  
-/// <version>$Id: IniFileProcessorTest.cs,v 1.7 2004/06/23 14:49:42 atownley Exp $</version>
+/// <version>$Id: IniFileProcessorTest.cs,v 1.8 2004/06/24 10:28:45 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -185,6 +185,18 @@ public sealed class IniFileProcessorTest
 		ConfigSection section = processor["nunit"];
 		Assert.IsNull(section["missing"],
 			"missing key should return a null");
+	}
+
+	[Test]
+	public void VerifyWindirResolution()
+	{
+		string windir = Environment.GetEnvironmentVariable("WINDIR");
+		Assert.IsNotNull(windir,
+			"WINDIR environment variable should be set (if on UNIX, should be set to TEST_DATA_DIR)");
+		IniFileProcessor ini = new IniFileProcessor("system.ini");
+		ini.ShowWarnings = false;
+		ConfigSection section = ini["drivers"];
+		Assert.AreEqual("mmdrv.dll", section["wave"]);
 	}
 
 	private IniFileProcessor	processor;

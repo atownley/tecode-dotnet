@@ -53,7 +53,7 @@ using System.Text;
 ///   line is provided by providing an instance of ILineProcessor
 ///   apropriate for the task.
 /// </summary>
-/// <version>$Id: TextFileProcessor.cs,v 1.3 2004/06/15 17:23:35 atownley Exp $</version>
+/// <version>$Id: TextFileProcessor.cs,v 1.4 2004/06/24 10:28:29 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -107,7 +107,12 @@ public class TextFileProcessor
 	public void ProcessFile(ILineProcessor lp)
 	{
 		StreamReader	reader = null;
-		
+
+		if(!File.Exists(_filename))
+		{
+			throw new FileNotFoundException("_filename");
+		}
+
 		try
 		{
 			if(_encoding != null)
@@ -144,8 +149,24 @@ public class TextFileProcessor
 		}
 	}
 
-	private readonly string	_filename;
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property is used by derived classes to modify the
+	///   filename after object creation, if necessary.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+
+	protected string FileName
+	{
+		get { return _filename; }
+		set { _filename = value; }
+	}
+	
 	private readonly string	_encoding;
+
+	// can't be read-only as derivied classes might need to change
+	// it post object construction
+	private string	_filename;
 }
 
 }
