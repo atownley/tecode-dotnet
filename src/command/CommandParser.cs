@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Common.Command {
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.1 2004/06/08 19:48:35 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.2 2004/06/08 23:14:56 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -303,6 +303,7 @@ public sealed class CommandParser: ICommandListener
 			if(s == null || s.Length == 0)
 				continue;
 
+Console.WriteLine("s:  " + s + "; eoa: " + _eoargs);
 			if(s.Equals(_eoargs))
 			{
 				copyargs = true;
@@ -535,8 +536,10 @@ public sealed class CommandParser: ICommandListener
 	private void AddOption(CommandOption opt, ICommandListener l)
 	{
 		OptionHolder holder = new OptionHolder(opt, l);
-	
-		string lname = opt.LongName;
+
+		// this fix is necessary because .NET seems to throw an
+		// exception if the key to a hashtable find is null
+		string lname = opt.LongName == null ? "" : opt.LongName;
 		char c = opt.ShortName;
 
 		// sanity check for existing options
@@ -825,7 +828,13 @@ public sealed class CommandParser: ICommandListener
 
 	private void RemoveOption(CommandOption opt)
 	{
-		_longOpts.Remove(opt.LongName);
+		// again, required to avoid the .NET null argument
+		// exception
+		if(opt.LongName != null)
+		{
+			_longOpts.Remove(opt.LongName);
+		}
+
 		_shortOpts.Remove(opt.ShortName);
 	}
 
