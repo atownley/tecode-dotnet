@@ -1,3 +1,9 @@
+2004-06-15 Andrew S. Townley <atownley>
+	* Added INI file parsing support
+
+2004-06-10 Andrew S. Townley <atownley>
+	* Ported the IO package from the Java Edition
+
 2004-06-09 Andrew S. Townley <atownley>
 	* Added NAnt build support
 	* Ported CommandParser unit tests
