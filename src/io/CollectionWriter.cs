@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   easily based on sensible ToString implementations of the
 ///   elements in the collections.
 /// </summary>
-/// <version>$Id: CollectionWriter.cs,v 1.1 2004/06/19 11:18:34 atownley Exp $</version>
+/// <version>$Id: CollectionWriter.cs,v 1.2 2004/06/22 12:06:35 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -107,10 +107,13 @@ public class CollectionWriter: StreamWriter
 	
 	public void Write(ICollection c, string d)
 	{
+		int i = 0;
+		int count = c.Count;
+
 		foreach(object o in c)
 		{
 			Write(o.ToString());
-			if(d != null)
+			if(d != null && ++i < count)
 				Write(d);
 		}
 	}
