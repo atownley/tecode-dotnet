@@ -51,7 +51,7 @@ namespace TownleyEnterprises.Common.Command {
 ///   with successfully parsing the options.  Manual verification of the
 ///   formatting of the usage and help output will still be necessary.
 /// </summary>  
-/// <version>$Id: CommandParserTest.cs,v 1.1 2004/06/08 21:17:06 atownley Exp $</version>
+/// <version>$Id: CommandParserTest.cs,v 1.2 2004/06/08 23:15:59 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -292,9 +292,9 @@ public sealed class CommandParserTest: AbstractCommandListener
 		altp.Parse(args);
 	
 		// this tests causes the argument parsing to stop at the '--'
-		Assert.IsFalse(opt1.Matched);
-		Assert.IsFalse(opt2.Matched);
-		Assert.IsFalse(opt3.Matched);
+		Assert.IsFalse(opt1.Matched, "option 1 should not be matched");
+		Assert.IsFalse(opt2.Matched, "option 2 should not be matched");
+		Assert.IsFalse(opt3.Matched, "option 3 should not be matched");
 	}
 
 	[Test]
@@ -343,7 +343,7 @@ public sealed class CommandParserTest: AbstractCommandListener
 		get { return options1; }
 	}
 
-	static CommandParser parser = new CommandParser("progname");
+	CommandParser parser = new CommandParser("progname");
 
 	static CommandOption opt1 = new CommandOption("one", '1', true,
 			"ARG", "Some argument value");
