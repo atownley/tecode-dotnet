@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Common.Command {
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.2 2004/06/08 23:14:56 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.3 2004/06/09 07:31:59 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -303,7 +303,6 @@ public sealed class CommandParser: ICommandListener
 			if(s == null || s.Length == 0)
 				continue;
 
-Console.WriteLine("s:  " + s + "; eoa: " + _eoargs);
 			if(s.Equals(_eoargs))
 			{
 				copyargs = true;
