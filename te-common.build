@@ -87,7 +87,7 @@
 		<buildstamp versioninfo="${build.version}"
 				devname="9999"
 				verbose="true">
-			<fileset dir="${basedir}">
+			<fileset basedir="${basedir}">
 				<include name="**/*.in"/>
 			</fileset>
 		</buildstamp>
@@ -97,7 +97,7 @@
 		<buildstamp versioninfo="${build.version}"
 				count="true"
 				verbose="true">
-			<fileset dir="${basedir}">
+			<fileset basedir="${basedir}">
 				<include name="**/*.in"/>
 			</fileset>
 		</buildstamp>
@@ -106,7 +106,7 @@
 	<target name="stamp-clean" depends="bootstrap">
 		<buildstamp versioninfo="${build.version}"
 				verbose="true" clean="true">
-			<fileset dir="${basedir}">
+			<fileset basedir="${basedir}">
 				<include name="**/*.in"/>
 			</fileset>
 		</buildstamp>
@@ -169,7 +169,7 @@
 		</copy>
 		<!--
 		<copy todir="${dist.dir}/examples">
-			<fileset dir="examples"/>
+			<fileset basedir="examples"/>
 		</copy>
 		-->
 	</target>
@@ -220,7 +220,7 @@
 
 	<target name="nunit" depends="compile-tests">
 		<copy todir="${build.tests}" flatten="true">
-			<fileset dir="${basedir}">
+			<fileset basedir="${basedir}">
 				<include name="${lib.name}"/>
 				<include name="**/*.pdb"/>
 			</fileset>
@@ -237,7 +237,6 @@
 	
 	<!-- documentation -->
 	<target name="docs" depends="compile-lib">
-		<if test="${not nant.platform.unix}">
 		<mkdir dir="${msdn.docs}"/>
 		<ndoc>
 			<assemblies>
@@ -268,12 +267,11 @@
 					<property name="DocumentProtected" value="true"/>
 					<property name="DocumentEmptyNamespaces" value="false"/>
 					<property name="IncludeAssemblyVersion" value="true"/>
-					<property name="CopyrightText" value="Copyright (c) 2001-2004, Andrew S. Townley.  All Rights Reserved."/>
-					<property name="CopyrightHref" value=""/>
+					<property name="CopyrightText" value="Copyright &copy; 2001-2004, Andrew S. Townley.  All Rights Reserved.  http://te-code.sourceforge.net"/>
+					<property name="CopyrightHref" value="http://te-code.sourceforge.net/"/>
 					<property name="CleanIntermediates" value="true"/>
 				</documenter>
 			</documenters>
 		</ndoc>
-		</if>
 	</target>
 </project>
