@@ -52,7 +52,7 @@ namespace TownleyEnterprises.Common.IO {
 ///   This file implements tests for the TextFileProcessor and the
 ///   DelimitedLineProcessor classes from the IO package.
 /// </summary>  
-/// <version>$Id: TextFileProcessorTest.cs,v 1.1 2004/06/10 08:01:15 atownley Exp $</version>
+/// <version>$Id: TextFileProcessorTest.cs,v 1.2 2004/06/10 08:05:33 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -107,7 +107,7 @@ public sealed class TextFileProcessorTest
 
 		TextFileProcessor processor = new TextFileProcessor(
 					Path.Combine(dataDir, "text-file-cp1252.txt"),
-					"CP1252");
+					"windows-1252");
 		BasicLineProcessor blp = new BasicLineProcessor();
 		processor.ProcessFile(blp);
 
