@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for defining command-line
 ///   arguments.
 /// </summary>
-/// <version>$Id: CommandOption.cs,v 1.6 2004/07/20 11:50:00 atownley Exp $</version>
+/// <version>$Id: CommandOption.cs,v 1.7 2004/07/23 05:51:49 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -360,6 +360,23 @@ public class CommandOption
 		}
 
 		return opts;
+	}
+
+	public override string ToString()
+	{
+		StringBuilder buf = new StringBuilder("[TownleyEnterprises.Command.CommandOption[ shortName = '");
+
+		if(_shortName != (char)0)
+			buf.Append(_shortName);
+		else
+			buf.Append("(none)");
+		buf.Append("'; longName = '");
+		buf.Append(_longName);
+		buf.Append("'; show = ");
+		buf.Append(_show);
+		buf.Append(" ]");
+
+		return buf.ToString();
 	}
 
 	private readonly bool	_hasarg;
