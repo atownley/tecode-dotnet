@@ -62,7 +62,7 @@ namespace TownleyEnterprises.Trace {
 ///   multiplier of the trace level for individual trace methods.
 ///   <para>
 /// </summary>
-/// <version>$Id: TraceCore.cs,v 1.1 2004/06/28 06:50:15 atownley Exp $</version>
+/// <version>$Id: TraceCore.cs,v 1.2 2004/06/28 07:41:16 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -107,7 +107,8 @@ public class TraceCore
 	/// <param name="args">the format arguments</param>
 	//////////////////////////////////////////////////////////////
 
-	public virtual void WriteLine(int threshold, string fmt, object[] args)
+	public virtual void WriteLine(int threshold, string fmt, 
+				params object[] args)
 	{
 		if(!WillTrace(threshold))
 			return;
