@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   strings.  Once the file has been parsed, the properties can be
 ///   retrieved and used as desired.
 /// </summary>
-/// <version>$Id: PropertyFileProcessor.cs,v 1.1 2004/06/21 08:40:22 atownley Exp $</version>
+/// <version>$Id: PropertyFileProcessor.cs,v 1.2 2004/06/23 14:49:04 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -67,6 +67,12 @@ public class PropertyFileProcessor: TextFileProcessor
 	
 	private class FileReader: AbstractLineProcessor
 	{
+		public FileReader(bool ignoreCase, string prefix)
+		{
+			_properties = new Properties(null,
+					ignoreCase, prefix);
+		}
+
 		public override void ProcessLine(string line)
 		{
 			base.ProcessLine(line);
@@ -95,7 +101,7 @@ public class PropertyFileProcessor: TextFileProcessor
 			}
 		}
 
-		private Properties	_properties = new Properties();
+		private Properties		_properties;
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -106,8 +112,30 @@ public class PropertyFileProcessor: TextFileProcessor
 	/// <param name="name">the file to process</param>
 	//////////////////////////////////////////////////////////////
 
-	public PropertyFileProcessor(string name) : base(name)
+	public PropertyFileProcessor(string name)
+		: this(name, false, null)
 	{
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   The constructor initializes the processor, but does not
+	///   actually process the file.
+	/// </summary>
+	/// <param name="name">the file to process</param>
+	/// <param name="ignoreCase">true if the properties are not
+	/// case-sensitive</param>
+	/// <param name="prefix">the prefix to use when building the
+	/// property entries</param>
+	//////////////////////////////////////////////////////////////
+
+	public PropertyFileProcessor(string name,
+				bool ignoreCase, string prefix)
+		: base(name)
+	{
+		_ignoreCase = ignoreCase;
+		_prefix = prefix;
+		_ir = new FileReader(ignoreCase, prefix);
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -132,7 +160,7 @@ public class PropertyFileProcessor: TextFileProcessor
 	
 	public void Reset()
 	{
-		_ir = new FileReader();
+		_ir = new FileReader(_ignoreCase, _prefix);
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -158,7 +186,9 @@ public class PropertyFileProcessor: TextFileProcessor
 		get { return _ir.Properties; }
 	}
 
-	private FileReader	_ir = new FileReader();
+	private bool		_ignoreCase = false;
+	private string		_prefix = null;
+	private FileReader	_ir = null;
 }
 
 }
