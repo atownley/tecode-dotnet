@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the TextFileProcessor class from
 ///   the IO package.
 /// </summary>  
-/// <version>$Id: TextFileProcessorTest.cs,v 1.4 2004/06/15 20:28:49 atownley Exp $</version>
+/// <version>$Id: TextFileProcessorTest.cs,v 1.5 2004/06/24 10:37:26 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -85,7 +85,6 @@ public sealed class TextFileProcessorTest
 		processor.ProcessFile(blp);
 
 		// now, we check the data
-		string s;
 		Assert.AreEqual(4, blp.LineCount,
 				"input file should contain 4 lines");
 		Assert.AreEqual("\u20AC4,000.00", blp.lines[0],
@@ -112,7 +111,6 @@ public sealed class TextFileProcessorTest
 		processor.ProcessFile(blp);
 
 		// now, we check the data
-		string s;
 		Assert.AreEqual(4, blp.LineCount,
 				"input file should contain 4 lines");
 		Assert.AreEqual("\u20AC4,000.00", blp.lines[0],
