@@ -53,7 +53,7 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the IniFileProcessor class from
 ///   the IO package.
 /// </summary>  
-/// <version>$Id: IniFileProcessorTest.cs,v 1.6 2004/06/23 13:05:27 atownley Exp $</version>
+/// <version>$Id: IniFileProcessorTest.cs,v 1.7 2004/06/23 14:49:42 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -176,8 +176,7 @@ public sealed class IniFileProcessorTest
 	public void VerifyParseEmptyKey()
 	{
 		ConfigSection section = processor["nunit"];
-		Assert.IsNull(section[""],
-			"empty key should return a null value");
+		Assert.AreEqual("emptykey", section[""]);
 	}
 
 	[Test]
