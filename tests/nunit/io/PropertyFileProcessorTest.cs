@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the PropertyFileProcessor class
 ///   from the IO package.
 /// </summary>  
-/// <version>$Id: PropertyFileProcessorTest.cs,v 1.1 2004/06/21 07:46:31 atownley Exp $</version>
+/// <version>$Id: PropertyFileProcessorTest.cs,v 1.2 2004/06/23 14:50:27 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -100,6 +100,19 @@ public sealed class PropertyFileProcessorTest
 	public void VerifyStripTrailingKeySpaces()
 	{
 		Assert.AreEqual("value", props["simple.property.tks"]);
+	}
+
+	[Test]
+	public void VerifyPrefix()
+	{
+		string dataDir = Environment.GetEnvironmentVariable("TEST_DATA_DIR");
+		
+		PropertyFileProcessor pfp = new PropertyFileProcessor(
+			Path.Combine(dataDir, "test.properties"),
+			false, "bogon");
+		pfp.ProcessFile();
+		props = pfp.Properties;
+		Assert.AreEqual("value", props["bogon.simple.property.tks"]);
 	}
 
 	private Properties	props;
