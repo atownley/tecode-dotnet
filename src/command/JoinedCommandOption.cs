@@ -48,30 +48,30 @@ namespace TownleyEnterprises.Command {
 ///   <ul>
 ///   <li>From gcc:
 ///   <ul>
-///   <li><code><strong>-m[VALUE]</strong></code> options for
+///   <li><c><strong>-m[VALUE]</strong></c> options for
 ///   machine-dependent behavior</li>
-///   <li><code><strong>-W[WARNING]</strong></code> options for warning
+///   <li><c><strong>-W[WARNING]</strong></c> options for warning
 ///   levels</li>
 ///   </ul>
 ///   </li>
 ///   <li>From java:
 ///   <ul>
-///   <li><code><strong>-D[PROPERTY=VALUE]</strong></code> options to
+///   <li><c><strong>-D[PROPERTY=VALUE]</strong></c> options to
 ///   set system properties</li>
-///   <li><code><strong>-X[OPTION]</strong></code> non-standard
+///   <li><c><strong>-X[OPTION]</strong></c> non-standard
 ///   extension options</li>
 ///   </ul>
 ///   </li>
 ///   </ul>
-///   <p>
+///   <para>
 ///   Typically speaking, the value of the joined option must immediately
 ///   follow the option's short name or switch.  However, this class
 ///   supports behavior to allow the value to also be specified as the
 ///   next argument in the argument list.
-///   </p>
+///   </para>
 /// </summary>
 ///
-/// <version>$Id: JoinedCommandOption.cs,v 1.2 2004/06/15 16:57:44 atownley Exp $</version>
+/// <version>$Id: JoinedCommandOption.cs,v 1.3 2004/06/18 15:30:45 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 
 public class JoinedCommandOption: RepeatableCommandOption

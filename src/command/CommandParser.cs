@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.4 2004/06/15 16:57:44 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.5 2004/06/18 15:30:45 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -154,7 +154,7 @@ public sealed class CommandParser: ICommandListener
 	///   specify the switch characters to be used for the short
 	///   and long options.  It also allows the specification of
 	///   the string to mark the end of the argument list.  By
-	///   default, this string is <code>--</code> which conforms
+	///   default, this string is <c>--</c> which conforms
 	///   to the POSIX standard.
 	/// </summary>
 	///

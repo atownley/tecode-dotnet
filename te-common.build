@@ -52,6 +52,8 @@
 	<property name="lib.dir"	value="lib"/>
 	<property name="lib.name"	value="${app.name}.dll"/>
 	<property name="src.dir"	value="src"/>
+	<property name="docs.dir"	value="docs"/>
+	<property name="msdn.docs"	value="${docs.dir}/msdn"/>
 	<property name="tests.dir"	value="tests/nunit"/>
 	<property name="tests.lib.dir"	value="tests/lib"/>
 	<property name="tests.lib.name"	value="${build.tests}/${app.name}-tests.dll"/>
@@ -59,7 +61,9 @@
 	<target name="all" depends="compile-lib"/>
 
 	<target name="compile-lib">
-		<csc target="library" output="${lib.name}">
+		<csc target="library" output="${lib.name}"
+				nowarn="1591" debug="true"
+				doc="${app.name}.xml">
 			<sources>
 				<include name="src/**/*.cs"/>
 			</sources>
@@ -67,13 +71,8 @@
 	</target>
 
 	<target name="clean">
-		<delete file="${lib.name}" failonerror="false"/>
-		<delete dir="build" failonerror="false"/>
-		<delete failonerror="false">
-			<fileset dir=".">
-				<include name="**/*.pdb"/>
-			</fileset>
-		</delete>
+		<delete file="${lib.name}"/>
+		<delete dir="build"/>
 	</target>
 
 	<!-- unit tests -->
@@ -105,5 +104,45 @@
 				</assemblies>
 			</test>
 		</nunit2>
+	</target>
+	
+	<!-- documentation -->
+	<target name="docs" depends="compile-lib">
+		<mkdir dir="${msdn.docs}"/>
+		<ndoc>
+			<assemblies>
+				<include name="${lib.name}"/>
+			</assemblies>
+			<summaries basedir="${docs.dir}">
+				<include name="namespaces.xml" />
+			</summaries>
+			<documenters>
+				<documenter name="MSDN">
+					<property name="OutputDirectory" value="${msdn.docs}"/>
+					<property name="HtmlHelpName" value="${nant.project.name}"/>
+					<property name="HtmlHelpCompilerFilename" value="hhc.exe"/>
+					<property name="IncludeFavorites" value="false"/>
+					<property name="Title" value="Townley Enterprises Public API"/>
+					<property name="SplitTOCS" value="false"/>
+					<property name="DefaultTOC" value=""/>
+					<property name="ShowVisualBasic" value="true"/>
+					<!--
+					<property name="ShowMissingSummaries" value="true"/>
+					<property name="ShowMissingRemarks" value="true"/>
+					<property name="ShowMissingParams" value="true"/>
+					<property name="ShowMissingReturns" value="true"/>
+					<property name="ShowMissingValues" value="true"/>
+					-->
+					<property name="DocumentInternals" value="false"/>
+					<property name="DocumentPrivates" value="false"/>
+					<property name="DocumentProtected" value="true"/>
+					<property name="DocumentEmptyNamespaces" value="false"/>
+					<property name="IncludeAssemblyVersion" value="true"/>
+					<property name="CopyrightText" value="Copyright (c) 2004, Andrew S. Townley.  All Rights Reserved."/>
+					<property name="CopyrightHref" value=""/>
+					<property name="CleanIntermediates" value="true"/>
+				</documenter>
+			</documenters>
+		</ndoc>
 	</target>
 </project>

@@ -48,19 +48,21 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for multi-valued options which are
 ///   specified using delmited values.  Examples of options of this form
 ///   are:
-///   <pre>
-///     -X one,two,three
-///     --value=1,2,3,4
-///     --eggs green
-///   </pre>
-///   <p>
+///   <example>
+/// <code>
+/// -X one,two,three
+/// --value=1,2,3,4
+/// --eggs green
+///	</code>
+///   </example>
+///   <para>
 ///   NOTE:  due to limitations in the .NET framework for parsing
 ///   strings, delimiters of more than one character will produce
 ///   unexpected results when used with this implementation.
-///   </p>
+///   </para>
 /// </summary>
 ///
-/// <version>$Id: DelimitedCommandOption.cs,v 1.2 2004/06/15 16:57:44 atownley Exp $</version>
+/// <version>$Id: DelimitedCommandOption.cs,v 1.3 2004/06/18 15:30:45 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 
 public class DelimitedCommandOption: RepeatableCommandOption

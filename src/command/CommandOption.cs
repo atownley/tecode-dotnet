@@ -48,7 +48,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for defining command-line
 ///   arguments.
 /// </summary>
-/// <version>$Id: CommandOption.cs,v 1.2 2004/06/15 16:57:44 atownley Exp $</version>
+/// <version>$Id: CommandOption.cs,v 1.3 2004/06/18 15:30:45 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 
 public class CommandOption
@@ -214,13 +214,13 @@ public class CommandOption
 	}
 
 	/// <summary>
-	/// <p>This method is called by the command parser to indicate
-	/// that the option has been matched.</p>
-	/// <p>This method may be overridden by derived classes to
+	/// <para>This method is called by the command parser to indicate
+	/// that the option has been matched.</para>
+	/// <para>This method may be overridden by derived classes to
 	/// provide object-oriented command-line argument handling.
 	/// The default implementation simply sets the value returned
-	/// by getMatched to <code>true</code> and stores the
-	/// argument.</p>
+	/// by getMatched to <c>true</c> and stores the
+	/// argument.</para>
 	/// </summary>
 	///
 	/// <param name="arg">the argument (if expected)</param>
@@ -248,7 +248,7 @@ public class CommandOption
 	///   This property is used to allow derived classes to
 	///   provide any type massaging necessary to return a usable
 	///   value of the argument to the client code.
-	/// <summary>
+	/// </summary>
 	/// 
 	/// <returns>the appropriate type of argument</returns>
 	
