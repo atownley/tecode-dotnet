@@ -44,13 +44,15 @@ using System.Collections;
 using System.IO;
 using NUnit.Framework;
 
+using TownleyEnterprises.IO;
+
 namespace TownleyEnterprises.Config {
 
 //////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   Tests for the IniConfigSupplier class.
 /// </summary>  
-/// <version>$Id: IniConfigSupplierTest.cs,v 1.1 2004/06/24 19:21:32 atownley Exp $</version>
+/// <version>$Id: IniConfigSupplierTest.cs,v 1.2 2004/06/24 20:04:29 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -61,7 +63,7 @@ public sealed class IniConfigSupplierTest
 	public void Init()
 	{
 		string s = Environment.GetEnvironmentVariable("TEST_DATA_DIR");
-		config = new IniConfigSupplier(GetType().Name,
+		config = new IniConfigSupplier("myapp",
 			Path.Combine(s, "system.ini"), "windows");
 	}
 
@@ -75,11 +77,16 @@ public sealed class IniConfigSupplierTest
 	[Test]
 	public void VerifyRegistration()
 	{
-		AppConfig appconfig = new AppConfig(GetType().Name);
+		AppConfig appconfig = new AppConfig("myapp");
 		appconfig.RegisterConfigSupplier(config);
 
+// FIXME:  bug in the appconfig class when resolving the mixed-case
+// name...
+//Serializer.WriteConfigAsProperties(Console.Out, appconfig);
+		Assert.AreEqual(config.AppName, appconfig.AppName);
 		Assert.AreEqual("mmdrv.dll", 
-			config["Windows.Drivers.Wave"]);
+			appconfig["windows.drivers.wave"]);
+
 	}
 
 	private IniConfigSupplier config = null;
