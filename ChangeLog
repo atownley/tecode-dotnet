@@ -1,3 +1,25 @@
+2004-07-19 Andrew S. Townley <atownley>
+	* Added command options and command listener for
+	  handling ErrorTrace settings
+	* Added DefaultCommandListener implementation to
+	  reduce boilerplate code required to integrate
+	  command-line argument handling.
+	
+	* src/command/CommandOption.cs
+
+	  Added parsing of key=value options to be used for
+	  complex, repeatable argument handling.
+
+	* src/trace/TraceCore.cs
+
+	  Added synchronization code for the map of objects
+	  to prevent any issues during derived class 
+	  instantiation.
+
+	* te-common.build
+
+	  Added documentation to the binary distribution zip file.
+
 2004-06-20 Andrew S. Townley <atownley>
 	* Added custom build counter NAnt task
 	* Added Property file support
