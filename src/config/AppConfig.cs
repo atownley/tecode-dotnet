@@ -49,7 +49,7 @@ namespace TownleyEnterprises.Config {
 ///   This class is used to group all of the settings for a given
 ///   application into a common place.
 /// </summary>
-/// <version>$Id: AppConfig.cs,v 1.1 2004/06/21 15:54:34 atownley Exp $</version>
+/// <version>$Id: AppConfig.cs,v 1.2 2004/06/22 12:02:47 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -83,25 +83,11 @@ public sealed class AppConfig: IConfigSupplier
 			return;
 		}
 
-		// NOTE:  there's two different ways to approach this.
-		// The first is to just replace the old value with the
-		// new one, but then you lose any traceability in your
-		// overrides.  The mechanism below is designed to
-		// support this tracking, but as I'm writing this, I'm
-		// not 100% sure it is necessary... (ast 21-June-04)
-		
 		foreach(string key in supplier.Keys)
 		{
-			ConfigResolver cr = new ConfigResolver(supplier);
-			ConfigResolver val = (ConfigResolver)_hash[key];
-			if(val != null)
-			{
-				val.Parent = cr;
-			}
-			else
-			{
-				_hash[key] = cr;
-			}
+			_hash[key] = _template.GetResolver(key,
+					supplier,
+					(IConfigResolver)_hash[key]);
 		}
 
 		_suppliers.Add(supplier);
@@ -117,6 +103,19 @@ public sealed class AppConfig: IConfigSupplier
 	public void UnregisterConfigSupplier(IConfigSupplier supplier)
 	{
 		// FIXME:  figure out how to implement this cleanly
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property allows manipulation of the template
+	///   strategy for configuration resolution.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+
+	public IConfigResolver TemplateResolver
+	{
+		get { return _template; }
+		set { _template = value; }
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -156,7 +155,7 @@ public sealed class AppConfig: IConfigSupplier
 	{
 		get
 		{
-			ConfigResolver cr = (ConfigResolver)_hash[key];
+			IConfigResolver cr = (IConfigResolver)_hash[key];
 			if(cr != null)
 				return cr[key];
 			
@@ -165,12 +164,58 @@ public sealed class AppConfig: IConfigSupplier
 
 		set
 		{
-			ConfigResolver cr = (ConfigResolver)_hash[key];
+			IConfigResolver cr = (IConfigResolver)_hash[key];
 			if(cr != null)
 				cr[key] = value;
 		}
 	}
 
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property determines if the supplier is
+	///   case-sensitive.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+	
+	public bool IsCaseSensitive
+	{
+		get { return !_ignoreCase; }
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method checks to see if the supplier provides the
+	///   specified key.
+	/// </summary>
+	/// <param name="key">the key to check</param>
+	/// <returns>true if the key is provided by this
+	/// supplier</returns>
+	//////////////////////////////////////////////////////////////
+	
+	public bool CanRead(string key)
+	{
+		return _hash.Contains(key);
+	}
+	
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method is used to determine if the key can be
+	///   written to this supplier.
+	/// </summary>
+	/// <param name="key">the key to check</param>
+	/// <returns>true if the key can be written by this
+	/// supplier</returns>
+	//////////////////////////////////////////////////////////////
+	
+	public bool CanWrite(string key)
+	{
+		IConfigSupplier cs = (IConfigSupplier)_hash[key];
+		if(cs != null)
+			return cs.CanWrite(key);
+
+		return false;
+	}
+	
 	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method will cause the properties to be reloaded
@@ -204,6 +249,8 @@ public sealed class AppConfig: IConfigSupplier
 	private Hashtable	_hash = new Hashtable();
 	private ArrayList	_suppliers = new ArrayList();
 	private string		_name;
+	private bool		_ignoreCase = true;
+	private IConfigResolver	_template = new DefaultConfigResolver();
 }
 
 }
