@@ -43,28 +43,29 @@ using System;
 using System.Collections;
 using System.Text;
 
+using TownleyEnterprises.Common;
+using TownleyEnterprises.IO;
+
 namespace TownleyEnterprises.Config {
 
 //////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   <para>
-///   This class more-or-less implements the java.util.Properties API.
-///   It allows .NET applications to easily work with existing
-///   property files in a similar manner to a Java application.  Why
-///   would you want to do this?  The primary reason is if you need to
-///   have a common configuration mechanism between .NET and J2SE
-///   applications.
+///   This class represents an un-named set of configuration
+///   properties.  Current examples in the wild of such things are the
+///   system's environment variables and the J2SE properties
+///   mechanism.
 ///   </para>
 ///   <para>
-///   To load or save properties, use the PropertiesFileProcessor and
-///   CollectionWriter objects.
+///   This class encapsulates all of these different storage mechanism
+///   into a common set of functionality.
 ///   </para>
 /// </summary>
-/// <version>$Id: Properties.cs,v 1.2 2004/06/22 12:04:13 atownley Exp $</version>
+/// <version>$Id: Properties.cs,v 1.3 2004/06/23 14:47:52 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
-public sealed class Properties
+public class Properties
 {
 	//////////////////////////////////////////////////////////////
 	/// <summary>
@@ -73,8 +74,8 @@ public sealed class Properties
 	//////////////////////////////////////////////////////////////
 	
 	public Properties()
+		: this(null, false, null)
 	{
-		_hash = new Hashtable();
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -86,8 +87,39 @@ public sealed class Properties
 	//////////////////////////////////////////////////////////////
 	
 	public Properties(Properties defaults)
+		: this(defaults, false, null)
 	{
-		_hash = new Hashtable(defaults._hash);
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This constructor gives more control over the behavior of
+	///   the properties regarding the resolution.
+	/// </summary>
+	/// <param name="defaults">the default values</param>
+	/// <param name="ignoreCase">true if the properties are not
+	/// case-sensitive</param>
+	/// <param name="prefix">a prefix to append to each of the
+	/// property values.  Prefixes are prepended to all property
+	/// names and are separated by the <c>.</c> character.</param>
+	//////////////////////////////////////////////////////////////
+	
+	public Properties(Properties defaults, 
+				bool ignoreCase, string prefix)
+	{
+		if(defaults != null)
+		{
+			_hash = new Hashtable(defaults._hash);
+		}
+		else
+		{
+			_hash = new Hashtable();
+		}
+
+		_ignoreCase = ignoreCase;
+
+		if(prefix != null)
+			_prefix = prefix + ".";
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -96,10 +128,15 @@ public sealed class Properties
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 	
-	public string this[string key]
+	public virtual string this[string key]
 	{
-		get { return (string)_hash[key]; }
-		set { _hash[key] = value; }
+		get
+		{
+			string rkey = GetKeyName(key, false);
+//Console.WriteLine("GetKeyName:  " + rkey);
+			return (string)_hash[rkey];
+		}
+		set { _hash[GetKeyName(key, true)] = value; }
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -109,7 +146,25 @@ public sealed class Properties
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 
-	public ICollection Keys
+	public virtual ICollection Keys
+	{
+		get
+		{
+			if(_prefix == null || _ignoreCase == true)
+				return _hash.Keys;
+
+			return _keys.Keys;
+		}
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property provides access to the raw keys as
+	///   initialized by whatever created the section.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+
+	public virtual ICollection RawKeys
 	{
 		get { return _hash.Keys; }
 	}
@@ -121,7 +176,7 @@ public sealed class Properties
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 
-	public ICollection Values
+	public virtual ICollection Values
 	{
 		get { return _hash.Values; }
 	}
@@ -132,8 +187,9 @@ public sealed class Properties
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 
-	public void Clear()
+	public virtual void Clear()
 	{
+		_keys.Clear();
 		_hash.Clear();
 	}
 
@@ -146,9 +202,33 @@ public sealed class Properties
 	/// <returns>true if the key exists; false otherwise</returns>
 	//////////////////////////////////////////////////////////////
 
-	public bool Contains(string key)
+	public virtual bool Contains(string key)
 	{
-		return _hash.Contains(key);
+		return _hash.Contains(GetKeyName(key, false));
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property determines if the properties object is
+	///   case-sensitive for property resolution.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+	
+	public virtual bool IsCaseSensitive
+	{
+		get { return !_ignoreCase; }
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property retrieves the prefix applied to the
+	///   properties.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+	
+	public virtual string Prefix
+	{
+		get { return _prefix; }
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -160,20 +240,59 @@ public sealed class Properties
 	
 	public override string ToString()
 	{
-		StringBuilder buf = new StringBuilder();
-		
-		foreach(string key in Keys)
-		{
-			buf.Append(key);
-			buf.Append("=");
-			buf.Append(this[key]);
-			buf.Append("\n");
-		}
-
-		return buf.ToString();
+		return Serializer.DictToPropertiesString(_hash);
 	}
 
-	private Hashtable	_hash = new Hashtable();
+	// FIXME:  this needs to be investigated again because i'm
+	// sure it can be more efficient
+
+	private string GetKeyName(string key, bool writing)
+	{
+		if(_prefix == null && !_ignoreCase)
+			return key;
+
+//Console.WriteLine("requested key name for key '{0}'; writing = {1}; prefix = '{2}'; _ignoreCase = {3}", key, writing, _prefix, _ignoreCase);
+
+		if(!writing && _ignoreCase)
+		{
+			key = key.ToLower();
+		}
+
+//Console.WriteLine(Serializer.DictToPropertiesString(_keys));
+//Console.WriteLine("\n");
+//Console.WriteLine(Serializer.DictToPropertiesString(_hash));
+		string s = (string)_keys[key];
+		if(s == null && writing)
+		{
+			s = Paths.Suffix(key, _prefix);
+			if(s == key && _prefix != null)
+			{
+				// special case during initialization
+				s = _prefix + key;
+			}
+			
+			if(_ignoreCase)
+			{
+				s = s.ToLower();
+			}
+
+//Console.WriteLine("adding alias '{0}' for '{1}'", s, key);
+			_keys[s] = key;
+			s = key;
+		}
+		else if(s == null && !writing)
+		{
+			s = key;
+		}
+
+//Console.WriteLine("GetKeyName:  returning '{0}'", s);
+		return s;
+	}
+
+	private Hashtable		_keys = new Hashtable();
+	private readonly Hashtable	_hash = null;
+	private readonly bool		_ignoreCase = false;
+	private readonly string		_prefix = null;
 }
 
 }
