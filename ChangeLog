@@ -1,3 +1,13 @@
+2004-07-20 Andrew S. Townley <atownley>
+	* Added example for CLI classes
+
+	* src/command/CommandParser.cs
+	
+	  Fixed bug where missing arguments weren't handled correctly
+	  in the case where another switch followed and was erronously
+	  picked up as the argument to the first switch.  Must fix
+	  this in the Java Edition as well.
+
 2004-07-19 Andrew S. Townley <atownley>
 	* Added command options and command listener for
 	  handling ErrorTrace settings
