@@ -50,7 +50,7 @@ using TownleyEnterprises.Command;
 ///   illustrate the proper use of the CommandParser and the Command
 ///   namespace.
 /// </summary>
-/// <version>$Id: feather3.cs,v 1.3 2004/07/23 05:51:00 atownley Exp $</version>
+/// <version>$Id: feather3.cs,v 1.4 2004/11/23 22:55:05 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -94,7 +94,7 @@ public class feather
 		parser.Parse(args);
 
 		// initialize the delegate
-		_create.OnExecute += CreateArchive;
+		_create.OnExecute += new ExecuteHandler(CreateArchive);
 
 		parser.AddConstraint(new MutexOptionConstraint(-500, _create, _extract));
 		parser.AddConstraint(new RequiresAnyOptionConstraint(-501, _file, new CommandOption[] { _create, _extract }));

@@ -49,7 +49,7 @@ using TownleyEnterprises.Command;
 ///   illustrate the proper use of the CommandParser and the Command
 ///   namespace.
 /// </summary>
-/// <version>$Id: feather2.cs,v 1.2 2004/07/20 14:14:16 atownley Exp $</version>
+/// <version>$Id: feather2.cs,v 1.3 2004/11/23 22:54:55 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -93,7 +93,7 @@ public class feather
 		}
 
 		// initialize the delegate
-		_create.OnExecute += CreateArchive;
+		_create.OnExecute += new ExecuteHandler(CreateArchive);
 
 		parser.ExecuteCommands(this);
 	}
