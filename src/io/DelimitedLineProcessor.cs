@@ -43,14 +43,14 @@ using System;
 using System.Collections;
 using System.IO;
 
-namespace TownleyEnterprises.Common.IO {
+namespace TownleyEnterprises.IO {
 
 //////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This class provides a mechanism for easily parsing delimited
 ///   text files.
 /// </summary>
-/// <version>$Id: DelimitedLineProcessor.cs,v 1.2 2004/06/10 08:43:54 atownley Exp $</version>
+/// <version>$Id: DelimitedLineProcessor.cs,v 1.3 2004/06/15 17:23:45 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
