@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.9 2004/07/20 13:16:40 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.10 2004/07/20 14:09:23 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -1041,7 +1041,7 @@ public sealed class CommandParser: ICommandListener
 				// make sure it isn't another
 				// switch...
 				if(arg.StartsWith(_lswitch)
-						|| arg[0] == _sswitch)
+						|| (arg[0] == _sswitch && arg.Length > 1))
 				{
 					HandleMissingArg(val);
 					return ++argc;
@@ -1108,7 +1108,7 @@ public sealed class CommandParser: ICommandListener
 					// be generalized for both
 					// cases...
 					if(arg.StartsWith(_lswitch)
-							|| arg[0] == _sswitch)
+							|| (arg[0] == _sswitch && arg.Length > 1))
 					{
 						HandleMissingArg(oh);
 					}
