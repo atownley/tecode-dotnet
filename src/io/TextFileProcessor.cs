@@ -39,7 +39,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-namespace TownleyEnterprises.Common.IO {
+namespace TownleyEnterprises.IO {
 
 using System;
 using System.IO;
@@ -53,7 +53,7 @@ using System.Text;
 ///   line is provided by providing an instance of ILineProcessor
 ///   apropriate for the task.
 /// </summary>
-/// <version>$Id: TextFileProcessor.cs,v 1.2 2004/06/10 08:45:22 atownley Exp $</version>
+/// <version>$Id: TextFileProcessor.cs,v 1.3 2004/06/15 17:23:35 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -68,7 +68,7 @@ public class TextFileProcessor
 	/// <param name="name">the file to process</param>
 	//////////////////////////////////////////////////////////////
 
-	public TextFileProcessor(String name)
+	public TextFileProcessor(string name)
 		: this(name, null)
 	{
 	}
@@ -84,7 +84,7 @@ public class TextFileProcessor
 	/// encoding isn't supported on this platform</exception>
 	//////////////////////////////////////////////////////////////
 
-	public TextFileProcessor(String name, String encoding)
+	public TextFileProcessor(string name, string encoding)
 	{
 		_filename = name;
 		_encoding = encoding;
@@ -121,7 +121,7 @@ public class TextFileProcessor
 			}
 
 			lp.Reset();
-			String line = reader.ReadLine();
+			string line = reader.ReadLine();
 			while(line != null)
 			{
 				lp.ProcessLine(line);
