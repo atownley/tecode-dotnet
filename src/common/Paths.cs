@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Common {
 ///   separators.  This class provides similar, but more flexible
 ///   operations to those found in the System.IO.Path class.
 /// </summary>
-/// <version>$Id: Paths.cs,v 1.1 2004/06/21 08:45:35 atownley Exp $</version>
+/// <version>$Id: Paths.cs,v 1.2 2004/06/21 08:54:28 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -175,7 +175,7 @@ public sealed class Paths
 	}
 
 	// prevent instantiation
-	private Path() {}
+	private Paths() {}
 }
 
 }
