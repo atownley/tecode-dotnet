@@ -53,7 +53,7 @@ using System.Text;
 ///   line is provided by providing an instance of ILineProcessor
 ///   apropriate for the task.
 /// </summary>
-/// <version>$Id: TextFileProcessor.cs,v 1.1 2004/06/10 07:58:28 atownley Exp $</version>
+/// <version>$Id: TextFileProcessor.cs,v 1.2 2004/06/10 08:45:22 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -137,7 +137,7 @@ public class TextFileProcessor
 					reader.Close();
 				}
 			}
-			catch(IOException e)
+			catch(IOException)
 			{
 				// don't care
 			}
