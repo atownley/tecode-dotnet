@@ -1,3 +1,7 @@
+2004-06-20 Andrew S. Townley <atownley>
+	* Added custom build counter NAnt task
+	* Added Property file support
+
 2004-06-17 Andrew S. Townley <atownley>
 	* src/io/IniFileProcessor.cs
 	  
