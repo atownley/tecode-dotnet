@@ -46,11 +46,11 @@ using System.Runtime.CompilerServices;
 // This file was originally created using Visual Studio .NET 2003.
 
 [assembly: AssemblyTitle("te-common.dll")]
-[assembly: AssemblyDescription(".NET implementation of the te-common library.")]
+[assembly: AssemblyDescription("Townley Enterprises te-common .NET Edition")]
 [assembly: AssemblyConfiguration("All")]
 [assembly: AssemblyCompany("Townley Enterprises")]
 [assembly: AssemblyProduct("Townley Enterprises Common API, .NET Edition")]
-[assembly: AssemblyCopyright("Copyright 2001-2004, Andrew S. Townley.  All Rights Reserved.")]
+[assembly: AssemblyCopyright("Copyright 2001-2004, Andrew S. Townley")]
 [assembly: AssemblyTrademark("Copyright 2001-2004, Andrew S. Townley.  All Rights Reserved.")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
