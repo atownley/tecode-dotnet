@@ -51,7 +51,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyCompany("Townley Enterprises")]
 [assembly: AssemblyProduct("Townley Enterprises Common API, .NET Edition")]
 [assembly: AssemblyCopyright("Copyright 2004, Andrew S. Townley")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Copyright 2004, Andrew S. Townley.  All Rights Reserved.")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
 
