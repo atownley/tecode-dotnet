@@ -49,7 +49,7 @@ namespace TownleyEnterprises.Common.Command {
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.1 2004/05/19 10:43:39 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.2 2004/05/19 10:49:25 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 
 public sealed class CommandParser: ICommandListener
@@ -267,8 +267,6 @@ public sealed class CommandParser: ICommandListener
 
 		// reset all the options (fix for multiple parse bug)
 		ResetOptions();
-
-		OptionHolder val = null;
 
 		bool copyargs = false;
 		_leftovers = new ArrayList();

@@ -36,7 +36,7 @@
 ##
 ## File:	Makefile
 ## Created:	Tue May 18 14:24:27 IST 2004
-## Version:	$Id: Makefile,v 1.1 2004/05/19 10:43:38 atownley Exp $
+## Version:	$Id: Makefile,v 1.2 2004/05/19 10:49:25 atownley Exp $
 ##
 ## This is a *very* simple makefile for building TE-Common.NET using
 ## the command line compiler.  For Windows, the following command
@@ -61,7 +61,7 @@ SEP		= /
 
 MAINLIB		= te-common.dll
 
-$(MAINLIB): common/AssemblyInfo.cs \
+$(MAINLIB): common$(SEP)AssemblyInfo.cs \
 		command$(SEP)AbstractCommandListener.cs \
 		command$(SEP)CommandOption.cs \
 		command$(SEP)CommandParser.cs \
