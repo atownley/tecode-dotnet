@@ -47,10 +47,21 @@ namespace TownleyEnterprises.Command {
 
 //////////////////////////////////////////////////////////////////////
 /// <summary>
+///   This delegate may be used to initialize a command option
+///   with the value to be used for the Execute method.
+/// </summary>
+/// <param name="sender">the object triggering the execution</param>
+/// <param name="e">the event arguments</param>
+//////////////////////////////////////////////////////////////////////
+
+public delegate void ExecuteHandler(Object sender, ExecuteEventArgs e);
+
+//////////////////////////////////////////////////////////////////////
+/// <summary>
 ///   This class provides support for defining command-line
 ///   arguments.
 /// </summary>
-/// <version>$Id: CommandOption.cs,v 1.7 2004/07/23 05:51:49 atownley Exp $</version>
+/// <version>$Id: CommandOption.cs,v 1.8 2004/07/26 09:05:35 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -188,18 +199,6 @@ public class CommandOption
 
 		return buf.ToString().GetHashCode();
 	}
-
-	//////////////////////////////////////////////////////////////
-	/// <summary>
-	///   This delegate may be used to initialize a command option
-	///   with the value to be used for the Execute method.
-	/// </summary>
-	/// <param name="sender">the object triggering the
-	/// execution</param>
-	/// <param name="e">the event arguments</param>
-	//////////////////////////////////////////////////////////////
-	
-	public delegate void ExecuteHandler(Object sender, ExecuteEventArgs e);
 
 	public event ExecuteHandler OnExecute;
 
