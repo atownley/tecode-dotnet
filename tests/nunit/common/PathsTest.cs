@@ -34,7 +34,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-// File:	PathTest.cs
+// File:	Test.cs
 // Created:	Sat Jun 19 13:12:38 IST 2004
 //
 //////////////////////////////////////////////////////////////////////
@@ -48,25 +48,25 @@ namespace TownleyEnterprises.Common {
 /// <summary>
 ///   Unit tests for the path class.
 /// </summary>  
-/// <version>$Id: PathTest.cs,v 1.1 2004/06/19 12:21:06 atownley Exp $</version>
+/// <version>$Id: PathsTest.cs,v 1.1 2004/06/21 08:54:11 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 [TestFixture]
-public sealed class PathTest
+public sealed class Test
 {
 	[Test]
 	public void testBasenameFileName()
 	{
 		Assert.AreEqual("file.txt",
-			Path.Basename("/some/path/to/file.txt", "/"));
+			Paths.Basename("/some/path/to/file.txt", "/"));
 	}
 	
 	[Test]
 	public void testBasenameFileNameStripSuffix()
 	{
 		Assert.AreEqual("file",
-			Path.Basename("/some/path/to/file.txt",
+			Paths.Basename("/some/path/to/file.txt",
 				"/", ".txt"));
 	}
 	
@@ -74,31 +74,31 @@ public sealed class PathTest
 	public void testDirname()
 	{
 		Assert.AreEqual("/some/path/to",
-			Path.Dirname("/some/path/to/file.txt"));
+			Paths.Dirname("/some/path/to/file.txt"));
 	}
 	
 	[Test]
-	public void testDirnameNoPath()
+	public void testDirnameNo()
 	{
-		Assert.AreEqual(".", Path.Dirname("file.txt"));
+		Assert.AreEqual(".", Paths.Dirname("file.txt"));
 	}
 	
 	[Test]
-	public void testBasenameNullPath()
+	public void testBasenameNull()
 	{
-		Assert.IsNull(Path.Basename(null, "foo"));
+		Assert.IsNull(Paths.Basename(null, "foo"));
 	}
 	
 	[Test]
-	public void testBasenameNoPath()
+	public void testBasenameNo()
 	{
-		Assert.AreEqual("one", Path.Basename("one", "/"));
+		Assert.AreEqual("one", Paths.Basename("one", "/"));
 	}
 	
 	[Test]
 	public void testClassname()
 	{
-		Assert.AreEqual("PathTest", Path.Classname(GetType().Name));
+		Assert.AreEqual("Test", Paths.Classname(GetType().Name));
 	}
 }
 }
