@@ -53,7 +53,7 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the IniFileProcessor class from
 ///   the IO package.
 /// </summary>  
-/// <version>$Id: IniFileProcessorTest.cs,v 1.4 2004/06/16 09:27:46 atownley Exp $</version>
+/// <version>$Id: IniFileProcessorTest.cs,v 1.5 2004/06/17 07:49:10 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -78,8 +78,8 @@ public sealed class IniFileProcessorTest
 	{
 		Assert.AreEqual(2279, processor.Sections.Count,
 			"there should be 2279 sections");
-		Assert.AreEqual(12804, processor.LineCount,
-			"there should be 12804 lines");
+		Assert.AreEqual(12806, processor.LineCount,
+			"there should be 12806 lines");
 
 		// check the Galeon 1.0 section
 		IniSection section = processor["Galeon 1.0"];
@@ -163,6 +163,29 @@ public sealed class IniFileProcessorTest
 	{
 		IniSection section = processor["nunit"];
 		Assert.AreEqual("value", section["tks"]);
+	}
+
+	[Test]
+	public void VerifyParseEmptyValue()
+	{
+		IniSection section = processor["nunit"];
+		Assert.AreEqual("", section["emptyvalue"]);
+	}
+
+	[Test]
+	public void VerifyParseEmptyKey()
+	{
+		IniSection section = processor["nunit"];
+		Assert.IsNull(section[""],
+			"empty key should return a null value");
+	}
+
+	[Test]
+	public void VerifyMissingKeyIsNull()
+	{
+		IniSection section = processor["nunit"];
+		Assert.IsNull(section["missing"],
+			"missing key should return a null");
 	}
 
 	private IniFileProcessor	processor;
