@@ -57,8 +57,55 @@
 	<property name="tests.dir"	value="tests/nunit"/>
 	<property name="tests.lib.dir"	value="tests/lib"/>
 	<property name="tests.lib.name"	value="${build.tests}/${app.name}-tests.dll"/>
+	<property name="custom.tasks"	value="nant-tasks/TownleyEnterprises.NAnt.Tasks.dll"/>
 
-	<target name="all" depends="compile-lib"/>
+	<target name="bootstrap">
+		<csc target="library" output="${custom.tasks}">
+			<sources>
+				<include name="nant-tasks/*.cs"/>
+				<include name="src/io/AbstractLineProcessor.cs"/>
+				<include name="src/io/ILineProcessor.cs"/>
+				<include name="src/io/PropertyFileProcessor.cs"/>
+				<include name="src/io/TextFileProcessor.cs"/>
+				<include name="src/config/Properties.cs"/>
+			</sources>
+			<references>
+				<include name="lib/NAnt.Core.dll"/>
+			</references>
+		</csc>
+		<loadtasks assembly="${custom.tasks}"/>
+	</target>
+
+	<target name="stamp" depends="bootstrap">
+		<buildstamp versioninfo="version.properties"
+				devname="999999"
+				verbose="true">
+			<fileset dir="${basedir}">
+				<include name="**/*.in"/>
+			</fileset>
+		</buildstamp>
+	</target>
+
+	<target name="stamp-count" depends="bootstrap">
+		<buildstamp versioninfo="version.properties"
+				count="true"
+				verbose="true">
+			<fileset dir="${basedir}">
+				<include name="**/*.in"/>
+			</fileset>
+		</buildstamp>
+	</target>
+
+	<target name="stamp-clean" depends="bootstrap">
+		<buildstamp versioninfo="version.properties"
+				verbose="true" clean="true">
+			<fileset dir="${basedir}">
+				<include name="**/*.in"/>
+			</fileset>
+		</buildstamp>
+	</target>
+
+	<target name="all" depends="stamp, compile-lib"/>
 
 	<target name="compile-lib">
 		<csc target="library" output="${lib.name}"
@@ -71,8 +118,12 @@
 	</target>
 
 	<target name="clean">
-		<delete file="${lib.name}"/>
-		<delete dir="build"/>
+		<delete file="${lib.name}" failonerror="false"/>
+		<delete dir="build" failonerror="false"/>
+	</target>
+
+	<target name="distclean" depends="clean,stamp-clean">
+		<delete file="${custom.tasks}" failonerror="false"/>
 	</target>
 
 	<!-- unit tests -->
