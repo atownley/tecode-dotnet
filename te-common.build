@@ -74,7 +74,8 @@
 	<!-- unit tests -->
 	<target name="compile-tests" depends="compile-lib">
 		<mkdir dir="${build.tests}"/>
-		<csc target="library" output="${tests.lib.name}">
+		<csc target="library" output="${tests.lib.name}"
+				debug="true">
 			<sources>
 				<include name="tests/nunit/**/*.cs"/>
 			</sources>
@@ -91,7 +92,7 @@
 				<include name="${lib.name}"/>
 			</fileset>
 		</copy>
-		<nunit2>
+		<nunit2 verbose="true">
 			<formatter type="Plain"/>
 			<test>
 				<assemblies>
