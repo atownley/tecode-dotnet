@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   the file has been parsed, the sections can be retrieved for
 ///   further manipulation.
 /// </summary>
-/// <version>$Id: IniFileProcessor.cs,v 1.6 2004/06/16 09:27:36 atownley Exp $</version>
+/// <version>$Id: IniFileProcessor.cs,v 1.7 2004/06/17 07:19:26 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -79,13 +79,26 @@ public class IniFileProcessor: TextFileProcessor
 				return;
 			}
 			
-			if(line.Trim().IndexOf("[") != 0)
+			string tline = line.Trim();
+			if(tline.IndexOf("[") != 0)
 			{
-				ParseValue(line);
+				try
+				{
+					ParseValue(tline);
+				}
+				catch(Exception e)
+				{
+					if(_warnings)
+					{
+						Console.Error.WriteLine("warning:  unable to parse line {0}.  Ignored.", LineCount);
+						Console.Error.WriteLine("cause was:");
+						Console.Error.WriteLine(e);
+					}
+				}
 			}
 			else
 			{
-				_cs = ParseSection(line);
+				_cs = ParseSection(tline);
 				
 				string key = _cs.Name.ToLower();
 				if(_sections.Contains(key))
@@ -136,25 +149,38 @@ public class IniFileProcessor: TextFileProcessor
 			return section;
 		}
 
+		// assumption:  line is already trimmed by the caller
 		private void ParseValue(string line)
 		{
 			int idx = line.IndexOf("=");
+			
 			if(idx != -1)
 			{
-				string sval = line.Substring(idx + 1);
-
-				// strip any quotes & whitespace
-				sval.Trim();
-				if((sval[sval.Length - 1] == '\"' &&
-						sval[0] == '\"') ||
-						(sval[sval.Length - 1] == '\'' &&
-						sval[0] == '\''))
+				string sval;
+				
+				if(idx == line.Length - 1)
 				{
-					sval = sval.Substring(1,
-						sval.Length - 2);
+					sval = "";
+				}
+				else
+				{
+					sval = line.Substring(idx + 1);
+				
+					// still necessary to prevent leading whitespace
+					sval.Trim();
+					
+					// strip any quotes & whitespace
+					if((sval[sval.Length - 1] == '\"' &&
+							sval[0] == '\"') ||
+							(sval[sval.Length - 1] == '\'' &&
+							sval[0] == '\''))
+					{
+						sval = sval.Substring(1,
+							sval.Length - 2);
+					}
 				}
 
-				_cs[line.Substring(0, idx).Trim()] = sval.Trim();
+				_cs[line.Substring(0, idx).Trim()] = sval;
 			}
 		}
 
