@@ -108,7 +108,7 @@ namespace TownleyEnterprises.BuildTasks.NAnt {
 ///   </list>
 ///   </para>
 /// </remarks>
-/// <version>$Id: BuildStamp.cs,v 1.2 2004/06/21 08:42:26 atownley Exp $</version>
+/// <version>$Id: BuildStamp.cs,v 1.3 2004/06/21 09:42:07 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -160,6 +160,23 @@ public class BuildStamp : Task
 	{
 		get { return _devname; }
 		set { _devname = value; }
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This is a hack to work around the missing property file
+	///   support.  This causes the task execution to not be
+	///   performed
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+
+	[TaskAttribute("import")]
+	[BooleanValidator()]
+
+	public bool Import
+	{
+		get { return _import; }
+		set { _import = value; }
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -261,6 +278,10 @@ public class BuildStamp : Task
 				sw.Close();
 			}
 		}
+		else if(_import)
+		{
+			_bldcount = _count.ToString();
+		}
 		else
 		{
 			_bldcount = _devname;
@@ -292,6 +313,13 @@ public class BuildStamp : Task
 
 	protected override void ExecuteTask()
 	{
+		if(_fileset == null && _import == true)
+		{
+			// hack to only set the properties
+			return;
+		}
+
+		// normal task processing
 		if(_fileset.BaseDirectory == null)
 			_fileset.BaseDirectory = new DirectoryInfo(Project.BaseDirectory);
 
@@ -391,6 +419,7 @@ public class BuildStamp : Task
 	internal string		_devname	= "DEVELOPER";
 	internal bool		_clean		= false;
 	internal bool		_dryrun		= false;
+	internal bool		_import		= false;
 	internal string		_suffix		= ".in";
 	internal FileSet	_fileset;
 	internal Properties	_props;
