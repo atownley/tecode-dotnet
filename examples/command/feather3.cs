@@ -50,7 +50,7 @@ using TownleyEnterprises.Command;
 ///   illustrate the proper use of the CommandParser and the Command
 ///   namespace.
 /// </summary>
-/// <version>$Id: feather3.cs,v 1.1 2004/07/20 13:21:46 atownley Exp $</version>
+/// <version>$Id: feather3.cs,v 1.2 2004/07/20 14:14:16 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -68,7 +68,11 @@ public class feather
 
 	static PosixCommandOption _display = new PosixCommandOption("display", true, "DISPLAY", "specify the display on which the output should be written");
 
-	static CommandOption[] _opts = { _create, _extract, _file, _verbose, _xclude, _display };
+	static JoinedCommandOption _options = new JoinedCommandOption('D', false, "PROPERTY=VALUE[,PROPERTY=VALUE...]", "set specific run-time properties", true);
+
+	static CommandOption[] _mainopts = { _create, _extract, _file, _verbose, _xclude };
+
+	static CommandOption[] _examples = { _display, _options };
 
 	public static void Main(string[] args)
 	{
@@ -82,9 +86,10 @@ public class feather
 
 		// this is ugly and you wouldn't do this in real code,
 		// but it serves to illustrate the method call
-		parser.SetExtraHelpText("This is the TE-Code feather program.  It is used to illustrate the features of the TownleyEnterprises.Command package.\n\nExamples:\n  # create archive.feather from files one, two, three and four\n  feather -cvf archive.feather one two three four\n\n  # exclude files five and six from an archive\n  feather -cvf archive.feather -X five -X six one two three\n\nAll options are not required unless otherwise stated in the description.", "This utility does not actually create an archive.\nAny bugs in the software should be reported to the te-code mailing lists.");
+		parser.SetExtraHelpText("This is the TE-Code feather program.  It is used to illustrate the features of the TownleyEnterprises.Command package.\n\nExamples:\n  # create archive.feather from files one, two, three and four\n  feather -cvf archive.feather one two three four\n\n  # exclude files five and six from an archive\n  feather -cvf archive.feather -X five -X six one two three\n\nAll options are not required unless otherwise stated in the description.", "This utility does not actually create an archive.\nAny bugs in the software should be reported to the te-code mailing lists.\n\nhttp://te-code.sourceforge.net");
 
-		parser.AddCommandListener(new DefaultCommandListener("feather options", _opts));
+		parser.AddCommandListener(new DefaultCommandListener("feather options", _mainopts));
+		parser.AddCommandListener(new DefaultCommandListener("Example options", _examples));
 
 		parser.Parse(args);
 
@@ -109,7 +114,7 @@ public class feather
 			System.Environment.Exit(-2);
 		}
 
-		if(_verbose.Matched)
+		if(_verbose.Matched && _file.Matched)
 		{
 			Console.WriteLine("creating archive '{0}'", _file.Arg);
 		}
