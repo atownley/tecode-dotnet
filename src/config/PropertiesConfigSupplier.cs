@@ -54,12 +54,24 @@ namespace TownleyEnterprises.Config {
 ///   This class decorates a Properties instance as an IConfigSupplier
 ///   implementation.
 /// </summary>
-/// <version>$Id: PropertiesConfigSupplier.cs,v 1.1 2004/06/23 14:38:28 atownley Exp $</version>
+/// <version>$Id: PropertiesConfigSupplier.cs,v 1.2 2004/06/28 06:51:43 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class PropertiesConfigSupplier: IConfigSupplier
 {
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This constructor determines the path name automatically
+	///   based on the underlying system defaults.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+	
+	public PropertiesConfigSupplier(string appname)
+		: this(appname, null)
+	{
+	}
+
 	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   The constructor reads the properties from the specified
@@ -69,7 +81,16 @@ public class PropertiesConfigSupplier: IConfigSupplier
 	
 	public PropertiesConfigSupplier(string appname, string path)
 	{
-		_propfile = Path.Combine(path, appname + ".properties");
+		string pname = String.Concat(appname, ".properties");
+		if(path != null)
+		{
+			_propfile = Path.Combine(path, pname);
+		}
+		else
+		{
+			_propfile = pname;
+		}
+		_name = appname;
 		_input = new PropertyFileProcessor(_propfile);
 		Load();
 	}
