@@ -200,6 +200,7 @@
 		<copy todir="${build.tests}" flatten="true">
 			<fileset dir="${basedir}">
 				<include name="${lib.name}"/>
+				<include name="**/*.pdb"/>
 			</fileset>
 		</copy>
 		<nunit2 verbose="true">
