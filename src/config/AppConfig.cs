@@ -49,7 +49,7 @@ namespace TownleyEnterprises.Config {
 ///   This class is used to group all of the settings for a given
 ///   application into a common place.
 /// </summary>
-/// <version>$Id: AppConfig.cs,v 1.2 2004/06/22 12:02:47 atownley Exp $</version>
+/// <version>$Id: AppConfig.cs,v 1.3 2004/06/23 14:45:07 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -66,6 +66,7 @@ public sealed class AppConfig: IConfigSupplier
 	public AppConfig(string name)
 	{
 		_name = name;
+		RegisterConfigSupplier(ConfigRegistry.Environment);
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -77,8 +78,10 @@ public sealed class AppConfig: IConfigSupplier
 
 	public void RegisterConfigSupplier(IConfigSupplier supplier)
 	{
-		if(_name != supplier.AppName)
+		if(supplier.AppName != null
+				&& _name != supplier.AppName)
 		{
+Console.WriteLine("skipped");
 			// don't do anything if the names don't match
 			return;
 		}
