@@ -246,7 +246,7 @@
 					<property name="DocumentProtected" value="true"/>
 					<property name="DocumentEmptyNamespaces" value="false"/>
 					<property name="IncludeAssemblyVersion" value="true"/>
-					<property name="CopyrightText" value="Copyright (c) 2004, Andrew S. Townley.  All Rights Reserved."/>
+					<property name="CopyrightText" value="Copyright (c) 2001-2004, Andrew S. Townley.  All Rights Reserved."/>
 					<property name="CopyrightHref" value=""/>
 					<property name="CleanIntermediates" value="true"/>
 				</documenter>
