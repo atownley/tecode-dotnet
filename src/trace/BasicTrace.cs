@@ -75,9 +75,9 @@ namespace TownleyEnterprises.Trace {
 ///   	// create a shared instance and give it a trace threshold of 0
 ///   	private static BasicTrace _trace = new BasicTrace("MyClass", 0)
 ///   	...
-///
-///	// define the names of the parameters as static so they aren't
-///	// created each time you need them.
+///   
+///   	// define the names of the parameters as static so they aren't
+///   	// created each time you need them.
 ///   	private static readonly string[] _myMethodParams = new string[] {"param1", "param2" };
 ///   	public int MyMethod(string param1, int param2)
 ///   	{
@@ -93,7 +93,7 @@ namespace TownleyEnterprises.Trace {
 ///   				throw (Exception)_trace.MethodThrow(new
 ///   					Exeption("I have a bad feeling about this."));
 ///   			}
-///
+///   
 ///   			// normal method body
 ///   			...
 ///   			return _trace.MethodReturn(rc);
@@ -113,7 +113,7 @@ namespace TownleyEnterprises.Trace {
 ///   name stack of the MethodTrace class).
 ///   </para>
 /// </remarks>
-/// <version>$Id: BasicTrace.cs,v 1.1 2004/06/28 06:50:14 atownley Exp $</version>
+/// <version>$Id: BasicTrace.cs,v 1.2 2004/06/28 07:49:04 atownley Exp $</version>
 /// <author>Phil Hourihane (API specification)</author>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
