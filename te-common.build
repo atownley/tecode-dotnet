@@ -68,7 +68,10 @@
 				<include name="src/io/ILineProcessor.cs"/>
 				<include name="src/io/PropertyFileProcessor.cs"/>
 				<include name="src/io/TextFileProcessor.cs"/>
+				<include name="src/io/Serializer.cs"/>
 				<include name="src/config/Properties.cs"/>
+				<include name="src/config/IConfigSupplier.cs"/>
+				<include name="src/common/Paths.cs"/>
 			</sources>
 			<references>
 				<include name="lib/NAnt.Core.dll"/>
