@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.11 2004/07/23 05:52:27 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.12 2004/11/23 22:50:08 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -552,8 +552,11 @@ public sealed class CommandParser: ICommandListener
 		{
 			try
 			{
-				option.Execute(sender,
-					new ExecuteEventArgs(this, option));
+				if(option.Matched)
+				{
+					option.Execute(sender,
+						new ExecuteEventArgs(this, option));
+				}
 			}
 			catch(Exception e)
 			{
