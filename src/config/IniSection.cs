@@ -52,7 +52,7 @@ namespace TownleyEnterprises.Config {
 ///   are essentially the same as named Hashtables (which is how this
 ///   class is currently implemented).
 /// </summary>
-/// <version>$Id: IniSection.cs,v 1.2 2004/06/15 23:03:10 atownley Exp $</version>
+/// <version>$Id: IniSection.cs,v 1.3 2004/06/16 09:11:24 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -68,7 +68,7 @@ public class IniSection
 	
 	public IniSection(string name)
 	{
-		_name = name.ToLower();
+		_name = name;
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -104,7 +104,7 @@ public class IniSection
 	public string Name
 	{
 		get { return _name; }
-		set { _name = value.ToLower(); }
+		set { _name = value; }
 	}
 
 	//////////////////////////////////////////////////////////////

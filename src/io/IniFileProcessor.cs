@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   the file has been parsed, the sections can be retrieved for
 ///   further manipulation.
 /// </summary>
-/// <version>$Id: IniFileProcessor.cs,v 1.4 2004/06/15 23:04:09 atownley Exp $</version>
+/// <version>$Id: IniFileProcessor.cs,v 1.5 2004/06/16 09:12:07 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -86,13 +86,15 @@ public class IniFileProcessor: TextFileProcessor
 			else
 			{
 				_cs = ParseSection(line);
-				if(_sections.Contains(_cs.Name))
+				
+				string key = _cs.Name.ToLower();
+				if(_sections.Contains(key))
 				{
 					Console.Error.WriteLine("warning:  overriding previous section definition for section '" + _cs.Name + "'");
-					_dupSections.Add(_sections[_cs.Name]);
+					_dupSections.Add(_sections[key]);
 				}
 
-				_sections[_cs.Name] = _cs;
+				_sections[key] = _cs;
 			}
 		}
 
