@@ -34,7 +34,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-// File:	IniSection.cs
+// File:	ConfigSection.cs
 // Created:	Tue Jun 15 17:58:47 IST 2004
 //
 //////////////////////////////////////////////////////////////////////
@@ -43,20 +43,23 @@ using System;
 using System.Collections;
 using System.Text;
 
+using TownleyEnterprises.IO;
+
 namespace TownleyEnterprises.Config {
 
 //////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This class represents a section in the "classic" Windows Profile
-///   or INI file.  Sections are named sets of key/value pairs which
-///   are essentially the same as named Hashtables (which is how this
-///   class is currently implemented).
+///   or INI file but also represents more generalized named groups of
+///   configuration settings.  Sections are named sets of key/value
+///   pairs which are essentially the same as named Hashtables (which
+///   is how this class is currently implemented).
 /// </summary>
-/// <version>$Id: IniSection.cs,v 1.4 2004/06/22 12:04:13 atownley Exp $</version>
+/// <version>$Id: ConfigSection.cs,v 1.1 2004/06/23 08:13:02 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
-public sealed class IniSection
+public class ConfigSection: Properties
 {
 	//////////////////////////////////////////////////////////////
 	/// <summary>
@@ -64,35 +67,47 @@ public sealed class IniSection
 	///   section and key values will be completely
 	///   case-insensitive.
 	/// </summary>
+	/// <param name="name">the name of the section</param>
 	//////////////////////////////////////////////////////////////
 	
-	public IniSection(string name)
+	public ConfigSection(string name)
+		: this(name, null, true, null)
+	{
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This constructor provides initializers for the name and
+	///   the property resolution.
+	/// </summary>
+	/// <param name="name">the name of the section</param>
+	/// <param name="ignoreCase">true if the properties are not
+	/// case-sensitive</param>
+	//////////////////////////////////////////////////////////////
+	
+	public ConfigSection(string name, bool ignoreCase)
+		: this(name, null, ignoreCase, null)
+	{
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This constructor fully initializes the instance.
+	/// </summary>
+	/// <param name="name">the name of the section</param>
+	/// <param name="defaults">the default values</param>
+	/// <param name="ignoreCase">true if the properties are not
+	/// case-sensitive</param>
+	/// <param name="prefix">a prefix to append to each of the
+	/// property values.  Prefixes are prepended to all property
+	/// names and are separated by the <c>.</c> character.</param>
+	//////////////////////////////////////////////////////////////
+	
+	public ConfigSection(string name, Properties defaults,
+				bool ignoreCase, string prefix)
+		: base(defaults, ignoreCase, prefix)
 	{
 		_name = name;
-	}
-
-	//////////////////////////////////////////////////////////////
-	/// <summary>
-	///   This property provides read-only access to the current
-	///   keys in the section (unsorted).
-	/// </summary>
-	//////////////////////////////////////////////////////////////
-	
-	public ICollection Keys
-	{
-		get { return _map.Keys; }
-	}
-
-	//////////////////////////////////////////////////////////////
-	/// <summary>
-	///   This property provides read-only access to the current
-	///   values of the section.
-	/// </summary>
-	//////////////////////////////////////////////////////////////
-	
-	public ICollection Values
-	{
-		get { return _map.Values; }
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -109,20 +124,6 @@ public sealed class IniSection
 
 	//////////////////////////////////////////////////////////////
 	/// <summary>
-	///   This property provides access to the section's indexed
-	///   values.  This property works exactly the same as the
-	///   corresponding property of the Hashtable.
-	/// </summary>
-	//////////////////////////////////////////////////////////////
-	
-	public string this[string key]
-	{
-		get { return (string)_map[key.ToLower()]; }
-		set { _map[key.ToLower()] = value; }
-	}
-
-	//////////////////////////////////////////////////////////////
-	/// <summary>
 	///   This method is used to output the entire section as a
 	///   string.
 	/// </summary>
@@ -134,19 +135,12 @@ public sealed class IniSection
 		buf.Append(_name);
 		buf.Append("]");
 		buf.Append("\n");
-		
-		foreach(string key in Keys)
-		{
-			buf.Append(key);
-			buf.Append("=");
-			buf.Append(this[key]);
-			buf.Append("\n");
-		}
 
+		buf.Append(base.ToString());
+		
 		return buf.ToString();
 	}
 
-	private Hashtable	_map = new Hashtable();
 	private string		_name = "";
 }
 
