@@ -108,7 +108,7 @@ namespace TownleyEnterprises.BuildTasks.NAnt {
 ///   </list>
 ///   </para>
 /// </remarks>
-/// <version>$Id: BuildStamp.cs,v 1.1 2004/06/21 07:54:17 atownley Exp $</version>
+/// <version>$Id: BuildStamp.cs,v 1.2 2004/06/21 08:42:26 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -245,6 +245,7 @@ public class BuildStamp : Task
 		_release = _props["build.version.release"];
 		_irelease = ParseReleaseNumber(_release);
 		_count = Int32.Parse(_props["build.version.count"]);
+		_datestr = _date.ToString("yyyy-MM-dd hh:mm:ss 'GMT'z");
 
 		if(_countbuild)
 		{
@@ -265,10 +266,20 @@ public class BuildStamp : Task
 			_bldcount = _devname;
 		}
 
+		// set the properties in the build
+		Properties["build.version.project"] = _name;
+		Properties["build.version.major"] = _major.ToString();
+		Properties["build.version.minor"] = _minor.ToString();
+		Properties["build.version.release"] = _release;
+		Properties["build.version.release-prefix"] = _irelease.ToString();
+		Properties["build.version.count"] = _bldcount;
+		Properties["build.version.date"] = _datestr;
+
 		Log(Level.Verbose, "{0}Major version:    {1}", LogPrefix, _major);
 		Log(Level.Verbose, "{0}Minor version:    {1}", LogPrefix, _minor);
 		Log(Level.Verbose, "{0}Release version:  {1}", LogPrefix, _release);
 		Log(Level.Verbose, "{0}Build number:     {1}", LogPrefix, _bldcount);
+		Log(Level.Verbose, "{0}Build date:       {1}", LogPrefix, _datestr);
 		Log(Level.Verbose, "");
 	}
 
@@ -358,7 +369,7 @@ public class BuildStamp : Task
 			nl = nl.Replace("@build.version.release@", _stamp._release);
 			nl = nl.Replace("@build.version.release-prefix@", _stamp._irelease.ToString());
 			nl = nl.Replace("@build.version.count@", _stamp._bldcount);
-			nl = nl.Replace("@build.version.date@", _stamp._date.ToString());
+			nl = nl.Replace("@build.version.date@", _stamp._datestr);
 
 			_target.Write(nl);
 			_target.Write("\n");
@@ -383,7 +394,8 @@ public class BuildStamp : Task
 	internal string		_suffix		= ".in";
 	internal FileSet	_fileset;
 	internal Properties	_props;
-	internal DateTime	_date = new DateTime();
+	internal DateTime	_date		= DateTime.Now;
+	internal string		_datestr;
 }
 
 }
