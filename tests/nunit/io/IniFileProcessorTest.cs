@@ -53,7 +53,7 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the IniFileProcessor class from
 ///   the IO package.
 /// </summary>  
-/// <version>$Id: IniFileProcessorTest.cs,v 1.2 2004/06/15 23:02:07 atownley Exp $</version>
+/// <version>$Id: IniFileProcessorTest.cs,v 1.3 2004/06/16 09:13:56 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -85,7 +85,7 @@ public sealed class IniFileProcessorTest
 		Assert.IsNotNull(section,
 			"Galeon 1.0 should be in the file.");
 
-		Assert.AreEqual("galeon 1.0", section.Name);
+		Assert.AreEqual("Galeon 1.0", section.Name);
 		Assert.AreEqual("Galeon", section["browser"]);
 		Assert.AreEqual("1", section["version"]);
 		Assert.AreEqual("False", section["netclr"]);
