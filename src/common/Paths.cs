@@ -40,6 +40,7 @@
 //////////////////////////////////////////////////////////////////////
 
 using System;
+using System.IO;
 
 namespace TownleyEnterprises.Common {
 
@@ -50,7 +51,7 @@ namespace TownleyEnterprises.Common {
 ///   separators.  This class provides similar, but more flexible
 ///   operations to those found in the System.IO.Path class.
 /// </summary>
-/// <version>$Id: Paths.cs,v 1.2 2004/06/21 08:54:28 atownley Exp $</version>
+/// <version>$Id: Paths.cs,v 1.3 2004/06/23 14:41:21 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -169,6 +170,59 @@ public sealed class Paths
 		if(s.Length == 0)
 		{
 			return ".";
+		}
+
+		return s;
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method provides the suffix of a path without the
+	///   given prefix.  This is useful for trying to strip known
+	///   portions of a path to find the relative parts.
+	/// </summary>
+	/// <param name="path">the path string</param>
+	/// <param name="prefix">the path prefix</param>
+	/// <returns>the path without the given prefix</returns>
+	//////////////////////////////////////////////////////////////
+
+	public static string Suffix(string path, string prefix)
+	{
+		if(prefix != null && path.StartsWith(prefix))
+			return path.Substring(prefix.Length);
+
+		return path;
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method is used to create an appropriate backup file
+	///   name with the specified suffix.
+	/// </summary>
+	/// <param name="name">the file name</param>
+	/// <param name="suffix">the suffix to use.  If the file with
+	/// the suffix already exists, the value of the
+	/// <c>overwrite</c> parameter controls the behavior.</param>
+	/// <param name="overwrite">true to overwrite the existing
+	/// backup files; false to append a number until a unique
+	/// backup file name has been found.</param>
+	/// <returns>the backup file name</returns>
+	//////////////////////////////////////////////////////////////
+
+	public static string GetBackupFileName(string name,
+				string suffix, bool overwrite)
+	{
+		string	backup = name + suffix;
+		string 	s = backup;
+		int	i = 0;
+	
+		if(!overwrite)
+		{
+			while(File.Exists(s))
+			{
+				// figure out a name that doesn't exist
+				s = backup + (++i);
+			}
 		}
 
 		return s;
