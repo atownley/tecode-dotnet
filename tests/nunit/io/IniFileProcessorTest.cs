@@ -53,7 +53,7 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the IniFileProcessor class from
 ///   the IO package.
 /// </summary>  
-/// <version>$Id: IniFileProcessorTest.cs,v 1.3 2004/06/16 09:13:56 atownley Exp $</version>
+/// <version>$Id: IniFileProcessorTest.cs,v 1.4 2004/06/16 09:27:46 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -69,6 +69,7 @@ public sealed class IniFileProcessorTest
 		
 		processor = new IniFileProcessor(
 			Path.Combine(dataDir, "browscap.ini"));
+		processor.ShowWarnings = false;
 		processor.ProcessFile();
 	}
 
