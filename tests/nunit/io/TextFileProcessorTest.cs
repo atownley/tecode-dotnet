@@ -44,7 +44,7 @@ using System.Collections;
 using System.IO;
 using NUnit.Framework;
 
-namespace TownleyEnterprises.Common.IO {
+namespace TownleyEnterprises.IO {
 
 
 //////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ namespace TownleyEnterprises.Common.IO {
 ///   This file implements tests for the TextFileProcessor class from
 ///   the IO package.
 /// </summary>  
-/// <version>$Id: TextFileProcessorTest.cs,v 1.3 2004/06/14 06:53:54 atownley Exp $</version>
+/// <version>$Id: TextFileProcessorTest.cs,v 1.4 2004/06/15 20:28:49 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 

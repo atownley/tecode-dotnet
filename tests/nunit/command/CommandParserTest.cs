@@ -42,7 +42,7 @@
 using System;
 using NUnit.Framework;
 
-namespace TownleyEnterprises.Common.Command {
+namespace TownleyEnterprises.Command {
 
 
 //////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ namespace TownleyEnterprises.Common.Command {
 ///   with successfully parsing the options.  Manual verification of the
 ///   formatting of the usage and help output will still be necessary.
 /// </summary>  
-/// <version>$Id: CommandParserTest.cs,v 1.2 2004/06/08 23:15:59 atownley Exp $</version>
+/// <version>$Id: CommandParserTest.cs,v 1.3 2004/06/15 20:28:49 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 

@@ -44,14 +44,14 @@ using System.Collections;
 using System.IO;
 using NUnit.Framework;
 
-namespace TownleyEnterprises.Common.IO {
+namespace TownleyEnterprises.IO {
 
 //////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This file implements tests for the DelimitedLineProcessor class
 ///   from the IO package.
 /// </summary>  
-/// <version>$Id: DelimitedLineProcessorTest.cs,v 1.1 2004/06/10 08:43:16 atownley Exp $</version>
+/// <version>$Id: DelimitedLineProcessorTest.cs,v 1.2 2004/06/15 20:28:49 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
