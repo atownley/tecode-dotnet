@@ -40,6 +40,7 @@
 //////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections;
 using System.Text;
 
 namespace TownleyEnterprises.Command {
@@ -48,7 +49,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for defining command-line
 ///   arguments.
 /// </summary>
-/// <version>$Id: CommandOption.cs,v 1.3 2004/06/18 15:30:45 atownley Exp $</version>
+/// <version>$Id: CommandOption.cs,v 1.4 2004/07/19 16:51:26 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 
 public class CommandOption
@@ -255,6 +256,53 @@ public class CommandOption
 	public virtual Object ArgValue
 	{
 		get { return Arg; }
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method is used to split compound options into their
+	///   individual parts.  Compound options are given as key=val
+	///   on the command line.
+	/// </summary>
+	/// <param name="str">the string containing the option</param>
+	/// <return>a 2 element array of strings for the key and
+	/// value</return>
+	//////////////////////////////////////////////////////////////
+
+	public static string[] ParseOption(string str)
+	{
+		string[] rez = new string[2];
+		
+		int cut = str.IndexOf("=");
+		if(cut == -1)
+			return rez;
+
+		rez[0] = str.Substring(0, cut);
+		rez[1] = str.Substring(cut + 1);
+
+		return rez;
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method is used to break up a list of strings
+	///   containing compound options and use them to initialize a
+	///   hashtable.
+	/// </summary>
+	/// <param name="list">the list of strings</param>
+	/// <return>hashtable containing the keys and values</return>
+	//////////////////////////////////////////////////////////////
+
+	public static Hashtable ParseOptions(IList list)
+	{
+		Hashtable opts = new Hashtable();
+		foreach(string s in list)
+		{
+			string[] ray = ParseOption(s);
+			opts[ray[0]] = ray[1];
+		}
+
+		return opts;
 	}
 
 	private readonly bool	_hasarg;
