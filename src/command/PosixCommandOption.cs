@@ -43,15 +43,18 @@ using System;
 
 namespace TownleyEnterprises.Command {
 
+//////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This class provides support for POSIX-compliant command options.
 /// </summary>
 ///
-/// <version>$Id: PosixCommandOption.cs,v 1.2 2004/06/15 16:57:44 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: PosixCommandOption.cs,v 1.3 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
+//////////////////////////////////////////////////////////////////////
 
 public class PosixCommandOption: CommandOption
 {
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   POSIX command options can't have both and long forms
 	///   (we're not counting abbreviations at the moment).  This
@@ -66,6 +69,7 @@ public class PosixCommandOption: CommandOption
 	/// argument</param>
 	/// <param name="argDesc">argDesc the long description of what
 	/// the argument does</param>
+	//////////////////////////////////////////////////////////////
 
 	public PosixCommandOption(string name, bool hasArg,
 				string argHelp, string argDesc)

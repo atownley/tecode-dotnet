@@ -54,8 +54,8 @@ namespace TownleyEnterprises.IO {
 ///   the file has been parsed, the sections can be retrieved for
 ///   further manipulation.
 /// </summary>
-/// <version>$Id: IniFileProcessor.cs,v 1.10 2004/06/24 10:28:29 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: IniFileProcessor.cs,v 1.11 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class IniFileProcessor: TextFileProcessor

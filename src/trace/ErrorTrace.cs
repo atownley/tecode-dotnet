@@ -142,8 +142,8 @@ namespace TownleyEnterprises.Trace {
 ///   name stack of the MethodTrace class).
 ///   </para>
 /// </remarks>
-/// <version>$Id: ErrorTrace.cs,v 1.2 2004/07/19 16:50:09 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: ErrorTrace.cs,v 1.3 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
  
 public class ErrorTrace: MethodTrace

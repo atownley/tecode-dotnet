@@ -51,8 +51,8 @@ namespace TownleyEnterprises.Command {
 ///   with successfully parsing the options.  Manual verification of the
 ///   formatting of the usage and help output will still be necessary.
 /// </summary>  
-/// <version>$Id: CommandParserTest.cs,v 1.3 2004/06/15 20:28:49 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: CommandParserTest.cs,v 1.4 2004/07/20 10:22:10 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 [TestFixture]

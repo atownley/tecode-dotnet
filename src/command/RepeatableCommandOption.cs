@@ -44,17 +44,20 @@ using System.Collections;
 
 namespace TownleyEnterprises.Command {
 
+//////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This class provides the basic support for repeatable command line
 ///   arguments.  This class can be used to allow a given argument to be
 ///   supplied more than once on the command line.
 /// </summary>
 ///
-/// <version>$Id: RepeatableCommandOption.cs,v 1.2 2004/06/15 16:57:44 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: RepeatableCommandOption.cs,v 1.3 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
+//////////////////////////////////////////////////////////////////////
 
 public class RepeatableCommandOption: CommandOption
 {
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   The constructor takes almost all of the parent class's
 	///   arguments, but the assumption is that if it was a regular
@@ -71,6 +74,7 @@ public class RepeatableCommandOption: CommandOption
 	/// argument</param>
 	/// <param name="argDesc">the long description of what the
 	/// argument does</param>
+	//////////////////////////////////////////////////////////////
 
 	public RepeatableCommandOption(string longName, char shortName,
 				string argHelp, string argDesc)
@@ -78,6 +82,7 @@ public class RepeatableCommandOption: CommandOption
 	{
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This version of the constructor allows specifying if the
 	///   argument is to be shown to the user and if the argument
@@ -96,6 +101,7 @@ public class RepeatableCommandOption: CommandOption
 	/// autohelp</param>
 	/// <param name="def">the default value of the argument if it
 	/// is not specified.</param>
+	//////////////////////////////////////////////////////////////
 
 	public RepeatableCommandOption(string longName, char shortName,
 				string argHelp, string argDesc,
@@ -104,6 +110,7 @@ public class RepeatableCommandOption: CommandOption
 	{
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method calls the parent class's version to ensure
 	///   that the option behaves consistently with the rest of
@@ -113,6 +120,7 @@ public class RepeatableCommandOption: CommandOption
 	/// </summary>
 	///
 	/// <param name="arg">the argument (if expected)</param>
+	//////////////////////////////////////////////////////////////
 
 	public override void OptionMatched(string arg)
 	{
@@ -120,23 +128,27 @@ public class RepeatableCommandOption: CommandOption
 		AddArg(arg);
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
-	///   This method returns the arguments which have been
+	///   This property returns the arguments which have been
 	///   matched by this instance.
 	/// </summary>
 	///
 	/// <returns>a copy of the matched arguments</returns>
+	//////////////////////////////////////////////////////////////
 
-	public virtual IList GetArgs()
+	public virtual IList Args
 	{
-		return ArrayList.ReadOnly(_list);
+		get { return ArrayList.ReadOnly(_list); }
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method empties the list of all matched arguments in
 	///   addition to any operations performed by the parent
 	///   class.
 	/// </summary>
+	//////////////////////////////////////////////////////////////
 
 	public override void Reset()
 	{
@@ -144,12 +156,14 @@ public class RepeatableCommandOption: CommandOption
 		_list.Clear();
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is provided so that any derived classes can
 	///   append arguments to the list.
 	/// </summary>
 	///
 	/// <param name="arg">the argument to be added</param>
+	//////////////////////////////////////////////////////////////
 
 	protected virtual void AddArg(string arg)
 	{

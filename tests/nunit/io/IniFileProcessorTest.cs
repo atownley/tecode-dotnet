@@ -53,8 +53,8 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the IniFileProcessor class from
 ///   the IO package.
 /// </summary>  
-/// <version>$Id: IniFileProcessorTest.cs,v 1.9 2004/06/24 10:32:59 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: IniFileProcessorTest.cs,v 1.10 2004/07/20 10:22:11 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 [TestFixture]

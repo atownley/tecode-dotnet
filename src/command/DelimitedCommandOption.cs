@@ -44,16 +44,17 @@ using System.Collections;
 
 namespace TownleyEnterprises.Command {
 
+//////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This class provides support for multi-valued options which are
 ///   specified using delmited values.  Examples of options of this form
 ///   are:
 ///   <example>
-/// <code>
-/// -X one,two,three
-/// --value=1,2,3,4
-/// --eggs green
-///	</code>
+///<code>
+///-X one,two,three
+///--value=1,2,3,4
+///--eggs green
+///</code>
 ///   </example>
 ///   <para>
 ///   NOTE:  due to limitations in the .NET framework for parsing
@@ -62,11 +63,13 @@ namespace TownleyEnterprises.Command {
 ///   </para>
 /// </summary>
 ///
-/// <version>$Id: DelimitedCommandOption.cs,v 1.3 2004/06/18 15:30:45 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: DelimitedCommandOption.cs,v 1.4 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
+//////////////////////////////////////////////////////////////////////
 
 public class DelimitedCommandOption: RepeatableCommandOption
 {
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   The constructor takes almost all of the parent class's
 	///   arguments, but the assumption is that if it was a regular
@@ -83,6 +86,7 @@ public class DelimitedCommandOption: RepeatableCommandOption
 	/// argument</param>
 	/// <param name="argDesc">the long description of what the
 	/// argument does</param>
+	//////////////////////////////////////////////////////////////
 
 	public DelimitedCommandOption(string longName, char shortName,
 				string argHelp, string argDesc)
@@ -91,6 +95,7 @@ public class DelimitedCommandOption: RepeatableCommandOption
 	{
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This version of the constructor allows specifying if the
 	///   argument is to be shown to the user and if the argument
@@ -111,6 +116,7 @@ public class DelimitedCommandOption: RepeatableCommandOption
 	/// is not specified.</param>
 	/// <param name="delim">the delimiter to be used to seperate
 	/// the option values.</param>
+	//////////////////////////////////////////////////////////////
 
 	public DelimitedCommandOption(string longName, char shortName,
 				string argHelp, string argDesc,
@@ -120,6 +126,7 @@ public class DelimitedCommandOption: RepeatableCommandOption
 		_delim = delim;
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method will parse the argument as it's added and
 	///   ensure that all of the values get added to the parent
@@ -127,6 +134,7 @@ public class DelimitedCommandOption: RepeatableCommandOption
 	/// </summary>
 	///
 	/// <param name="arg">the argument to be added</param>
+	//////////////////////////////////////////////////////////////
 
 	protected override void AddArg(string arg)
 	{

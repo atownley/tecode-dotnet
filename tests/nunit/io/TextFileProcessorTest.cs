@@ -52,8 +52,8 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the TextFileProcessor class from
 ///   the IO package.
 /// </summary>  
-/// <version>$Id: TextFileProcessorTest.cs,v 1.5 2004/06/24 10:37:26 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: TextFileProcessorTest.cs,v 1.6 2004/07/20 10:22:11 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 [TestFixture]

@@ -62,8 +62,8 @@ namespace TownleyEnterprises.Trace {
 ///   multiplier of the trace level for individual trace methods.
 ///   <para>
 /// </summary>
-/// <version>$Id: TraceCore.cs,v 1.4 2004/07/19 16:48:44 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: TraceCore.cs,v 1.5 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class TraceCore

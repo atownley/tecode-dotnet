@@ -53,8 +53,8 @@ namespace TownleyEnterprises.Trace {
 ///   StringBuilder is that this class is aware of the Traceable
 ///   interface and will use TraceString if it is available.
 /// </summary>
-/// <version>$Id: TraceMessage.cs,v 1.1 2004/06/28 06:50:15 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: TraceMessage.cs,v 1.2 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class TraceMessage 

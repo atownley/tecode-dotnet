@@ -54,8 +54,8 @@ namespace TownleyEnterprises.Common {
 ///   </para>
 ///   <para>NOTE:  this class is intentionally not documented</para>
 /// </summary>
-/// <version>$Id: DebugWriter.cs,v 1.1 2004/06/22 11:58:24 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: DebugWriter.cs,v 1.2 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public sealed class DebugWriter

@@ -68,8 +68,8 @@ namespace TownleyEnterprises.Config {
 ///   </ol>
 ///   </para>
 /// </summary>
-/// <version>$Id: IniConfigSupplier.cs,v 1.2 2004/06/24 20:03:43 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: IniConfigSupplier.cs,v 1.3 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class IniConfigSupplier: IConfigSupplier

@@ -50,6 +50,7 @@
 	<property name="build.version"	value="version.properties"/>
 	<property name="build.tests"	value="build/tests"/>
 	<property name="reports.tests"	value="build/reports"/>
+	<property name="clover.build"	value="build/clover"/>
 	<property name="lib.dir"	value="lib"/>
 	<property name="lib.name"	value="${app.name}.dll"/>
 	<property name="src.dir"	value="src"/>
@@ -59,6 +60,8 @@
 	<property name="tests.lib.dir"	value="tests/lib"/>
 	<property name="tests.lib.name"	value="${build.tests}/${app.name}-tests.dll"/>
 	<property name="custom.tasks"	value="nant-tasks/TownleyEnterprises.NAnt.Tasks.dll"/>
+
+	<loadtasks assembly="${lib.dir}/CloverNAnt-0.85.dll"/>
 
 	<target name="bootstrap">
 		<csc target="library" output="${custom.tasks}">
@@ -116,6 +119,19 @@
 				import="true"/>
 		<property name="version" value="${build.version.major}.${build.version.minor}.${build.version.release}"/>
 		<property name="dist.dir" value="${app.name}-${version}"/>
+	</target>
+
+	<target name="with-clover">
+		<clover-setup initstring="${clover.build}/te-common.cdb"
+			builddir="${clover.build}" flatten="true"/>
+	</target>
+
+	<target name="clover-report" depends="with-clover">
+		<clover-report>
+			<current title="test" output="report">
+				<format type="html"/>
+			</current>
+		</clover-report>
 	</target>
 
 	<target name="all" depends="stamp, compile-lib"/>

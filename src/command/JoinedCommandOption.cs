@@ -43,6 +43,7 @@ using System;
 
 namespace TownleyEnterprises.Command {
 
+//////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This class provides support for "joined" command options.  Some common examples of these are:
 ///   <ul>
@@ -71,11 +72,13 @@ namespace TownleyEnterprises.Command {
 ///   </para>
 /// </summary>
 ///
-/// <version>$Id: JoinedCommandOption.cs,v 1.3 2004/06/18 15:30:45 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: JoinedCommandOption.cs,v 1.4 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
+//////////////////////////////////////////////////////////////////////
 
 public class JoinedCommandOption: RepeatableCommandOption
 {
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   The constructor specifies only the arguments which make
 	///   sense for this type of option.  These options do not
@@ -93,6 +96,7 @@ public class JoinedCommandOption: RepeatableCommandOption
 	/// argument does</param>
 	/// <param name="show">true if should be shown in
 	/// autohelp</param>
+	//////////////////////////////////////////////////////////////
 
 	public JoinedCommandOption(char shortName, bool canSplit,
 					string argHelp, string argDesc,
@@ -102,6 +106,7 @@ public class JoinedCommandOption: RepeatableCommandOption
 		_cansplit = canSplit;
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is used to tell the parser if the option value
 	///   can follow the switch or it must be part of the switch.
@@ -109,6 +114,7 @@ public class JoinedCommandOption: RepeatableCommandOption
 	///
 	/// <returns>true if the argument must be joined; false
 	/// otherwise</returns>
+	//////////////////////////////////////////////////////////////
 
 	public virtual bool ArgCanSplit
 	{

@@ -55,8 +55,8 @@ namespace TownleyEnterprises.Config {
 ///   normally unless the value has been changed.  In this case, the
 ///   new value is returned.
 /// </summary>
-/// <version>$Id: WriteCaptureConfigResolver.cs,v 1.1 2004/06/22 12:01:51 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: WriteCaptureConfigResolver.cs,v 1.2 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class WriteCaptureConfigResolver: DefaultConfigResolver

@@ -49,8 +49,8 @@ namespace TownleyEnterprises.Config {
 ///   This class is used to group all of the settings for a given
 ///   application into a common place.
 /// </summary>
-/// <version>$Id: AppConfig.cs,v 1.4 2004/06/24 20:03:03 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: AppConfig.cs,v 1.5 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public sealed class AppConfig: IConfigSupplier

@@ -45,15 +45,18 @@ using System.Text;
 
 namespace TownleyEnterprises.Command {
 
+//////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This class provides support for defining command-line
 ///   arguments.
 /// </summary>
-/// <version>$Id: CommandOption.cs,v 1.4 2004/07/19 16:51:26 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: CommandOption.cs,v 1.5 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
+//////////////////////////////////////////////////////////////////////
 
 public class CommandOption
 {
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   The class is fully initialized by the constructor and each
 	///   argument is immutable once it has been set.
@@ -68,6 +71,7 @@ public class CommandOption
 	/// argument</param>
 	/// <param name="argDesc">the long description of what the
 	/// argument does</param>
+	//////////////////////////////////////////////////////////////
 
 	public CommandOption(string longName, char shortName,
 				bool hasArg, string argHelp,
@@ -77,6 +81,7 @@ public class CommandOption
 	{
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This version of the constructor allows specifying if the
 	///   argument is to be shown to the user and if the argument
@@ -96,6 +101,7 @@ public class CommandOption
 	/// <param name="show">true if should be shown in
 	/// autohelp</param>
 	/// <param name="def">the default value for the option</param>
+	//////////////////////////////////////////////////////////////
 
 	public CommandOption(string longName, char shortName,
 				bool hasArg, string argHelp,
@@ -111,6 +117,7 @@ public class CommandOption
 		_default = def;
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This version of the constructor allows specifying if the
 	///   argument has a default value.  It will always be shown
@@ -127,6 +134,7 @@ public class CommandOption
 	/// <param name="argDesc">the long description of what the
 	/// argument does</param>
 	/// <param name="def">the default value for the option</param>
+	//////////////////////////////////////////////////////////////
 
 	public CommandOption(string longName, char shortName,
 				bool hasArg, string argHelp,
@@ -181,6 +189,7 @@ public class CommandOption
 		return buf.ToString().GetHashCode();
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is used to retrieve the argument (if any)
 	///   which was given to the option.  If no argument was
@@ -190,6 +199,7 @@ public class CommandOption
 	///
 	/// <returns>the argument or null if no argument was
 	/// specified</returns>
+	//////////////////////////////////////////////////////////////
 
 	public virtual string Arg
 	{
@@ -202,18 +212,21 @@ public class CommandOption
 		}
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   Indicates if this option has been matched by the command
 	///   parser or not.
 	/// </summary>
 	///
 	/// <returns>true if matched; false otherwise</returns>
+	//////////////////////////////////////////////////////////////
 
 	public virtual bool Matched
 	{
 		get { return _matched; }
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	/// <para>This method is called by the command parser to indicate
 	/// that the option has been matched.</para>
@@ -225,6 +238,7 @@ public class CommandOption
 	/// </summary>
 	///
 	/// <param name="arg">the argument (if expected)</param>
+	//////////////////////////////////////////////////////////////
 
 	public virtual void OptionMatched(string arg)
 	{
@@ -232,12 +246,14 @@ public class CommandOption
 		_arg = arg;
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is used to support multiple parses by a
 	///   CommandParser instance using different sets of
 	///   arguments.  Derived classes should override this method
 	///   to reset any state stored using the optionMatched method. 
 	/// </summary>
+	//////////////////////////////////////////////////////////////
 
 	public virtual void Reset()
 	{
@@ -245,6 +261,7 @@ public class CommandOption
 		_arg = null;
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This property is used to allow derived classes to
 	///   provide any type massaging necessary to return a usable
@@ -252,6 +269,7 @@ public class CommandOption
 	/// </summary>
 	/// 
 	/// <returns>the appropriate type of argument</returns>
+	//////////////////////////////////////////////////////////////
 	
 	public virtual Object ArgValue
 	{

@@ -47,8 +47,8 @@ namespace TownleyEnterprises.IO {
 ///   ILineProcessor interface which keeps track of the number of
 ///   lines processed.
 /// </summary>
-/// <version>$Id: AbstractLineProcessor.cs,v 1.2 2004/06/15 17:22:08 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: AbstractLineProcessor.cs,v 1.3 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public abstract class AbstractLineProcessor: ILineProcessor

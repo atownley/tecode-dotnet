@@ -46,8 +46,8 @@ namespace TownleyEnterprises.IO {
 ///   This interface is used to provide line-based processing of text
 ///   files.
 /// </summary>
-/// <version>$Id: ILineProcessor.cs,v 1.2 2004/06/15 17:23:45 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: ILineProcessor.cs,v 1.3 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public interface ILineProcessor

@@ -55,8 +55,8 @@ namespace TownleyEnterprises.Config {
 ///   pairs which are essentially the same as named Hashtables (which
 ///   is how this class is currently implemented).
 /// </summary>
-/// <version>$Id: ConfigSection.cs,v 1.1 2004/06/23 08:13:02 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: ConfigSection.cs,v 1.2 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class ConfigSection: Properties

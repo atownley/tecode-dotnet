@@ -54,8 +54,8 @@ namespace TownleyEnterprises.Config {
 ///   This class decorates a Properties instance as an IConfigSupplier
 ///   implementation.
 /// </summary>
-/// <version>$Id: PropertiesConfigSupplier.cs,v 1.2 2004/06/28 06:51:43 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: PropertiesConfigSupplier.cs,v 1.3 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class PropertiesConfigSupplier: IConfigSupplier

@@ -50,8 +50,8 @@ namespace TownleyEnterprises.Config {
 ///   This class provides an implementation of the Registry pattern
 ///   for system-wide configuration.
 /// </summary>
-/// <version>$Id: ConfigRegistry.cs,v 1.2 2004/06/23 14:45:44 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: ConfigRegistry.cs,v 1.3 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public sealed class ConfigRegistry

@@ -50,8 +50,8 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.6 2004/07/20 10:08:07 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: CommandParser.cs,v 1.7 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public sealed class CommandParser: ICommandListener

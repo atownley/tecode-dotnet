@@ -49,8 +49,8 @@ namespace TownleyEnterprises.Config {
 ///   This class exposes the system environment as an IConfigSupplier
 ///   implementation which extends the DictionaryConfigSupplier class.
 /// </summary>
-/// <version>$Id: EnvConfigSupplier.cs,v 1.1 2004/06/23 08:30:35 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: EnvConfigSupplier.cs,v 1.2 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public sealed class EnvConfigSupplier: DictionaryConfigSupplier

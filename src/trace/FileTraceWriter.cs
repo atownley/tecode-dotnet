@@ -50,8 +50,8 @@ namespace TownleyEnterprises.Trace {
 ///   interface in terms of a system file.  Multiple threads accessing
 ///   this writer are synchronized on the underlying stream.
 /// </summary>
-/// <version>$Id: FileTraceWriter.cs,v 1.1 2004/06/28 06:50:15 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: FileTraceWriter.cs,v 1.2 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class FileTraceWriter: TraceWriter

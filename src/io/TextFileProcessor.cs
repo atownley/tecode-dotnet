@@ -53,8 +53,8 @@ using System.Text;
 ///   line is provided by providing an instance of ILineProcessor
 ///   apropriate for the task.
 /// </summary>
-/// <version>$Id: TextFileProcessor.cs,v 1.5 2004/06/24 10:32:59 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: TextFileProcessor.cs,v 1.6 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class TextFileProcessor

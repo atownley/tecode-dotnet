@@ -41,27 +41,32 @@
 
 namespace TownleyEnterprises.Command {
 
+//////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This abstract class is intended to easily support the
 ///   implementation of command-line argument handler classes
 ///   by providing an empty optionMatched method.
 /// </summary>
-/// <version>$Id: AbstractCommandListener.cs,v 1.2 2004/06/15 16:57:34 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: AbstractCommandListener.cs,v 1.3 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
+//////////////////////////////////////////////////////////////////////
 
 public abstract class AbstractCommandListener: ICommandListener
 {
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This property is used to retrieve the
 	///   description of the command listener's options
 	///   when printing the help message.
 	/// </summary>
+	//////////////////////////////////////////////////////////////
 	
 	public abstract string Description
 	{
 		get;
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This property is used to retrieve the arguments
 	///   to be handled by the listener.
@@ -69,12 +74,14 @@ public abstract class AbstractCommandListener: ICommandListener
 	///
 	/// <returns>an array of CommandOption
 	/// arguments</returns>
+	//////////////////////////////////////////////////////////////
 
 	public abstract CommandOption[] Options
 	{
 		get;
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is called whenever the argument
 	///   registered the parser is detected.  It is not
@@ -85,6 +92,7 @@ public abstract class AbstractCommandListener: ICommandListener
 	/// parser</param>
 	/// <param name="arg">the option argument (if
 	/// any)</param>
+	//////////////////////////////////////////////////////////////
 
 	public virtual void OptionMatched(CommandOption opt, string arg)
 	{

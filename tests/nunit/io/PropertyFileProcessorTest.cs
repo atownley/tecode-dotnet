@@ -52,8 +52,8 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the PropertyFileProcessor class
 ///   from the IO package.
 /// </summary>  
-/// <version>$Id: PropertyFileProcessorTest.cs,v 1.2 2004/06/23 14:50:27 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: PropertyFileProcessorTest.cs,v 1.3 2004/07/20 10:22:11 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 [TestFixture]

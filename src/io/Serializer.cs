@@ -53,8 +53,8 @@ namespace TownleyEnterprises.IO {
 ///   This utility class provides various ways of serializing common
 ///   data structures to recurring serialized forms.
 /// </summary>
-/// <version>$Id: Serializer.cs,v 1.1 2004/06/23 14:39:11 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: Serializer.cs,v 1.2 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public sealed class Serializer

@@ -54,8 +54,8 @@ namespace TownleyEnterprises.Config {
 ///   decorator for a single reference to an IConfigSupplier instance
 ///   delegate.
 /// </summary>
-/// <version>$Id: DefaultConfigResolver.cs,v 1.2 2004/06/23 14:46:32 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: DefaultConfigResolver.cs,v 1.3 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class DefaultConfigResolver: IConfigResolver

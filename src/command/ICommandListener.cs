@@ -41,24 +41,29 @@
 
 namespace TownleyEnterprises.Command {
 
+//////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This interface must be implemented by classes that
 ///   intend to respond to command-line arguments processed by
 ///   the CommandParser.
 /// </summary>
-/// <version>$Id: ICommandListener.cs,v 1.2 2004/06/15 16:57:44 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: ICommandListener.cs,v 1.3 2004/07/20 10:22:08 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
+//////////////////////////////////////////////////////////////////////
 
 public interface ICommandListener
 {
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This property is used to retrieve the
 	///   description of the command listener's options
 	///   when printing the help message.
 	/// </summary>
+	//////////////////////////////////////////////////////////////
 	
 	string Description { get; }
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This property is used to retrieve the arguments
 	///   to be handled by the listener.
@@ -66,9 +71,11 @@ public interface ICommandListener
 	///
 	/// <returns>an array of CommandOption
 	/// arguments</returns>
+	//////////////////////////////////////////////////////////////
 
 	CommandOption[] Options { get; }
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is called whenever the argument
 	///   registered the parser is detected.  It is not
@@ -79,6 +86,7 @@ public interface ICommandListener
 	/// parser</param>
 	/// <param name="arg">the option argument (if
 	/// any)</param>
+	//////////////////////////////////////////////////////////////
 
 	void OptionMatched(CommandOption opt, string arg);
 }

@@ -50,8 +50,8 @@ namespace TownleyEnterprises.Config {
 /// <summary>
 ///   Tests for the AppConfig class.
 /// </summary>  
-/// <version>$Id: AppConfigTest.cs,v 1.2 2004/06/22 11:57:08 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: AppConfigTest.cs,v 1.3 2004/07/20 10:22:10 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 [TestFixture]

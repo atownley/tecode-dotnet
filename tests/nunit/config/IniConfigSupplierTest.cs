@@ -52,8 +52,8 @@ namespace TownleyEnterprises.Config {
 /// <summary>
 ///   Tests for the IniConfigSupplier class.
 /// </summary>  
-/// <version>$Id: IniConfigSupplierTest.cs,v 1.2 2004/06/24 20:04:29 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: IniConfigSupplierTest.cs,v 1.3 2004/07/20 10:22:10 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 [TestFixture]

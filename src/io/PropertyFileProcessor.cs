@@ -52,8 +52,8 @@ namespace TownleyEnterprises.IO {
 ///   strings.  Once the file has been parsed, the properties can be
 ///   retrieved and used as desired.
 /// </summary>
-/// <version>$Id: PropertyFileProcessor.cs,v 1.2 2004/06/23 14:49:04 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: PropertyFileProcessor.cs,v 1.3 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class PropertyFileProcessor: TextFileProcessor

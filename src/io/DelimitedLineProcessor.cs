@@ -50,8 +50,8 @@ namespace TownleyEnterprises.IO {
 ///   This class provides a mechanism for easily parsing delimited
 ///   text files.
 /// </summary>
-/// <version>$Id: DelimitedLineProcessor.cs,v 1.3 2004/06/15 17:23:45 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: DelimitedLineProcessor.cs,v 1.4 2004/07/20 10:22:09 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public abstract class DelimitedLineProcessor: AbstractLineProcessor
