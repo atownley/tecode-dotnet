@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.8 2004/07/20 11:50:00 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.9 2004/07/20 13:16:40 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -545,6 +545,9 @@ public sealed class CommandParser: ICommandListener
 
 	public void ExecuteCommands(Object sender)
 	{
+		// make sure our constraints have been checked
+		CheckConstraints();
+
 		foreach(CommandOption option in _commands)
 		{
 			try
@@ -565,6 +568,45 @@ public sealed class CommandParser: ICommandListener
 		}
 	}
 
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method is used to add an option constraint to be
+	///   checked before the commands are executed.
+	/// </summary>
+	/// <param name="constraint">constraint to check</param>
+	//////////////////////////////////////////////////////////////
+
+	public void AddConstraint(OptionConstraint constraint)
+	{
+		_constraints.Add(constraint);
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method takes care of iterating over the constraints
+	///   and will exit with the specific return code of the
+	///   failed constraint.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+	
+	private void CheckConstraints()
+	{
+		if(_checkedConstraints)
+			return;
+
+		foreach(OptionConstraint oc in _constraints)
+		{
+			if(!oc.OK)
+			{
+				Console.Error.WriteLine(oc.Message + ".  Exiting.");
+				Usage();
+				System.Environment.Exit(oc.ExitStatus);
+			}
+		}
+
+		_checkedConstraints = true;
+	}
+	
 	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is an easy way to add a new command option to
@@ -899,6 +941,8 @@ public sealed class CommandParser: ICommandListener
 		{
 			option.Reset();
 		}
+
+		_checkedConstraints = false;
 	}
 
 	private int ProcessArg(int argc, string[] args)
@@ -1135,6 +1179,12 @@ public sealed class CommandParser: ICommandListener
 
 	/** tracks the unique list of commands */
 	private ArrayList	_commands = new ArrayList();
+
+	/** our option constraints */
+	private ArrayList	_constraints = new ArrayList();
+
+	/** track if we've checked already */
+	private bool		_checkedConstraints = false;
 
 	/** the maximum width of the switch part */
 	private const int	SWITCH_LENGTH = 35;
