@@ -53,7 +53,7 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the IniFileProcessor class from
 ///   the IO package.
 /// </summary>  
-/// <version>$Id: IniFileProcessorTest.cs,v 1.5 2004/06/17 07:49:10 atownley Exp $</version>
+/// <version>$Id: IniFileProcessorTest.cs,v 1.6 2004/06/23 13:05:27 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -82,7 +82,7 @@ public sealed class IniFileProcessorTest
 			"there should be 12806 lines");
 
 		// check the Galeon 1.0 section
-		IniSection section = processor["Galeon 1.0"];
+		ConfigSection section = processor["Galeon 1.0"];
 		Assert.IsNotNull(section,
 			"Galeon 1.0 should be in the file.");
 
@@ -95,28 +95,28 @@ public sealed class IniFileProcessorTest
 	[Test]
 	public void VerifyCaseInsensitiveKeys()
 	{
-		IniSection section = processor["galeon 1.0"];
+		ConfigSection section = processor["galeon 1.0"];
 		Assert.AreEqual("Galeon", section["bRoWsEr"]);
 	}
 
 	[Test]
 	public void VerifyDiscardDoubleQuotes()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.AreEqual("double quote test", section["dqt"]);
 	}
 
 	[Test]
 	public void VerifyDiscardSingleQuotes()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.AreEqual("single quote test", section["sqt"]);
 	}
 
 	[Test]
 	public void VerifyKeepInternalQuotes()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.AreEqual("his mind was \"blown\" by the song",
 			section["iqt"]);
 	}
@@ -124,7 +124,7 @@ public sealed class IniFileProcessorTest
 	[Test]
 	public void VerifyKeepLeadQuotes()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.AreEqual("\"there's a quote here",
 			section["lqt"]);
 	}
@@ -132,7 +132,7 @@ public sealed class IniFileProcessorTest
 	[Test]
 	public void VerifyKeepEndQuotes()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.AreEqual("there's a quote at the end'",
 			section["tqt"]);
 	}
@@ -140,42 +140,42 @@ public sealed class IniFileProcessorTest
 	[Test]
 	public void VerifyStripLeadingValueSpaces()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.AreEqual("value", section["lvs"]);
 	}
 
 	[Test]
 	public void VerifyStripTrailingValueSpaces()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.AreEqual("value", section["tvs"]);
 	}
 
 	[Test]
 	public void VerifyStripLeadingKeySpaces()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.AreEqual("value", section["lks"]);
 	}
 
 	[Test]
 	public void VerifyStripTrailingKeySpaces()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.AreEqual("value", section["tks"]);
 	}
 
 	[Test]
 	public void VerifyParseEmptyValue()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.AreEqual("", section["emptyvalue"]);
 	}
 
 	[Test]
 	public void VerifyParseEmptyKey()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.IsNull(section[""],
 			"empty key should return a null value");
 	}
@@ -183,7 +183,7 @@ public sealed class IniFileProcessorTest
 	[Test]
 	public void VerifyMissingKeyIsNull()
 	{
-		IniSection section = processor["nunit"];
+		ConfigSection section = processor["nunit"];
 		Assert.IsNull(section["missing"],
 			"missing key should return a null");
 	}
