@@ -62,7 +62,7 @@ namespace TownleyEnterprises.Trace {
 ///   multiplier of the trace level for individual trace methods.
 ///   <para>
 /// </summary>
-/// <version>$Id: TraceCore.cs,v 1.3 2004/06/28 09:20:37 atownley Exp $</version>
+/// <version>$Id: TraceCore.cs,v 1.4 2004/07/19 16:48:44 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -85,7 +85,10 @@ public class TraceCore
 
 	protected TraceCore(string name, int maturity)
 	{
-		_tracers[name] = this;
+		lock(_tracers.SyncRoot)
+		{
+			_tracers[name] = this;
+		}
 		
 		_className = name;
 		_cnhash = _className.GetHashCode();
