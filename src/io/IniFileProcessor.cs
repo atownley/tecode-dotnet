@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   the file has been parsed, the sections can be retrieved for
 ///   further manipulation.
 /// </summary>
-/// <version>$Id: IniFileProcessor.cs,v 1.7 2004/06/17 07:19:26 atownley Exp $</version>
+/// <version>$Id: IniFileProcessor.cs,v 1.8 2004/06/17 07:48:11 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -157,6 +157,7 @@ public class IniFileProcessor: TextFileProcessor
 			if(idx != -1)
 			{
 				string sval;
+				string key = line.Substring(0, idx).Trim();
 				
 				if(idx == line.Length - 1)
 				{
@@ -164,11 +165,9 @@ public class IniFileProcessor: TextFileProcessor
 				}
 				else
 				{
-					sval = line.Substring(idx + 1);
+					// still necessary to trim for leading WS
+					sval = line.Substring(idx + 1).Trim();
 				
-					// still necessary to prevent leading whitespace
-					sval.Trim();
-					
 					// strip any quotes & whitespace
 					if((sval[sval.Length - 1] == '\"' &&
 							sval[0] == '\"') ||
@@ -180,7 +179,7 @@ public class IniFileProcessor: TextFileProcessor
 					}
 				}
 
-				_cs[line.Substring(0, idx).Trim()] = sval;
+				_cs[key] = sval;
 			}
 		}
 
