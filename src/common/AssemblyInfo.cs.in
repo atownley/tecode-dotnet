@@ -65,5 +65,5 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyFileVersion("@build.version.major@.@build.version.minor@.@build.version.release@.@build.version.count@")]
 
 // Currently not doing signed assemblies
-[assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile("")]
+//[assembly: AssemblyDelaySign(false)]
+[assembly: AssemblyKeyFile("src\\common\\te-common.key")]
