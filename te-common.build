@@ -60,13 +60,14 @@
 	<target name="compile-lib">
 		<csc target="library" output="${app.name}.dll">
 			<sources>
-				<includes name="src/**/*.cs"/>
+				<include name="src/**/*.cs"/>
 			</sources>
 		</csc>
 	</target>
 
 	<target name="clean">
 		<delete file="${app.name}.dll"/>
+		<delete dir="build"/>
 	</target>
 
 	<!-- unit tests -->
@@ -74,17 +75,24 @@
 		<mkdir dir="${build.tests}"/>
 		<csc target="library" output="${build.tests}/${app.name}-tests.dll">
 			<sources>
-				<includes name="tests/nunit/**/*.cs"/>
+				<include name="tests/nunit/**/*.cs"/>
 			</sources>
 			<references>
-				<includes name="${app.name}.dll"/>
-				<includes name="${tests.lib.dir}/*.dll"/>
+				<include name="${app.name}.dll"/>
+				<include name="${tests.lib.dir}/*.dll"/>
 			</references>
 		</csc>
 	</target>
 
 	<target name="nunit" depends="compile-tests">
-		<nunit>
-		</nunit>
+		<nunit2>
+			<formatter type="Plain"/>
+			<test>
+				<assemblies>
+					<include name="${app.name}.dll"/>
+					<include name="${build.tests}/${app.name}-tests.dll"/>
+				</assemblies>
+			</test>
+		</nunit2>
 	</target>
 </project>
