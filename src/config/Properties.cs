@@ -60,11 +60,11 @@ namespace TownleyEnterprises.Config {
 ///   CollectionWriter objects.
 ///   </para>
 /// </summary>
-/// <version>$Id: Properties.cs,v 1.1 2004/06/21 08:39:27 atownley Exp $</version>
+/// <version>$Id: Properties.cs,v 1.2 2004/06/22 12:04:13 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
-public class Properties
+public sealed class Properties
 {
 	//////////////////////////////////////////////////////////////
 	/// <summary>

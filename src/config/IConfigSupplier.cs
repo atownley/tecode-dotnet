@@ -49,7 +49,7 @@ namespace TownleyEnterprises.Config {
 ///   This interface is used to provide a common abstraction to
 ///   accessing application configuration properties.
 /// </summary>
-/// <version>$Id: IConfigSupplier.cs,v 1.1 2004/06/21 15:57:17 atownley Exp $</version>
+/// <version>$Id: IConfigSupplier.cs,v 1.2 2004/06/22 12:04:13 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -94,6 +94,42 @@ public interface IConfigSupplier
 		set;
 	}
 
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property determines if the supplier is
+	///   case-sensitive.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+	
+	bool IsCaseSensitive
+	{
+		get;
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method checks to see if the supplier provides the
+	///   specified key.
+	/// </summary>
+	/// <param name="key">the key to check</param>
+	/// <returns>true if the key is provided by this
+	/// supplier</returns>
+	//////////////////////////////////////////////////////////////
+	
+	bool CanRead(string key);
+	
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method is used to determine if the key can be
+	///   written to this supplier.
+	/// </summary>
+	/// <param name="key">the key to check</param>
+	/// <returns>true if the key can be written by this
+	/// supplier</returns>
+	//////////////////////////////////////////////////////////////
+	
+	bool CanWrite(string key);
+	
 	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method will cause the properties to be reloaded

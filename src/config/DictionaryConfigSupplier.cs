@@ -41,6 +41,9 @@
 
 using System;
 using System.Collections;
+using System.Text;
+
+using TownleyEnterprises.IO;
 
 namespace TownleyEnterprises.Config {
 
@@ -49,7 +52,7 @@ namespace TownleyEnterprises.Config {
 ///   This class is a Dictionary decorator which implements the
 ///   IConfigSupplier interface.
 /// </summary>
-/// <version>$Id: DictionaryConfigSupplier.cs,v 1.1 2004/06/21 15:56:42 atownley Exp $</version>
+/// <version>$Id: DictionaryConfigSupplier.cs,v 1.2 2004/06/22 12:04:13 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -112,6 +115,48 @@ public sealed class DictionaryConfigSupplier: IConfigSupplier
 
 	//////////////////////////////////////////////////////////////
 	/// <summary>
+	///   This property determines if the supplier is
+	///   case-sensitive.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+	
+	public bool IsCaseSensitive
+	{
+		get { return true; }
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method checks to see if the supplier provides the
+	///   specified key.
+	/// </summary>
+	/// <param name="key">the key to check</param>
+	/// <returns>true if the key is provided by this
+	/// supplier</returns>
+	//////////////////////////////////////////////////////////////
+	
+	public bool CanRead(string key)
+	{
+		return _dict.Contains(key);
+	}
+	
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This method is used to determine if the key can be
+	///   written to this supplier.
+	/// </summary>
+	/// <param name="key">the key to check</param>
+	/// <returns>true if the key can be written by this
+	/// supplier</returns>
+	//////////////////////////////////////////////////////////////
+	
+	public bool CanWrite(string key)
+	{
+		return true;
+	}
+	
+	//////////////////////////////////////////////////////////////
+	/// <summary>
 	///   This method will cause the properties to be reloaded
 	///   from their original source.
 	/// </summary>
@@ -130,6 +175,17 @@ public sealed class DictionaryConfigSupplier: IConfigSupplier
 	
 	public void Save()
 	{
+	}
+
+	public override string ToString()
+	{
+		StringBuilder buf = new StringBuilder();
+		buf.Append(base.ToString());
+		buf.Append("[");
+		buf.Append(GetHashCode());
+		buf.Append("]");
+
+		return buf.ToString();
 	}
 
 	private readonly string		_name;
