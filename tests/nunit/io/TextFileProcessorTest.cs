@@ -49,10 +49,10 @@ namespace TownleyEnterprises.Common.IO {
 
 //////////////////////////////////////////////////////////////////////
 /// <summary>
-///   This file implements tests for the TextFileProcessor and the
-///   DelimitedLineProcessor classes from the IO package.
+///   This file implements tests for the TextFileProcessor class from
+///   the IO package.
 /// </summary>  
-/// <version>$Id: TextFileProcessorTest.cs,v 1.2 2004/06/10 08:05:33 atownley Exp $</version>
+/// <version>$Id: TextFileProcessorTest.cs,v 1.3 2004/06/14 06:53:54 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -125,7 +125,7 @@ public sealed class TextFileProcessorTest
 				"should correctly process non-8859-15 characters");
 	}
 	
-//	// NOTE:  this test doesn't seem to work with .NET
+	// NOTE:  this test doesn't seem to work with .NET
 //	[Test]
 //	public void VerifySimpleParseWith885915Encoding()
 //	{
