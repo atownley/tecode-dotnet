@@ -136,6 +136,7 @@
 		<mkdir dir="${dist.dir}"/>
 		<mkdir dir="${dist.dir}/bin"/>
 		<mkdir dir="${dist.dir}/examples"/>
+		<mkdir dir="${dist.dir}/docs"/>
 
 		<copy file="LICENSE" todir="${dist.dir}" />
 		<copy file="RELEASE-NOTES" todir="${dist.dir}" />
@@ -158,10 +159,13 @@
 	<target name="bin-dist" depends="version,compile-lib,docs,distdirs">
 		<copy file="${lib.name}" todir="${dist.dir}/bin" />
 		<copy file="${custom.tasks}" todir="${dist.dir}/bin" />
-		<mkdir dir="${dist.dir}/docs" />
-		<copy todir="${dist.dir}/docs">
-			<fileset dir="docs"/>
-		</copy>
+		<if test="${not nant.platform.unix}">
+			<copy todir="${dist.dir}/docs">
+				<fileset basedir="docs">
+					<include name="**/**"/>
+				</fileset>
+			</copy>
+		</if>
 		<zip zipfile="${dist.dir}.zip">
 			<fileset basedir=".">
 				<include name="${dist.dir}/**"/>
