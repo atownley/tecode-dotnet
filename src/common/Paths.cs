@@ -34,7 +34,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-// File:	Path.java
+// File:	Paths.cs
 // Created:	Sat Jun 19 12:59:40 IST 2004
 //
 //////////////////////////////////////////////////////////////////////
@@ -47,13 +47,14 @@ namespace TownleyEnterprises.Common {
 /// <summary>
 ///   This class provides methods equivalent to the UNIX commands
 ///   <c>dirname</c> and <c>basename</c> using arbitrary path
-///   separators.
+///   separators.  This class provides similar, but more flexible
+///   operations to those found in the System.IO.Path class.
 /// </summary>
-/// <version>$Id: Path.cs,v 1.1 2004/06/19 12:21:39 atownley Exp $</version>
+/// <version>$Id: Paths.cs,v 1.1 2004/06/21 08:45:35 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
-public sealed class Path
+public sealed class Paths
 {
 	//////////////////////////////////////////////////////////////
 	/// <summary>
