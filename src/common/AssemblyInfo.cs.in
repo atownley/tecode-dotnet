@@ -45,20 +45,23 @@ using System.Runtime.CompilerServices;
 
 // This file was originally created using Visual Studio .NET 2003.
 
-[assembly: AssemblyTitle("te-common.NET")]
+[assembly: AssemblyTitle("te-common.dll")]
 [assembly: AssemblyDescription(".NET implementation of the te-common library.")]
 [assembly: AssemblyConfiguration("All")]
 [assembly: AssemblyCompany("Townley Enterprises")]
-[assembly: AssemblyProduct("")]
+[assembly: AssemblyProduct("Townley Enterprises Common API, .NET Edition")]
 [assembly: AssemblyCopyright("Copyright 2004, Andrew S. Townley")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: CLSCompliant(true)]
 
-// NOTE:  the version here will be used to track which version of the
-// Java library implements compatible functionality.
+// NOTE:  this should track the base release for compatiblity in
+// loading various compatible releases.  It will function as the last
+// compatible version from a binary point of view.
+[assembly: AssemblyVersion("@build.version.major@.@build.version.minor@.0.0")]
 
-[assembly: AssemblyVersion("@build.version.major@.@build.version.minor@.@build.version.release-prefix@.@build.version.count@")]
+// this is the display version, so we can do what we want here
+[assembly: AssemblyFileVersion("@build.version.major@.@build.version.minor@.@build.version.release@ (Build @build.version.count@")]
 
 // Currently not doing signed assemblies
 [assembly: AssemblyDelaySign(false)]
