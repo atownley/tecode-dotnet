@@ -43,6 +43,7 @@ using System;
 using System.Collections;
 using System.IO;
 using NUnit.Framework;
+using TownleyEnterprises.Config;
 
 namespace TownleyEnterprises.IO {
 
@@ -52,32 +53,118 @@ namespace TownleyEnterprises.IO {
 ///   This file implements tests for the IniFileProcessor class from
 ///   the IO package.
 /// </summary>  
-/// <version>$Id: IniFileProcessorTest.cs,v 1.1 2004/06/15 22:23:33 atownley Exp $</version>
+/// <version>$Id: IniFileProcessorTest.cs,v 1.2 2004/06/15 23:02:07 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 [TestFixture]
 public sealed class IniFileProcessorTest
 {
-	[Test]
-	public void VerifySimpleSection()
+	[SetUp]
+	public void ParseFile()
 	{
 		string dataDir = Environment.GetEnvironmentVariable("TEST_DATA_DIR");
 		Assert.IsNotNull(dataDir,
-				"TEST_DATA_DIR environment variable should be set");
-
-		IniFileProcessor processor = new IniFileProcessor(
+			"TEST_DATA_DIR environment variable should be set");
+		
+		processor = new IniFileProcessor(
 			Path.Combine(dataDir, "browscap.ini"));
 		processor.ProcessFile();
+	}
 
+	[Test]
+	public void VerifySimpleSection()
+	{
 		Assert.AreEqual(2279, processor.Sections.Count,
 			"there should be 2279 sections");
-		Assert.AreEqual(12792, processor.LineCount,
-			"there should be 12792 lines");
+		Assert.AreEqual(12804, processor.LineCount,
+			"there should be 12804 lines");
 
-		// check
+		// check the Galeon 1.0 section
+		IniSection section = processor["Galeon 1.0"];
+		Assert.IsNotNull(section,
+			"Galeon 1.0 should be in the file.");
+
+		Assert.AreEqual("galeon 1.0", section.Name);
+		Assert.AreEqual("Galeon", section["browser"]);
+		Assert.AreEqual("1", section["version"]);
+		Assert.AreEqual("False", section["netclr"]);
 	}
 	
+	[Test]
+	public void VerifyCaseInsensitiveKeys()
+	{
+		IniSection section = processor["galeon 1.0"];
+		Assert.AreEqual("Galeon", section["bRoWsEr"]);
+	}
+
+	[Test]
+	public void VerifyDiscardDoubleQuotes()
+	{
+		IniSection section = processor["nunit"];
+		Assert.AreEqual("double quote test", section["dqt"]);
+	}
+
+	[Test]
+	public void VerifyDiscardSingleQuotes()
+	{
+		IniSection section = processor["nunit"];
+		Assert.AreEqual("single quote test", section["sqt"]);
+	}
+
+	[Test]
+	public void VerifyKeepInternalQuotes()
+	{
+		IniSection section = processor["nunit"];
+		Assert.AreEqual("his mind was \"blown\" by the song",
+			section["iqt"]);
+	}
+
+	[Test]
+	public void VerifyKeepLeadQuotes()
+	{
+		IniSection section = processor["nunit"];
+		Assert.AreEqual("\"there's a quote here",
+			section["lqt"]);
+	}
+
+	[Test]
+	public void VerifyKeepEndQuotes()
+	{
+		IniSection section = processor["nunit"];
+		Assert.AreEqual("there's a quote at the end'",
+			section["tqt"]);
+	}
+
+	[Test]
+	public void VerifyStripLeadingValueSpaces()
+	{
+		IniSection section = processor["nunit"];
+		Assert.AreEqual("value", section["lvs"]);
+	}
+
+	[Test]
+	public void VerifyStripTrailingValueSpaces()
+	{
+		IniSection section = processor["nunit"];
+		Assert.AreEqual("value", section["tvs"]);
+	}
+
+	[Test]
+	public void VerifyStripLeadingKeySpaces()
+	{
+		IniSection section = processor["nunit"];
+		Assert.AreEqual("value", section["lks"]);
+	}
+
+	[Test]
+	public void VerifyStripTrailingKeySpaces()
+	{
+		IniSection section = processor["nunit"];
+		Assert.AreEqual("value", section["tks"]);
+	}
+
+	private IniFileProcessor	processor;
 }
 
 }
