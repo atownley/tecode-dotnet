@@ -52,7 +52,7 @@ namespace TownleyEnterprises.Config {
 ///   are essentially the same as named Hashtables (which is how this
 ///   class is currently implemented).
 /// </summary>
-/// <version>$Id: IniSection.cs,v 1.1 2004/06/15 20:25:44 atownley Exp $</version>
+/// <version>$Id: IniSection.cs,v 1.2 2004/06/15 23:03:10 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -60,13 +60,15 @@ public class IniSection
 {
 	//////////////////////////////////////////////////////////////
 	/// <summary>
-	///   The constructor provides the name for the section.
+	///   The constructor provides the name for the section.  The
+	///   section and key values will be completely
+	///   case-insensitive.
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 	
 	public IniSection(string name)
 	{
-		_name = name;
+		_name = name.ToLower();
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -102,7 +104,7 @@ public class IniSection
 	public string Name
 	{
 		get { return _name; }
-		set { _name = value; }
+		set { _name = value.ToLower(); }
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -115,8 +117,8 @@ public class IniSection
 	
 	public string this[string key]
 	{
-		get { return (string)_map[key]; }
-		set { _map[key] = value; }
+		get { return (string)_map[key.ToLower()]; }
+		set { _map[key.ToLower()] = value; }
 	}
 
 	//////////////////////////////////////////////////////////////
