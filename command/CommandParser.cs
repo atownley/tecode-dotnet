@@ -49,7 +49,7 @@ namespace TownleyEnterprises.Common.Command {
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.3 2004/05/19 17:30:52 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.4 2004/05/21 15:07:40 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 
 public sealed class CommandParser: ICommandListener
@@ -531,11 +531,11 @@ public sealed class CommandParser: ICommandListener
 		}
 
 		// set up the maps
-		_longOpts.Add(lname, holder);
+		_longOpts[lname] = holder;
 
 		if(c != (char)0)
 		{
-			_shortOpts.Add(c, holder);
+			_shortOpts[c] = holder;
 		}
 	}
 
