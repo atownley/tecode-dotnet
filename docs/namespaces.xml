@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<namespaces>
+	<namespace name="TownleyEnterprises.Common">
+		Common classes which are the base of the library.
+	</namespace>
+</namespaces>
