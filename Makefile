@@ -36,7 +36,7 @@
 ##
 ## File:	Makefile
 ## Created:	Tue May 18 14:24:27 IST 2004
-## Version:	$Id: Makefile,v 1.2 2004/05/19 10:49:25 atownley Exp $
+## Version:	$Id: Makefile,v 1.3 2004/05/25 07:19:03 atownley Exp $
 ##
 ## This is a *very* simple makefile for building TE-Common.NET using
 ## the command line compiler.  For Windows, the following command
@@ -79,5 +79,5 @@ clean:
 # some makefile games for Windows
 ######################################################################
 
-csc:
+csc: clean
 	$(MAKE) CSC="csc" CSCFLAGS="-nologo" SEP="\\"
