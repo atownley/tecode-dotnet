@@ -45,21 +45,25 @@ using System.Text;
 
 namespace TownleyEnterprises.Common.Command {
 
+//////////////////////////////////////////////////////////////////////
 /// <summary>
 ///   This class provides support for parsing command-line arguments.
 /// </summary>
 ///
-/// <version>$Id: CommandParser.cs,v 1.4 2004/05/21 15:07:40 atownley Exp $</version>
+/// <version>$Id: CommandParser.cs,v 1.5 2004/05/25 07:18:26 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+//////////////////////////////////////////////////////////////////////
 
 public sealed class CommandParser: ICommandListener
 {
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This class is used to make life easier by mapping 3
 	///   things at once.  If we match an argument, we
 	///   automatically have all we need to call the appropriate
 	///   listener.
 	/// </summary>
+	//////////////////////////////////////////////////////////////
 
 	private class OptionHolder
 	{
@@ -73,16 +77,19 @@ public sealed class CommandParser: ICommandListener
 		internal readonly ICommandListener	listener;
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>Specify the autohelp default handler
 	/// options</summary>
 
 	// FIXME:  needs l10n support!!
+	//////////////////////////////////////////////////////////////
 	
 	private static CommandOption[] ahopts = {
 		new CommandOption("help", '?', false, null, "show this help message"),
 		new CommandOption("usage", (char)0, false, null, "show brief usage message")
 	};
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   The default constructor initializes the parser with the
 	///   standard '-' and '--' switches for the short and long
@@ -91,12 +98,14 @@ public sealed class CommandParser: ICommandListener
 	/// </summary>
 	///
 	/// <param name="appName">the name of the application</param>
+	//////////////////////////////////////////////////////////////
 
 	public CommandParser(string appName)
 		: this(appName, null)
 	{
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This version of the constructor alows a description for
 	///   the unhandled arguments to be supplied to the parser.
@@ -107,12 +116,14 @@ public sealed class CommandParser: ICommandListener
 	/// <param name="appName">the name of the application</param>
 	/// <param name="appHelp">the help for the additional
 	/// arguments which may be supplied to the application</param>
+	//////////////////////////////////////////////////////////////
 
 	public CommandParser(string appName, string argHelp)
 		: this(appName, argHelp, '-', "--", "--")
 	{
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This version of the constructor allows the client to
 	///   specify the switch characters to be used for the short
@@ -129,6 +140,7 @@ public sealed class CommandParser: ICommandListener
 	///
 	/// <exception cref="SystemException">if a single
 	/// character is used for the long switch</exception>
+	//////////////////////////////////////////////////////////////
 
 	public CommandParser(string appName, string argHelp,
 				char sSwitch, string lSwitch)
@@ -136,6 +148,7 @@ public sealed class CommandParser: ICommandListener
 	{
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This version of the constructor allows the client to
 	///   specify the switch characters to be used for the short
@@ -158,6 +171,7 @@ public sealed class CommandParser: ICommandListener
 	///
 	/// <exception cref="SystemException">if a single
 	/// character is used for the long switch</exception>
+	//////////////////////////////////////////////////////////////
 
 	public CommandParser(string appName, string argHelp,
 				char sSwitch, string lSwitch,
@@ -175,6 +189,7 @@ public sealed class CommandParser: ICommandListener
 		}
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method tells the parser to automatically handle
 	///   command lines with the help character.  Optionally, the
@@ -188,6 +203,7 @@ public sealed class CommandParser: ICommandListener
 	/// <param name="allowZeroArgs">true to allow commands to have
 	/// no arguments; false to require at least one
 	/// argument</param>
+	//////////////////////////////////////////////////////////////
 
 	public void EnableAutohelp(bool autohelp, bool allowZeroArgs)
 	{
@@ -195,6 +211,7 @@ public sealed class CommandParser: ICommandListener
 		_zeroarg = allowZeroArgs;
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is used to register a new command listener
 	///   with the parser.
@@ -202,6 +219,7 @@ public sealed class CommandParser: ICommandListener
 	///
 	/// <param name="listener">the ICommandListener
 	/// instance</param>
+	//////////////////////////////////////////////////////////////
 
 	public void AddCommandListener(ICommandListener listener)
 	{
@@ -219,6 +237,7 @@ public sealed class CommandParser: ICommandListener
 		_listeners.Add(listener);
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is used to unregister a command listener with
 	///   the parser.
@@ -226,6 +245,7 @@ public sealed class CommandParser: ICommandListener
 	///
 	/// <param name="listener">the ICommandListener
 	/// instance</param>
+	//////////////////////////////////////////////////////////////
 
 	public void RemoveCommandListener(ICommandListener listener)
 	{
@@ -239,6 +259,7 @@ public sealed class CommandParser: ICommandListener
 		_listeners.Remove(listener);
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This is the main parsing function that should be called to
 	///   trigger the parsing of the command-line arguments
@@ -247,6 +268,7 @@ public sealed class CommandParser: ICommandListener
 	///
 	/// <param name="args">the command-line arguments to
 	/// parse</param>
+	//////////////////////////////////////////////////////////////
 
 	public void Parse(string[] args)
 	{
@@ -298,6 +320,7 @@ public sealed class CommandParser: ICommandListener
 		}
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method allows the client of the argument parser to
 	///   retrieve any unhandled arguments in the argument list.
@@ -307,6 +330,7 @@ public sealed class CommandParser: ICommandListener
 	///
 	/// <returns>an array of string objects or a zero-length
 	/// array if none were present</returns>
+	//////////////////////////////////////////////////////////////
 
 	public string[] UnhandledArguments
 	{
@@ -346,10 +370,12 @@ public sealed class CommandParser: ICommandListener
 		get { return "Help options"; }
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method prints the automatically generated help
 	///   messages for the registered options.
 	/// </summary>
+	//////////////////////////////////////////////////////////////
 
 	public void Help()
 	{
@@ -380,10 +406,12 @@ public sealed class CommandParser: ICommandListener
 		}
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is used to print the usage summary
 	///   information.
 	/// </summary>
+	//////////////////////////////////////////////////////////////
 
 	public void Usage()
 	{
@@ -458,6 +486,7 @@ public sealed class CommandParser: ICommandListener
 		PrintWrappedText(buf.ToString(), ']', 72, 8);
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is used to configure the command parser to
 	///   exit with the specified return code when it encounters
@@ -467,6 +496,7 @@ public sealed class CommandParser: ICommandListener
 	/// <param name="val">toggles the behavior</param>
 	/// <param name="status">the exit status to pass to
 	/// Exit()</param>
+	//////////////////////////////////////////////////////////////
 
 	public void SetExitOnMissingArg(bool val, int status)
 	{
@@ -474,6 +504,7 @@ public sealed class CommandParser: ICommandListener
 		_exitstatus = status;
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is used to set optional text which can be
 	///   printed before and after the command option descriptions.
@@ -483,6 +514,7 @@ public sealed class CommandParser: ICommandListener
 	/// option descriptions</param>
 	/// <param name="postamble">the text to be printed after the
 	/// option descriptions</param>
+	//////////////////////////////////////////////////////////////
 
 	public void SetExtraHelpText(string preamble, string postamble)
 	{
@@ -490,6 +522,7 @@ public sealed class CommandParser: ICommandListener
 		_postamble = postamble;
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is an easy way to add a new command option to
 	///   the appropriate places.
@@ -497,6 +530,7 @@ public sealed class CommandParser: ICommandListener
 	///
 	/// <param name="opt">the CommandOption to add</param>
 	/// <param name="l">the ICommandListener to notify</param>
+	//////////////////////////////////////////////////////////////
 
 	private void AddOption(CommandOption opt, ICommandListener l)
 	{
@@ -539,12 +573,14 @@ public sealed class CommandParser: ICommandListener
 		}
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method controls what happens when a missing argument
 	///   for an option is encountered.
 	/// </summary>
 	///
 	/// <param name="val">the OptionHolder</param>
+	//////////////////////////////////////////////////////////////
 
 	private void HandleMissingArg(OptionHolder val)
 	{
@@ -584,12 +620,14 @@ public sealed class CommandParser: ICommandListener
 		}
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is responsible for printing the options block
 	///   for a given command listener.
 	/// </summary>
 	///
 	/// <param name="opts">the command options</param>
+	//////////////////////////////////////////////////////////////
 
 	private void PrintOptionsHelp(CommandOption[] opts)
 	{
@@ -687,6 +725,7 @@ public sealed class CommandParser: ICommandListener
 		}
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method handles the multi-line formatting of the
 	///   indicated text based on the cut character, and prefix
@@ -700,6 +739,7 @@ public sealed class CommandParser: ICommandListener
 	/// take place</param>
 	/// <param name="indent">the number of spaces to indent the
 	/// text</param>
+	//////////////////////////////////////////////////////////////
 
 	private void PrintWrappedText(string text, char cchar, 
 				int width, int indent)
@@ -774,12 +814,14 @@ public sealed class CommandParser: ICommandListener
 		Console.WriteLine(line);
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is used to unregister a command option from
 	///   the appropriate places.
 	/// </summary>
 	///
 	/// <param name="opt">the CommandOption to delete</param>
+	//////////////////////////////////////////////////////////////
 
 	private void RemoveOption(CommandOption opt)
 	{
@@ -787,11 +829,13 @@ public sealed class CommandParser: ICommandListener
 		_shortOpts.Remove(opt.ShortName);
 	}
 
+	//////////////////////////////////////////////////////////////
 	/// <summary>
 	///   This method is used to reset the option state prior to
 	///   parsing.  It is necessary to ensure that each time the
 	///   parse is performed, the correct results are returned.
 	/// </summary>
+	//////////////////////////////////////////////////////////////
 
 	private void ResetOptions()
 	{
@@ -817,7 +861,7 @@ public sealed class CommandParser: ICommandListener
 		char c0 = s[0];
 		int slen = s.Length;
 		int idx = s.IndexOf("=");
-		
+
 		if((_sswitch == c0) && (slen > 1)
 				&& !(s.StartsWith(_lswitch)))
 		{
@@ -849,13 +893,12 @@ public sealed class CommandParser: ICommandListener
 			string key;
 			if(idx != -1)
 			{
-				key = s.Substring(_lswitch.Length, idx);
+				key = s.Substring(_lswitch.Length, idx-2);
 			}
 			else
 			{
 				key = s.Substring(_lswitch.Length);
 			}
-
 			val = (OptionHolder)_longOpts[key];
 		}
 		else
