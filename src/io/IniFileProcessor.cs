@@ -41,7 +41,7 @@
 
 using System;
 using System.Collections;
-using TownleyEnterprises.Common;
+using TownleyEnterprises.Config;
 
 namespace TownleyEnterprises.IO {
 
@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   the file has been parsed, the sections can be retrieved for
 ///   further manipulation.
 /// </summary>
-/// <version>$Id: IniFileProcessor.cs,v 1.1 2004/06/15 17:21:15 atownley Exp $</version>
+/// <version>$Id: IniFileProcessor.cs,v 1.2 2004/06/15 20:24:34 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -65,7 +65,7 @@ public class IniFileProcessor: TextFileProcessor
 	/// </summary>
 	//////////////////////////////////////////////////////////////
 	
-	class IniReader: AbstractLineProcessor
+	private class IniReader: AbstractLineProcessor
 	{
 		public override void ProcessLine(string line)
 		{
@@ -73,7 +73,8 @@ public class IniFileProcessor: TextFileProcessor
 
 			// ignore comments
 			if(line.Length == 0 || line.StartsWith("#")
-					|| line.StartsWith("'"))
+					|| line.StartsWith("'")
+					|| line.StartsWith(";")
 			{
 				return;
 			}
@@ -84,8 +85,8 @@ public class IniFileProcessor: TextFileProcessor
 			}
 			else
 			{
-				_currentSection = ParseSection(line);
-				_sections.Add(_currentSection);
+				_cs = ParseSection(line);
+				_sections.Add(_cs);
 			}
 		}
 
@@ -113,13 +114,13 @@ public class IniFileProcessor: TextFileProcessor
 			int idx = line.IndexOf("=");
 			if(idx != -1)
 			{
-				_currentSection[line.Substring(0, idx)] =
+				_cs[line.Substring(0, idx)] =
 					line.Substring(idx + 1);
 			}
 		}
 
 		private ArrayList	_sections = new ArrayList();
-		private IniSection	_currentSection = null;
+		private IniSection	_cs = null;
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -156,7 +157,6 @@ public class IniFileProcessor: TextFileProcessor
 	
 	public void Reset()
 	{
-		base.Reset();
 		_ir = new IniReader();
 	}
 
@@ -173,4 +173,6 @@ public class IniFileProcessor: TextFileProcessor
 	}
 	
 	private IniReader	_ir = new IniReader();
+}
+
 }
