@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   the file has been parsed, the sections can be retrieved for
 ///   further manipulation.
 /// </summary>
-/// <version>$Id: IniFileProcessor.cs,v 1.2 2004/06/15 20:24:34 atownley Exp $</version>
+/// <version>$Id: IniFileProcessor.cs,v 1.3 2004/06/15 20:27:18 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -74,7 +74,7 @@ public class IniFileProcessor: TextFileProcessor
 			// ignore comments
 			if(line.Length == 0 || line.StartsWith("#")
 					|| line.StartsWith("'")
-					|| line.StartsWith(";")
+					|| line.StartsWith(";"))
 			{
 				return;
 			}
