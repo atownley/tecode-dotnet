@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   the file has been parsed, the sections can be retrieved for
 ///   further manipulation.
 /// </summary>
-/// <version>$Id: IniFileProcessor.cs,v 1.5 2004/06/16 09:12:07 atownley Exp $</version>
+/// <version>$Id: IniFileProcessor.cs,v 1.6 2004/06/16 09:27:36 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -90,7 +90,10 @@ public class IniFileProcessor: TextFileProcessor
 				string key = _cs.Name.ToLower();
 				if(_sections.Contains(key))
 				{
-					Console.Error.WriteLine("warning:  overriding previous section definition for section '" + _cs.Name + "'");
+					if(_warnings)
+					{
+						Console.Error.WriteLine("warning:  overriding previous section definition for section '" + _cs.Name + "'");
+					}
 					_dupSections.Add(_sections[key]);
 				}
 
@@ -111,6 +114,12 @@ public class IniFileProcessor: TextFileProcessor
 		public IniSection this[string key]
 		{
 			get { return (IniSection)_sections[key.ToLower()]; }
+		}
+
+		public bool Warnings
+		{
+			get { return _warnings; }
+			set { _warnings = value; }
 		}
 
 		private IniSection ParseSection(string line)
@@ -152,6 +161,7 @@ public class IniFileProcessor: TextFileProcessor
 		private Hashtable	_sections = new Hashtable();
 		private IniSection	_cs = null;
 		private ArrayList	_dupSections = new ArrayList();
+		private bool		_warnings = true;
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -241,6 +251,23 @@ public class IniFileProcessor: TextFileProcessor
 	public IniSection this[string key]
 	{
 		get { return (_ir == null) ? null: _ir[key]; }
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property is used to control if warning messages are
+	///   echoed to Console.Error.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+
+	public bool ShowWarnings
+	{
+		get { return (_ir == null) ? true : _ir.Warnings; }
+		set
+		{
+			if(_ir != null)
+				_ir.Warnings = value;
+		}
 	}
 
 	private IniReader	_ir = new IniReader();
