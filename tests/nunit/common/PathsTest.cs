@@ -34,7 +34,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 //
-// File:	Test.cs
+// File:	PathsTest.cs
 // Created:	Sat Jun 19 13:12:38 IST 2004
 //
 //////////////////////////////////////////////////////////////////////
@@ -48,12 +48,12 @@ namespace TownleyEnterprises.Common {
 /// <summary>
 ///   Unit tests for the path class.
 /// </summary>  
-/// <version>$Id: PathsTest.cs,v 1.1 2004/06/21 08:54:11 atownley Exp $</version>
+/// <version>$Id: PathsTest.cs,v 1.2 2004/06/23 14:51:34 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 [TestFixture]
-public sealed class Test
+public sealed class PathsTest
 {
 	[Test]
 	public void testBasenameFileName()
@@ -98,7 +98,24 @@ public sealed class Test
 	[Test]
 	public void testClassname()
 	{
-		Assert.AreEqual("Test", Paths.Classname(GetType().Name));
+		Assert.AreEqual("PathsTest",
+				Paths.Classname(GetType().FullName));
+	}
+	
+	[Test]
+	public void testSuffix()
+	{
+		Assert.AreEqual(".Common.PathsTest",
+				Paths.Suffix(GetType().FullName,
+				"TownleyEnterprises"));
+	}
+	
+	[Test]
+	public void testSuffixNotPresent()
+	{
+		Assert.AreEqual("TownleyEnterprises.Common.PathsTest",
+				Paths.Suffix(GetType().FullName,
+				"ZZZZ"));
 	}
 }
 }
