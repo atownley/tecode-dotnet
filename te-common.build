@@ -47,6 +47,7 @@
 <project name="te-common" default="all" basedir=".">
 	<property name="basedir"	value="${nant.project.basedir}"/>
 	<property name="app.name"	value="te-common"/>
+	<property name="build.version"	value="version.properties"/>
 	<property name="build.tests"	value="build/tests"/>
 	<property name="reports.tests"	value="build/reports"/>
 	<property name="lib.dir"	value="lib"/>
@@ -77,7 +78,7 @@
 	</target>
 
 	<target name="stamp" depends="bootstrap">
-		<buildstamp versioninfo="version.properties"
+		<buildstamp versioninfo="${build.version}"
 				devname="999999"
 				verbose="true">
 			<fileset dir="${basedir}">
@@ -87,7 +88,7 @@
 	</target>
 
 	<target name="stamp-count" depends="bootstrap">
-		<buildstamp versioninfo="version.properties"
+		<buildstamp versioninfo="${build.version}"
 				count="true"
 				verbose="true">
 			<fileset dir="${basedir}">
@@ -97,12 +98,21 @@
 	</target>
 
 	<target name="stamp-clean" depends="bootstrap">
-		<buildstamp versioninfo="version.properties"
+		<buildstamp versioninfo="${build.version}"
 				verbose="true" clean="true">
 			<fileset dir="${basedir}">
 				<include name="**/*.in"/>
 			</fileset>
 		</buildstamp>
+		<property name="version" value="${build.version.major}.${build.version.minor}.${build.version.release}"/>
+		<property name="dist.dir" value="${app.name}-${version}"/>
+	</target>
+
+	<target name="version" depends="bootstrap">
+		<buildstamp versioninfo="${build.version}"
+				import="true"/>
+		<property name="version" value="${build.version.major}.${build.version.minor}.${build.version.release}"/>
+		<property name="dist.dir" value="${app.name}-${version}"/>
 	</target>
 
 	<target name="all" depends="stamp, compile-lib"/>
@@ -117,6 +127,44 @@
 		</csc>
 	</target>
 
+	<target name="distdirs">
+		<mkdir dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}/bin"/>
+		<mkdir dir="${dist.dir}/examples"/>
+
+		<copy file="LICENSE" todir="${dist.dir}" />
+		<copy file="RELEASE-NOTES" todir="${dist.dir}" />
+		<copy file="BUGS" todir="${dist.dir}" />
+		<copy file="TODO" todir="${dist.dir}" />
+		<copy file="ChangeLog" todir="${dist.dir}" />
+		<copy file="${build.version}" todir="${dist.dir}" />
+		<copy todir="${dist.dir}/bin">
+			<fileset basedir="${lib.dir}">
+				<include name="**/*.dll"/>
+			</fileset>
+		</copy>
+		<!--
+		<copy todir="${dist.dir}/examples">
+			<fileset dir="examples"/>
+		</copy>
+		-->
+	</target>
+
+	<!--target name="bin-dist" depends="compile-lib,docs,distdirs"-->
+	<target name="bin-dist" depends="version,compile-lib,distdirs">
+		<copy file="${lib.name}" todir="${dist.dir}/bin" />
+		<copy file="${custom.tasks}" todir="${dist.dir}/bin" />
+		<mkdir dir="${dist.dir}/docs" />
+		<copy todir="${dist.dir}/docs">
+			<fileset dir="docs"/>
+		</copy>
+		<zip zipfile="${dist.dir}.zip">
+			<fileset basedir=".">
+				<include name="${dist.dir}/**"/>
+			</fileset>
+		</zip>
+	</target>
+
 	<target name="clean">
 		<delete file="${lib.name}" failonerror="false"/>
 		<delete dir="build" failonerror="false"/>
@@ -124,6 +172,8 @@
 
 	<target name="distclean" depends="clean,stamp-clean">
 		<delete file="${custom.tasks}" failonerror="false"/>
+		<delete dir="${dist.dir}"/>
+		<delete file="${dist.dir}.zip"/>
 	</target>
 
 	<!-- unit tests -->
