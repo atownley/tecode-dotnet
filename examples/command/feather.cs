@@ -49,7 +49,7 @@ using TownleyEnterprises.Command;
 ///   illustrate the proper use of the CommandParser and the Command
 ///   namespace.
 /// </summary>
-/// <version>$Id: feather.cs,v 1.1 2004/07/20 10:15:12 atownley Exp $</version>
+/// <version>$Id: feather.cs,v 1.2 2004/07/20 11:52:34 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -115,7 +115,7 @@ public class feather
 		{
 			if(_verbose.Matched)
 			{
-				foreach(string s in _xclude.GetArgs())
+				foreach(string s in _xclude.Args)
 				{
 					Console.WriteLine("excluded {0}", s);
 				}
