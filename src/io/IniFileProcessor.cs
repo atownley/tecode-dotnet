@@ -52,7 +52,7 @@ namespace TownleyEnterprises.IO {
 ///   the file has been parsed, the sections can be retrieved for
 ///   further manipulation.
 /// </summary>
-/// <version>$Id: IniFileProcessor.cs,v 1.3 2004/06/15 20:27:18 atownley Exp $</version>
+/// <version>$Id: IniFileProcessor.cs,v 1.4 2004/06/15 23:04:09 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -70,7 +70,7 @@ public class IniFileProcessor: TextFileProcessor
 		public override void ProcessLine(string line)
 		{
 			base.ProcessLine(line);
-
+			
 			// ignore comments
 			if(line.Length == 0 || line.StartsWith("#")
 					|| line.StartsWith("'")
@@ -86,13 +86,29 @@ public class IniFileProcessor: TextFileProcessor
 			else
 			{
 				_cs = ParseSection(line);
-				_sections.Add(_cs);
+				if(_sections.Contains(_cs.Name))
+				{
+					Console.Error.WriteLine("warning:  overriding previous section definition for section '" + _cs.Name + "'");
+					_dupSections.Add(_sections[_cs.Name]);
+				}
+
+				_sections[_cs.Name] = _cs;
 			}
 		}
 
 		public ICollection Sections
 		{
-			get { return _sections; }
+			get { return _sections.Values; }
+		}
+
+		public ICollection DuplicateSections
+		{
+			get { return _dupSections; }
+		}
+
+		public IniSection this[string key]
+		{
+			get { return (IniSection)_sections[key.ToLower()]; }
 		}
 
 		private IniSection ParseSection(string line)
@@ -114,13 +130,26 @@ public class IniFileProcessor: TextFileProcessor
 			int idx = line.IndexOf("=");
 			if(idx != -1)
 			{
-				_cs[line.Substring(0, idx)] =
-					line.Substring(idx + 1);
+				string sval = line.Substring(idx + 1);
+
+				// strip any quotes & whitespace
+				sval.Trim();
+				if((sval[sval.Length - 1] == '\"' &&
+						sval[0] == '\"') ||
+						(sval[sval.Length - 1] == '\'' &&
+						sval[0] == '\''))
+				{
+					sval = sval.Substring(1,
+						sval.Length - 2);
+				}
+
+				_cs[line.Substring(0, idx).Trim()] = sval.Trim();
 			}
 		}
 
-		private ArrayList	_sections = new ArrayList();
+		private Hashtable	_sections = new Hashtable();
 		private IniSection	_cs = null;
+		private ArrayList	_dupSections = new ArrayList();
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -171,7 +200,47 @@ public class IniFileProcessor: TextFileProcessor
 	{
 		get { return (_ir == null) ? null : _ir.Sections; }
 	}
-	
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property is used to retrieve any sections which
+	///   were defined more than once.  Any section in this
+	///   collection exists in the file, but it's values are not
+	///   used because sections later in the file override
+	///   sections defined earlier.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+
+	public ICollection DuplicateSections
+	{
+		get { return (_ir == null) ? null
+				: _ir.DuplicateSections; }
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property is used to retrieve the number of lines in
+	///   the input file.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+
+	public int LineCount
+	{
+		get { return _ir.LineCount; }
+	}
+
+	//////////////////////////////////////////////////////////////
+	/// <summary>
+	///   This property provides an indexer for retrieving a
+	///   specific section in the file.
+	/// </summary>
+	//////////////////////////////////////////////////////////////
+
+	public IniSection this[string key]
+	{
+		get { return (_ir == null) ? null: _ir[key]; }
+	}
+
 	private IniReader	_ir = new IniReader();
 }
 
