@@ -46,7 +46,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides an implementation of a mutual exclusion
 ///   constraint for two options.
 /// </summary>
-/// <version>$Id: MutexOptionConstraint.cs,v 1.1 2004/07/20 13:16:41 atownley Exp $</version>
+/// <version>$Id: MutexOptionConstraint.cs,v 1.2 2004/07/23 05:54:11 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -58,14 +58,14 @@ public class MutexOptionConstraint: OptionConstraint
 	///   status code.
 	/// </summary>
 	///
-	/// <param name="opt">the option being constrained.</param>
 	/// <param name="status">the exit status on failure</param>
+	/// <param name="opt">the option being constrained.</param>
 	/// <param name="opt2">the other option</param>
 	//////////////////////////////////////////////////////////////
 	
-	public MutexOptionConstraint(CommandOption opt, int status,
+	public MutexOptionConstraint(int status, CommandOption opt,
 				CommandOption opt2)
-		: base(opt, status, 
+		: base(status, opt,
 			"error:  cannot specify both '{0}' and '{1}'")
 	{
 		_exoption = opt2;
@@ -78,15 +78,15 @@ public class MutexOptionConstraint: OptionConstraint
 	///   of a custom message.
 	/// </summary>
 	///
-	/// <param name="opt">the option being constrained.</param>
 	/// <param name="status">the exit status on failure</param>
+	/// <param name="opt">the option being constrained.</param>
 	/// <param name="opt2">the other option</param>
 	/// <param name="message">a custom message</param>
 	//////////////////////////////////////////////////////////////
 	
-	public MutexOptionConstraint(CommandOption opt, int status,
+	public MutexOptionConstraint(int status, CommandOption opt,
 				CommandOption opt2, string message)
-		: base(opt, status, message)
+		: base(status, opt, message)
 	{
 		_custommsg = true;
 	}

@@ -48,7 +48,7 @@ namespace TownleyEnterprises.Command {
 ///   This class provides an implementation of a dependency 
 ///   constraint between options.
 /// </summary>
-/// <version>$Id: RequiresAnyOptionConstraint.cs,v 1.1 2004/07/20 13:16:41 atownley Exp $</version>
+/// <version>$Id: RequiresAnyOptionConstraint.cs,v 1.2 2004/07/23 05:54:11 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -60,14 +60,14 @@ public class RequiresAnyOptionConstraint: OptionConstraint
 	///   status code.
 	/// </summary>
 	///
-	/// <param name="opt">the option being constrained.</param>
 	/// <param name="status">the exit status on failure</param>
+	/// <param name="opt">the option being constrained.</param>
 	/// <param name="deps">the other options</param>
 	//////////////////////////////////////////////////////////////
 	
-	public RequiresAnyOptionConstraint(CommandOption opt,
-				int status, CommandOption[] deps)
-		: base(opt, status,
+	public RequiresAnyOptionConstraint(int status,
+				CommandOption opt, CommandOption[] deps)
+		: base(status, opt,
 			"error:  option '{0}' requires one of:  ")
 	{
 		_deps = deps;
@@ -80,16 +80,16 @@ public class RequiresAnyOptionConstraint: OptionConstraint
 	///   of a custom message.
 	/// </summary>
 	///
-	/// <param name="opt">the option being constrained.</param>
 	/// <param name="status">the exit status on failure</param>
+	/// <param name="opt">the option being constrained.</param>
 	/// <param name="deps">the other options</param>
 	/// <param name="message">a custom message</param>
 	//////////////////////////////////////////////////////////////
 	
-	public RequiresAnyOptionConstraint(CommandOption opt, 
-				int status, CommandOption[] deps,
+	public RequiresAnyOptionConstraint(int status,
+				CommandOption opt, CommandOption[] deps,
 				string message)
-		: base(opt, status, message)
+		: base(status, opt, message)
 	{
 		_deps = deps;
 		_custommsg = true;

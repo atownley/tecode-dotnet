@@ -45,7 +45,7 @@ namespace TownleyEnterprises.Command {
 /// <summary>
 ///   This is the base class for all the option constraints.
 /// </summary>
-/// <version>$Id: OptionConstraint.cs,v 1.1 2004/07/20 13:16:41 atownley Exp $</version>
+/// <version>$Id: OptionConstraint.cs,v 1.2 2004/07/23 05:54:11 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -58,13 +58,13 @@ public abstract class OptionConstraint
 	///   during failure.
 	/// </summary>
 	///
-	/// <param name="opt">the option being constrained.</param>
 	/// <param name="status">the exit status on failure</param>
+	/// <param name="opt">the option being constrained.</param>
 	/// <param name="msg">the message to report</param>
 	//////////////////////////////////////////////////////////////
 
-	protected OptionConstraint(CommandOption option,
-				int status, string msg)
+	protected OptionConstraint(int status, CommandOption option,
+				string msg)
 	{
 		_option = option;
 		_message = msg;
