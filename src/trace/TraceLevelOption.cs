@@ -58,8 +58,8 @@ namespace TownleyEnterprises.Trace {
 ///   global value is not touched, but the trace level for TraceName
 ///   is set to 10.
 /// </remarks>
-/// <version>$Id: TraceLevelOption.cs,v 1.1 2004/07/19 16:44:18 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: TraceLevelOption.cs,v 1.2 2005/10/29 11:31:24 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class TraceLevelOption: DelimitedCommandOption

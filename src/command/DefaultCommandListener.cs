@@ -47,8 +47,8 @@ namespace TownleyEnterprises.Command {
 ///   implementation of command-line argument handler classes
 ///   by providing an empty optionMatched method.
 /// </summary>
-/// <version>$Id: DefaultCommandListener.cs,v 1.1 2004/07/19 16:45:23 atownley Exp $</version>
-/// <author><a href="mailto:adz1092@netscape.net">Andrew S. Townley</a></author>
+/// <version>$Id: DefaultCommandListener.cs,v 1.2 2005/10/29 11:30:28 atownley Exp $</version>
+/// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
 public class DefaultCommandListener: AbstractCommandListener
