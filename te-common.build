@@ -207,7 +207,7 @@
 	<target name="compile-tests" depends="compile-lib">
 		<mkdir dir="${build.tests}"/>
 		<csc target="library" output="${tests.lib.name}"
-				debug="true">
+				debug="Enable">
 			<sources>
 				<include name="tests/nunit/**/*.cs"/>
 			</sources>
