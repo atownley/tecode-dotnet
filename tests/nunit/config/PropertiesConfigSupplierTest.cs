@@ -50,7 +50,7 @@ namespace TownleyEnterprises.Config {
 /// <summary>
 ///   Tests for the PropertiesConfigSupplier class.
 /// </summary>  
-/// <version>$Id: PropertiesConfigSupplierTest.cs,v 1.2 2004/07/20 10:22:10 atownley Exp $</version>
+/// <version>$Id: PropertiesConfigSupplierTest.cs,v 1.3 2005/10/29 12:17:19 atownley Exp $</version>
 /// <author><a href="mailto:adz1092@yahoo.com">Andrew S. Townley</a></author>
 //////////////////////////////////////////////////////////////////////
 
@@ -73,7 +73,11 @@ public sealed class PropertiesConfigSupplierTest
 	[Test]
 	public void VerifyRegistration()
 	{
-		AppConfig appconfig = new AppConfig(GetType().Name);
+		// since we want things to match, we must allocate the
+		// application config using the name "test", otherwise
+		// we'd need a properties file named the same as the
+		// class
+		AppConfig appconfig = new AppConfig("test");
 		appconfig.RegisterConfigSupplier(config);
 
 		Assert.AreEqual("value", appconfig["simple.property"]);
