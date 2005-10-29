@@ -44,3 +44,7 @@ com.townleyenterprises.swing Package
 
 * Make the ResourceLoader aware of Locales so that specific
   ones can be loaded
+
+2005-10-19: ast
+
+* Need to add support for MS-style options
