@@ -267,7 +267,7 @@
 					<property name="DocumentProtected" value="true"/>
 					<property name="DocumentEmptyNamespaces" value="false"/>
 					<property name="IncludeAssemblyVersion" value="true"/>
-					<property name="CopyrightText" value="Copyright &copy; 2001-2004, Andrew S. Townley.  All Rights Reserved.  http://te-code.sourceforge.net"/>
+					<property name="CopyrightText" value="Copyright &#169; 2001-2004, Andrew S. Townley.  All Rights Reserved.  http://te-code.sourceforge.net"/>
 					<property name="CopyrightHref" value="http://te-code.sourceforge.net/"/>
 					<property name="CleanIntermediates" value="true"/>
 				</documenter>
